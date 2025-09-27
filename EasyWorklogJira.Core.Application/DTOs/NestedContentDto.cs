@@ -2,7 +2,7 @@
 
 public class NestedContentDto
 {
-    public string Type { get; set; }
-    public IEnumerable<TextContentDto> Content { get; set; }
-    public string Text { get; set; }
+    public string Type { get; set; } = string.Empty;
+    public IEnumerable<TextContentDto> Content { get; set; } = Array.Empty<TextContentDto>();
+    public string Text { get; set; } = string.Empty;
 }

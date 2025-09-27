@@ -99,14 +99,14 @@ public class JiraApiClient : IJiraApiClient
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var worklogResult = JsonSerializer.Deserialize<WorklogDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-        
+
         return _mapper.Map<AppDto.WorklogDto>(worklogResult!);
     }
 
-    public async Task AddWorklogAsync(string issueKey, AppDto.Add.WorklogAddDto worklogAddDto)
+    public async Task AddWorklogAsync(string issueKey, AppDto.Maintenance.WorklogMaintenanceDto worklogAddDto)
     {
         var url = $"{_httpClient.BaseAddress}/rest/api/3/issue/{issueKey}/worklog";
-        var worklogInfraAppDto = _mapper.Map<InfraDto.Add.WorklogAddDto>(worklogAddDto);
+        var worklogInfraAppDto = _mapper.Map<InfraDto.Maintenance.WorklogMaintenanceDto>(worklogAddDto);
         var serializedObject = JsonSerializer.Serialize(worklogInfraAppDto);
 
         var content = new StringContent
@@ -120,11 +120,10 @@ public class JiraApiClient : IJiraApiClient
         response.EnsureSuccessStatusCode();
     }
 
-    // TODO: refactor class WorklogAddDto to a name that make sense for inser and update operation.
-    public async Task UpdateWorklogAsync(string issueKey, string worklogId, AppDto.Add.WorklogAddDto worklogAddDto)
+    public async Task UpdateWorklogAsync(string issueKey, string worklogId, AppDto.Maintenance.WorklogMaintenanceDto worklogAddDto)
     {
         var url = $"{_httpClient.BaseAddress}/rest/api/3/issue/{issueKey}/worklog/{worklogId}";
-        var worklogInfraAppDto = _mapper.Map<InfraDto.Add.WorklogAddDto>(worklogAddDto);
+        var worklogInfraAppDto = _mapper.Map<InfraDto.Maintenance.WorklogMaintenanceDto>(worklogAddDto);
         var serializedObject = JsonSerializer.Serialize(worklogInfraAppDto);
 
         var content = new StringContent

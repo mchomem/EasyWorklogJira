@@ -33,15 +33,16 @@ public class JiraService : IJiraService
         return worklog;
     }
 
-    public async Task AddWorklogAsync(string issueKey, WorklogAddDto worklogAddDto)
+    public async Task AddWorklogAsync(string issueKey, WorklogMaintenanceDto worklogAddDto)
     {
         await _jiraApiClient.AddWorklogAsync(issueKey, worklogAddDto);
     }
 
-    public async Task UpdateWorklogAsync(string issueKey, string worklogId, WorklogAddDto worklogAddDto)
+    public async Task UpdateWorklogAsync(string issueKey, string worklogId, WorklogMaintenanceDto worklogAddDto)
     {
         await _jiraApiClient.UpdateWorklogAsync(issueKey, worklogId, worklogAddDto);
     }
+
     public async Task DeleteWorklogAsync(string issueKey, string worklogId)
     {
         await _jiraApiClient.DeleteWorklogAsync(issueKey, worklogId);

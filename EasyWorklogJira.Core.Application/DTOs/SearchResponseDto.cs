@@ -2,5 +2,5 @@
 
 public class SearchResponseDto
 {
-    public IEnumerable<JiraIssueDto> Issues { get; set; }
+    public IEnumerable<JiraIssueDto> Issues { get; set; } = Array.Empty<JiraIssueDto>();
 }

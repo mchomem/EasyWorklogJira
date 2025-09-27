@@ -2,7 +2,7 @@
 
 public class AuthorDto
 {
-    public string AccountId { get; set; }
-    public string EmailAddress { get; set; }
-    public string DisplayName { get; set; }
+    public string AccountId { get; set; } = string.Empty;
+    public string EmailAddress { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
 }

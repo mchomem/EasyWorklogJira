@@ -1,6 +1,6 @@
-﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs.Add;
+﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs.Maintenance;
 
-public class InnerContentAddDto
+public class InnerContentMaintenanceDto
 {
     [JsonPropertyName("text")]
     public string Text { get; set; }

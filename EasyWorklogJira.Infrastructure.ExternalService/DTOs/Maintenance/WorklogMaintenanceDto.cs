@@ -1,9 +1,9 @@
-﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs.Add;
+﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs.Maintenance;
 
-public class WorklogAddDto
+public class WorklogMaintenanceDto
 {
     [JsonPropertyName("comment")]
-    public CommentAddDto Comment { get; set; }
+    public CommentMaintenanceDto Comment { get; set; }
     
     [JsonPropertyName("started")]
     public string Started { get; set; }

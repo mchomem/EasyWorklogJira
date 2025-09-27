@@ -2,7 +2,7 @@
 
 public class ContentItemDto
 {
-    public string Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
-    public IEnumerable<NestedContentDto> Content { get; set; }
+    public IEnumerable<NestedContentDto> Content { get; set; } = Array.Empty<NestedContentDto>();
 }

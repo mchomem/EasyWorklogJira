@@ -1,9 +1,9 @@
-﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs.Add;
+﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs.Maintenance;
 
-public class CommentAddDto
+public class CommentMaintenanceDto
 {
     [JsonPropertyName("content")]
-    public IEnumerable<ContentAddDto> Content { get; set; }
+    public IEnumerable<ContentMaintenanceDto> Content { get; set; }
 
     [JsonPropertyName("type")]
     public string Type { get; set; } = "doc";

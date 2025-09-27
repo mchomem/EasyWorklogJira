@@ -2,6 +2,6 @@
 
 public class WorklogResponseDto
 {
-    public IEnumerable<WorklogDto> Worklogs { get; set; }
+    public IEnumerable<WorklogDto> Worklogs { get; set; } = Array.Empty<WorklogDto>();
     public int Total { get; set; }
 }

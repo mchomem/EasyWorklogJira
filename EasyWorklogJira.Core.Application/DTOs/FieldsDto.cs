@@ -2,5 +2,5 @@
 
 public class FieldsDto
 {
-    public string Summary { get; set; }
+    public string Summary { get; set; } = string.Empty;
 }

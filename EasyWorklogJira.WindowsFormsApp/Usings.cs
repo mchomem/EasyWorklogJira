@@ -4,7 +4,7 @@ global using System.Diagnostics;
 global using System.Globalization;
 global using System.Text.Json;
 global using EasyWorklogJira.Core.Application.DTOs;
-global using EasyWorklogJira.Core.Application.DTOs.Add;
+global using EasyWorklogJira.Core.Application.DTOs.Maintenance;
 global using EasyWorklogJira.Core.Application.Emuns;
 global using EasyWorklogJira.Core.Application.Extensions;
 global using EasyWorklogJira.Core.Application.Interfaces;

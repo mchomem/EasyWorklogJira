@@ -16,9 +16,9 @@ public static class ProfileMapping
         config.NewConfig<InfraDto.WorklogDto, AppDto.WorklogDto>().TwoWays();
         config.NewConfig<InfraDto.WorklogResponseDto, AppDto.WorklogResponseDto>().TwoWays();
 
-        config.NewConfig<InfraDto.Add.WorklogAddDto, AppDto.Add.WorklogAddDto>().TwoWays();
-        config.NewConfig<InfraDto.Add.CommentAddDto, AppDto.Add.CommentAddDto>().TwoWays();
-        config.NewConfig<InfraDto.Add.ContentAddDto, AppDto.Add.ContentAddDto>().TwoWays();
-        config.NewConfig<InfraDto.Add.InnerContentAddDto, AppDto.Add.InnerContentAddDto>().TwoWays();
+        config.NewConfig<InfraDto.Maintenance.WorklogMaintenanceDto, AppDto.Maintenance.WorklogMaintenanceDto>().TwoWays();
+        config.NewConfig<InfraDto.Maintenance.CommentMaintenanceDto, AppDto.Maintenance.CommentMaintenanceDto>().TwoWays();
+        config.NewConfig<InfraDto.Maintenance.ContentMaintenanceDto, AppDto.Maintenance.ContentMaintenanceDto>().TwoWays();
+        config.NewConfig<InfraDto.Maintenance.InnerContentMaintenanceDto, AppDto.Maintenance.InnerContentMaintenanceDto>().TwoWays();
     }
 }

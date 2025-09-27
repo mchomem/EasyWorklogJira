@@ -51,17 +51,17 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         // Calcular o tempo em segundos (horas * 3600 + minutos * 60)
         long timeSpentSeconds = (long)timeSpent.TotalSeconds;
 
-        var worklog = new Core.Application.DTOs.Add.WorklogAddDto();
-        var comment = new Core.Application.DTOs.Add.CommentAddDto();
+        var worklog = new Core.Application.DTOs.Maintenance.WorklogMaintenanceDto();
+        var comment = new Core.Application.DTOs.Maintenance.CommentMaintenanceDto();
 
         #region Preenche a lista de InnerContentAddDto
 
-        var innerContents = new List<InnerContentAddDto>();
+        var innerContents = new List<InnerContentMaintenanceDto>();
         var textBoxContent = textBoxIssueDescription.Text.Split(Environment.NewLine);
 
         foreach (var line in textBoxContent)
         {
-            var innerContent = new Core.Application.DTOs.Add.InnerContentAddDto
+            var innerContent = new Core.Application.DTOs.Maintenance.InnerContentMaintenanceDto
             {
                 Text = line
             };
@@ -73,8 +73,8 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
         #region Preenche a lista do ContentAddDto
 
-        var contents = new List<ContentAddDto>();
-        var content = new Core.Application.DTOs.Add.ContentAddDto
+        var contents = new List<ContentMaintenanceDto>();
+        var content = new Core.Application.DTOs.Maintenance.ContentMaintenanceDto
         {
             Content = innerContents
         };
