@@ -1,0 +1,14 @@
+﻿global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Diagnostics;
+global using System.Globalization;
+global using System.Text.Json;
+global using EasyWorklogJira.Core.Application.DTOs;
+global using EasyWorklogJira.Core.Application.DTOs.Add;
+global using EasyWorklogJira.Core.Application.Emuns;
+global using EasyWorklogJira.Core.Application.Extensions;
+global using EasyWorklogJira.Core.Application.Interfaces;
+global using EasyWorklogJira.Core.Application.Models;
+global using EasyWorklogJira.Infrastructure.IoC;
+global using EasyWorklogJira.WindowsFormsApp.Forms;
+global using EasyWorklogJira.WindowsFormsApp.Forms.Base;

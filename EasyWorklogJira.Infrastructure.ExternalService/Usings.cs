@@ -1,0 +1,12 @@
+﻿global using Mapster;
+global using MapsterMapper;
+global using Microsoft.Extensions.Configuration;
+global using System.ComponentModel;
+global using System.Net.Http.Headers;
+global using System.Text;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using EasyWorklogJira.Core.Application.Interfaces;
+global using EasyWorklogJira.Infrastructure.ExternalService.DTOs;
+global using AppDto = EasyWorklogJira.Core.Application.DTOs;
+global using InfraDto = EasyWorklogJira.Infrastructure.ExternalService.DTOs;
