@@ -362,3 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /EasyWorklogJira.WindowsFormsApp/appsettings.json
+/EasyWorklogJira.Test.Integration/appsettings.test.json
+/EasyWorklogJira.Test.Functional/appsettings.test.json
