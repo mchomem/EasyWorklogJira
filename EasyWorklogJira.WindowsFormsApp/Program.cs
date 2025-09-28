@@ -1,6 +1,6 @@
 namespace EasyWorklogJira.WindowsFormsApp;
 
-internal static class Program
+public static class Program
 {
     public static IConfiguration Configuration { get; private set; }
 

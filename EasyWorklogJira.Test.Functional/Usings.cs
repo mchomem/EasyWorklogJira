@@ -1,0 +1,11 @@
+﻿global using EasyWorklogJira.Core.Application.Interfaces;
+global using EasyWorklogJira.Core.Application.Services;
+global using EasyWorklogJira.Infrastructure.ExternalService.Clients;
+global using EasyWorklogJira.Infrastructure.ExternalService.ProfileMappings;
+global using EasyWorklogJira.WindowsFormsApp.Forms;
+global using Mapster;
+global using MapsterMapper;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using System.Net.Http.Headers;
+global using System.Windows.Forms;

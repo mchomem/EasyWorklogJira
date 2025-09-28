@@ -17,6 +17,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Core", "1 - Core", "{30
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.Infrastructure.IoC", "EasyWorklogJira.Infrastructure.IoC\EasyWorklogJira.Infrastructure.IoC.csproj", "{3000020C-B7C3-450D-9888-C1B14FD04889}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Test", "0 - Test", "{CCD086A6-8DFC-4D65-8ADE-1637C53B6195}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.Test.Unit", "EasyWorklogJira.Test.Unit\EasyWorklogJira.Test.Unit.csproj", "{FC310022-829C-40C3-9266-BF980799BEE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.Test.Integration", "EasyWorklogJira.Test.Integration\EasyWorklogJira.Test.Integration.csproj", "{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.Test.Functional", "EasyWorklogJira.Test.Functional\EasyWorklogJira.Test.Functional.csproj", "{BFE66D1E-15FD-465C-A538-726915643805}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +47,18 @@ Global
 		{3000020C-B7C3-450D-9888-C1B14FD04889}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3000020C-B7C3-450D-9888-C1B14FD04889}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3000020C-B7C3-450D-9888-C1B14FD04889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC310022-829C-40C3-9266-BF980799BEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC310022-829C-40C3-9266-BF980799BEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC310022-829C-40C3-9266-BF980799BEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC310022-829C-40C3-9266-BF980799BEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE66D1E-15FD-465C-A538-726915643805}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE66D1E-15FD-465C-A538-726915643805}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE66D1E-15FD-465C-A538-726915643805}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE66D1E-15FD-465C-A538-726915643805}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +68,9 @@ Global
 		{D3460DDA-AB33-474D-B396-C7F09F7F2808} = {1A966735-2C86-482F-B80D-32FE75C32170}
 		{9D68FA82-5C3D-49BC-8B3C-623623B94D34} = {30F9BEC4-E4C0-4911-B109-2F4601C2C866}
 		{3000020C-B7C3-450D-9888-C1B14FD04889} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{FC310022-829C-40C3-9266-BF980799BEE0} = {CCD086A6-8DFC-4D65-8ADE-1637C53B6195}
+		{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF} = {CCD086A6-8DFC-4D65-8ADE-1637C53B6195}
+		{BFE66D1E-15FD-465C-A538-726915643805} = {CCD086A6-8DFC-4D65-8ADE-1637C53B6195}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE330931-4E3C-4C00-BAB3-CCEFEA0EA17E}
