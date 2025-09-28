@@ -263,13 +263,13 @@ public partial class WorklogListingForm : MdiChieldFormBase
         {
             Size = new Size(80, 80),
             SizeMode = PictureBoxSizeMode.StretchImage,
-            Image = EasyWorklogJira.WindowsFormsApp.Resource.Gear1x_0_3s_200px_200px
+            Image = EasyWorklogJira.WindowsFormsApp.Resource.Rolling1x_1_0s_200px_200px
         };
 
         try
         {
             // Use o nome correto do recurso conforme definido no .resx
-            loaderGif.Image = EasyWorklogJira.WindowsFormsApp.Resource.Gear1x_0_3s_200px_200px;
+            loaderGif.Image = EasyWorklogJira.WindowsFormsApp.Resource.Rolling1x_1_0s_200px_200px;
         }
         catch (Exception ex)
         {

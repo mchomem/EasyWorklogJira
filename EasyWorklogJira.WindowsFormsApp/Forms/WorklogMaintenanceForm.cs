@@ -4,10 +4,16 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 {
     private readonly IJiraService _jiraService;
 
+    // Loader components
+    private Panel loaderPanel;
+    private Label loaderLabel;
+    private PictureBox loaderGif;
+
     public WorklogMaintenanceForm(IJiraService jiraService)
     {
         _jiraService = jiraService;
         InitializeComponent();
+        InitializeLoader();
 
         maskedTextBoxStartTime.Text = DateTime.Now.ToString("HH:mm");
     }
@@ -103,6 +109,8 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
         try
         {
+            ShowLoader("Salvando worklog...");
+
             var selectedIssue = comboBoxIssues?.SelectedValue?.ToString()!;
 
             if (string.IsNullOrEmpty(TransferData.IssueKey) && string.IsNullOrEmpty(TransferData.WorklogId))
@@ -116,6 +124,10 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         catch (Exception ex)
         {
             MessageBox.Show($"Erro ao registrar o worklog: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            HideLoader();
         }
     }
 
@@ -142,28 +154,40 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
     private async void WorklogMaintenanceForm_Load(object sender, EventArgs e)
     {
-        await LoadIssuesOnActiveSprint();
-
-        // TODO: create a loader spinner while loading data or disable the form.
-        // If editing record, load each field with recovered data.
-        if (!string.IsNullOrEmpty(TransferData.IssueKey) && !string.IsNullOrEmpty(TransferData.WorklogId))
+        try
         {
-            var worklog = await _jiraService.GetWorklogByIdAsync(TransferData.IssueKey, TransferData.WorklogId);
+            ShowLoader("Carregando dados...");
 
-            comboBoxIssues.SelectedValue = TransferData.IssueKey;
-            dateTimePickerStarted.Value = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture);
-            maskedTextBoxStartTime.Text = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture).ToString("HH:mm");
-            maskedTextBoxTimeSpent.Text = $"{(worklog.TimeSpentSeconds / 3600):00}:{((worklog.TimeSpentSeconds % 3600) / 60):00}";
+            await LoadIssuesOnActiveSprint();
+
+            // If editing record, load each field with recovered data.
+            if (!string.IsNullOrEmpty(TransferData.IssueKey) && !string.IsNullOrEmpty(TransferData.WorklogId))
+            {
+                var worklog = await _jiraService.GetWorklogByIdAsync(TransferData.IssueKey, TransferData.WorklogId);
+
+                comboBoxIssues.SelectedValue = TransferData.IssueKey;
+                dateTimePickerStarted.Value = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture);
+                maskedTextBoxStartTime.Text = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture).ToString("HH:mm");
+                maskedTextBoxTimeSpent.Text = $"{(worklog.TimeSpentSeconds / 3600):00}:{((worklog.TimeSpentSeconds % 3600) / 60):00}";
+
+                var commentLines = ExtractTextFromComment(worklog.Comment)
+                    .Where(line => !string.IsNullOrWhiteSpace(line))
+                    .ToList();
+
+                textBoxIssueDescription.Text = commentLines.Any()
+                    ? string.Join(Environment.NewLine, commentLines)
+                    : string.Empty;
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Erro ao carregar os dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        finally
+        {
+            HideLoader();
             maskedTextBoxTimeSpent.Focus();
             textBoxIssueDescription.Focus();
-
-            var commentLines = ExtractTextFromComment(worklog.Comment)
-                .Where(line => !string.IsNullOrWhiteSpace(line))
-                .ToList();
-
-            textBoxIssueDescription.Text = commentLines.Any()
-                ? string.Join(Environment.NewLine, commentLines)
-                : string.Empty;
         }
     }
 
@@ -237,4 +261,106 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
         return comments;
     }
+
+    #region Loader methods
+
+    private void InitializeLoader()
+    {
+        // Crie o painel do loader
+        loaderPanel = new Panel
+        {
+            BackColor = Color.FromArgb(200, 255, 255, 255),
+            Dock = DockStyle.Fill,
+            Visible = false
+        };
+
+        // Crie o PictureBox para o GIF
+        loaderGif = new PictureBox
+        {
+            Size = new Size(80, 80),
+            SizeMode = PictureBoxSizeMode.StretchImage
+        };
+
+        try
+        {
+            // Use o nome correto do recurso conforme definido no .resx
+            loaderGif.Image = EasyWorklogJira.WindowsFormsApp.Resource.Rolling1x_1_0s_200px_200px;
+        }
+        catch (Exception ex)
+        {
+            // Em caso de erro, crie um loader alternativo simples
+            Console.WriteLine($"Erro ao carregar o GIF: {ex.Message}");
+            loaderGif.BackColor = Color.LightGray;
+            loaderGif.BorderStyle = BorderStyle.FixedSingle;
+        }
+
+        // Crie o label com a mensagem de carregamento
+        loaderLabel = new Label
+        {
+            Text = "Carregando dados...",
+            AutoSize = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Font = new Font("Segoe UI", 12, FontStyle.Bold),
+            Height = 30,
+            ForeColor = Color.DarkBlue
+        };
+
+        loaderPanel.Controls.Add(loaderGif);
+        loaderPanel.Controls.Add(loaderLabel);
+
+        // Adicione o painel ao formulário
+        this.Controls.Add(loaderPanel);
+
+        // Traga o loader para frente dos outros controles
+        loaderPanel.BringToFront();
+    }
+
+    private void ShowLoader(string message = "Carregando dados...")
+    {
+        // Atualize a mensagem do loader
+        loaderLabel.Text = message;
+
+        // Posicione o GIF no centro do formulário
+        loaderGif.Location = new Point(
+            (this.ClientSize.Width - loaderGif.Width) / 2,
+            (this.ClientSize.Height - loaderGif.Height) / 2 - 20
+        );
+
+        // Posicione o label abaixo do GIF
+        loaderLabel.Size = new Size(this.ClientSize.Width, 30);
+        loaderLabel.Location = new Point(
+            0,
+            loaderGif.Bottom + 10
+        );
+
+        // Desabilite todos os controles do formulário exceto o loader
+        SetControlsEnabled(false);
+
+        // Mostre o loader
+        loaderPanel.Visible = true;
+        Application.DoEvents(); // Force a atualização da UI
+    }
+
+    private void HideLoader()
+    {
+        // Esconda o loader
+        loaderPanel.Visible = false;
+
+        // Reabilite todos os controles do formulário
+        SetControlsEnabled(true);
+    }
+
+    private void SetControlsEnabled(bool enabled)
+    {
+        // Disable/Enable all controls except the loader panel
+        foreach (Control control in this.Controls)
+        {
+            if (control != loaderPanel)
+            {
+                control.Enabled = enabled;
+            }
+        }
+    }
+
+    #endregion
 }
