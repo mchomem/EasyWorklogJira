@@ -49,8 +49,8 @@
             labelInformationToken = new Label();
             labelToken = new Label();
             tabPageJiraQueries = new TabPage();
-            labelCommonAndActiveSprintIssues = new Label();
             textBoxCommonAndActiveSprintIssues = new TextBox();
+            labelCommonAndActiveSprintIssues = new Label();
             tabControlDefault.SuspendLayout();
             tabPageDefault.SuspendLayout();
             groupBoxWebSite.SuspendLayout();
@@ -265,6 +265,14 @@
             tabPageJiraQueries.Text = "Consultas JQL";
             tabPageJiraQueries.UseVisualStyleBackColor = true;
             // 
+            // textBoxCommonAndActiveSprintIssues
+            // 
+            textBoxCommonAndActiveSprintIssues.Location = new Point(23, 44);
+            textBoxCommonAndActiveSprintIssues.Multiline = true;
+            textBoxCommonAndActiveSprintIssues.Name = "textBoxCommonAndActiveSprintIssues";
+            textBoxCommonAndActiveSprintIssues.Size = new Size(592, 64);
+            textBoxCommonAndActiveSprintIssues.TabIndex = 1;
+            // 
             // labelCommonAndActiveSprintIssues
             // 
             labelCommonAndActiveSprintIssues.AutoSize = true;
@@ -273,13 +281,6 @@
             labelCommonAndActiveSprintIssues.Size = new Size(223, 15);
             labelCommonAndActiveSprintIssues.TabIndex = 0;
             labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
-            // 
-            // textBoxCommonAndActiveSprintIssues
-            // 
-            textBoxCommonAndActiveSprintIssues.Location = new Point(23, 44);
-            textBoxCommonAndActiveSprintIssues.Name = "textBoxCommonAndActiveSprintIssues";
-            textBoxCommonAndActiveSprintIssues.Size = new Size(592, 23);
-            textBoxCommonAndActiveSprintIssues.TabIndex = 1;
             // 
             // ConfigurationForm
             // 
