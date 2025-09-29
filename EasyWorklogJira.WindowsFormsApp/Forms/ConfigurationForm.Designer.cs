@@ -28,64 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            labelEmail = new Label();
-            textBoxEmail = new TextBox();
-            labelToken = new Label();
-            textBoxToken = new TextBox();
             buttonSave = new Button();
-            labelInformationToken = new Label();
-            linkLabel = new LinkLabel();
             buttonClose = new Button();
-            groupBoxJiraAccessCredentials = new GroupBox();
+            tabControlDefault = new TabControl();
+            tabPageDefault = new TabPage();
+            groupBoxWebSite = new GroupBox();
+            textBoxUrlBase = new TextBox();
+            labelUrlBase = new Label();
             groupBoxDailyMeetingSchedule = new GroupBox();
+            labelWarningRule = new Label();
             maskedTextBoxEndTime = new MaskedTextBox();
             labelEndTime = new Label();
             maskedTextBoxStartTime = new MaskedTextBox();
             labelStartTime = new Label();
-            groupBoxWebSite = new GroupBox();
-            textBoxUrlBase = new TextBox();
-            labelUrlBase = new Label();
-            labelWarningRule = new Label();
-            groupBoxJiraAccessCredentials.SuspendLayout();
-            groupBoxDailyMeetingSchedule.SuspendLayout();
+            groupBoxJiraAccessCredentials = new GroupBox();
+            textBoxToken = new TextBox();
+            labelEmail = new Label();
+            linkLabel = new LinkLabel();
+            textBoxEmail = new TextBox();
+            labelInformationToken = new Label();
+            labelToken = new Label();
+            tabPageJiraQueries = new TabPage();
+            labelCommonAndActiveSprintIssues = new Label();
+            textBoxCommonAndActiveSprintIssues = new TextBox();
+            tabControlDefault.SuspendLayout();
+            tabPageDefault.SuspendLayout();
             groupBoxWebSite.SuspendLayout();
+            groupBoxDailyMeetingSchedule.SuspendLayout();
+            groupBoxJiraAccessCredentials.SuspendLayout();
+            tabPageJiraQueries.SuspendLayout();
             SuspendLayout();
-            // 
-            // labelEmail
-            // 
-            labelEmail.AutoSize = true;
-            labelEmail.Location = new Point(26, 31);
-            labelEmail.Name = "labelEmail";
-            labelEmail.Size = new Size(44, 15);
-            labelEmail.TabIndex = 4;
-            labelEmail.Text = "e-mail:";
-            // 
-            // textBoxEmail
-            // 
-            textBoxEmail.Location = new Point(84, 26);
-            textBoxEmail.Name = "textBoxEmail";
-            textBoxEmail.Size = new Size(353, 23);
-            textBoxEmail.TabIndex = 5;
-            // 
-            // labelToken
-            // 
-            labelToken.AutoSize = true;
-            labelToken.Location = new Point(26, 98);
-            labelToken.Name = "labelToken";
-            labelToken.Size = new Size(42, 15);
-            labelToken.TabIndex = 8;
-            labelToken.Text = "Token:";
-            // 
-            // textBoxToken
-            // 
-            textBoxToken.Location = new Point(84, 95);
-            textBoxToken.Name = "textBoxToken";
-            textBoxToken.Size = new Size(353, 23);
-            textBoxToken.TabIndex = 9;
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(399, 325);
+            buttonSave.Location = new Point(562, 441);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 16;
@@ -93,29 +69,9 @@
             buttonSave.UseVisualStyleBackColor = true;
             buttonSave.Click += buttonSave_Click;
             // 
-            // labelInformationToken
-            // 
-            labelInformationToken.AutoSize = true;
-            labelInformationToken.Location = new Point(26, 63);
-            labelInformationToken.Name = "labelInformationToken";
-            labelInformationToken.Size = new Size(111, 15);
-            labelInformationToken.TabIndex = 6;
-            labelInformationToken.Text = "Gere seu token em: ";
-            // 
-            // linkLabel
-            // 
-            linkLabel.AutoSize = true;
-            linkLabel.Location = new Point(151, 63);
-            linkLabel.Name = "linkLabel";
-            linkLabel.Size = new Size(286, 15);
-            linkLabel.TabIndex = 7;
-            linkLabel.TabStop = true;
-            linkLabel.Text = "id.atlassian.com/manage-profile/security/api-tokens";
-            linkLabel.LinkClicked += linkLabel_LinkClicked;
-            // 
             // buttonClose
             // 
-            buttonClose.Location = new Point(318, 325);
+            buttonClose.Location = new Point(481, 441);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 15;
@@ -123,33 +79,78 @@
             buttonClose.UseVisualStyleBackColor = true;
             buttonClose.Click += buttonClose_Click;
             // 
-            // groupBoxJiraAccessCredentials
+            // tabControlDefault
             // 
-            groupBoxJiraAccessCredentials.Controls.Add(textBoxToken);
-            groupBoxJiraAccessCredentials.Controls.Add(labelEmail);
-            groupBoxJiraAccessCredentials.Controls.Add(linkLabel);
-            groupBoxJiraAccessCredentials.Controls.Add(textBoxEmail);
-            groupBoxJiraAccessCredentials.Controls.Add(labelInformationToken);
-            groupBoxJiraAccessCredentials.Controls.Add(labelToken);
-            groupBoxJiraAccessCredentials.Location = new Point(12, 103);
-            groupBoxJiraAccessCredentials.Name = "groupBoxJiraAccessCredentials";
-            groupBoxJiraAccessCredentials.Size = new Size(462, 140);
-            groupBoxJiraAccessCredentials.TabIndex = 3;
-            groupBoxJiraAccessCredentials.TabStop = false;
-            groupBoxJiraAccessCredentials.Text = "Credenciais de Acesso do Jira";
+            tabControlDefault.Controls.Add(tabPageDefault);
+            tabControlDefault.Controls.Add(tabPageJiraQueries);
+            tabControlDefault.Location = new Point(12, 12);
+            tabControlDefault.Name = "tabControlDefault";
+            tabControlDefault.SelectedIndex = 0;
+            tabControlDefault.Size = new Size(629, 423);
+            tabControlDefault.TabIndex = 18;
+            // 
+            // tabPageDefault
+            // 
+            tabPageDefault.Controls.Add(groupBoxWebSite);
+            tabPageDefault.Controls.Add(groupBoxDailyMeetingSchedule);
+            tabPageDefault.Controls.Add(groupBoxJiraAccessCredentials);
+            tabPageDefault.Location = new Point(4, 24);
+            tabPageDefault.Name = "tabPageDefault";
+            tabPageDefault.Padding = new Padding(3);
+            tabPageDefault.Size = new Size(621, 395);
+            tabPageDefault.TabIndex = 0;
+            tabPageDefault.Text = "Padrão";
+            tabPageDefault.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxWebSite
+            // 
+            groupBoxWebSite.Controls.Add(textBoxUrlBase);
+            groupBoxWebSite.Controls.Add(labelUrlBase);
+            groupBoxWebSite.Location = new Point(18, 18);
+            groupBoxWebSite.Name = "groupBoxWebSite";
+            groupBoxWebSite.Size = new Size(465, 73);
+            groupBoxWebSite.TabIndex = 11;
+            groupBoxWebSite.TabStop = false;
+            groupBoxWebSite.Text = "Web Site";
+            // 
+            // textBoxUrlBase
+            // 
+            textBoxUrlBase.Location = new Point(84, 31);
+            textBoxUrlBase.Name = "textBoxUrlBase";
+            textBoxUrlBase.Size = new Size(353, 23);
+            textBoxUrlBase.TabIndex = 2;
+            // 
+            // labelUrlBase
+            // 
+            labelUrlBase.AutoSize = true;
+            labelUrlBase.Location = new Point(26, 36);
+            labelUrlBase.Name = "labelUrlBase";
+            labelUrlBase.Size = new Size(52, 15);
+            labelUrlBase.TabIndex = 1;
+            labelUrlBase.Text = "Url Base:";
             // 
             // groupBoxDailyMeetingSchedule
             // 
+            groupBoxDailyMeetingSchedule.Controls.Add(labelWarningRule);
             groupBoxDailyMeetingSchedule.Controls.Add(maskedTextBoxEndTime);
             groupBoxDailyMeetingSchedule.Controls.Add(labelEndTime);
             groupBoxDailyMeetingSchedule.Controls.Add(maskedTextBoxStartTime);
             groupBoxDailyMeetingSchedule.Controls.Add(labelStartTime);
-            groupBoxDailyMeetingSchedule.Location = new Point(12, 249);
+            groupBoxDailyMeetingSchedule.Location = new Point(18, 255);
             groupBoxDailyMeetingSchedule.Name = "groupBoxDailyMeetingSchedule";
-            groupBoxDailyMeetingSchedule.Size = new Size(462, 70);
-            groupBoxDailyMeetingSchedule.TabIndex = 10;
+            groupBoxDailyMeetingSchedule.Size = new Size(462, 109);
+            groupBoxDailyMeetingSchedule.TabIndex = 13;
             groupBoxDailyMeetingSchedule.TabStop = false;
             groupBoxDailyMeetingSchedule.Text = "Horário da Daily *";
+            // 
+            // labelWarningRule
+            // 
+            labelWarningRule.AutoSize = true;
+            labelWarningRule.Location = new Point(6, 80);
+            labelWarningRule.Name = "labelWarningRule";
+            labelWarningRule.Size = new Size(86, 15);
+            labelWarningRule.TabIndex = 18;
+            labelWarningRule.Text = "{Warning Rule}";
             // 
             // maskedTextBoxEndTime
             // 
@@ -185,84 +186,147 @@
             labelStartTime.TabIndex = 11;
             labelStartTime.Text = "Hora de Início:";
             // 
-            // groupBoxWebSite
+            // groupBoxJiraAccessCredentials
             // 
-            groupBoxWebSite.Controls.Add(textBoxUrlBase);
-            groupBoxWebSite.Controls.Add(labelUrlBase);
-            groupBoxWebSite.Location = new Point(12, 12);
-            groupBoxWebSite.Name = "groupBoxWebSite";
-            groupBoxWebSite.Size = new Size(465, 73);
-            groupBoxWebSite.TabIndex = 0;
-            groupBoxWebSite.TabStop = false;
-            groupBoxWebSite.Text = "Web Site";
+            groupBoxJiraAccessCredentials.Controls.Add(textBoxToken);
+            groupBoxJiraAccessCredentials.Controls.Add(labelEmail);
+            groupBoxJiraAccessCredentials.Controls.Add(linkLabel);
+            groupBoxJiraAccessCredentials.Controls.Add(textBoxEmail);
+            groupBoxJiraAccessCredentials.Controls.Add(labelInformationToken);
+            groupBoxJiraAccessCredentials.Controls.Add(labelToken);
+            groupBoxJiraAccessCredentials.Location = new Point(18, 109);
+            groupBoxJiraAccessCredentials.Name = "groupBoxJiraAccessCredentials";
+            groupBoxJiraAccessCredentials.Size = new Size(462, 140);
+            groupBoxJiraAccessCredentials.TabIndex = 12;
+            groupBoxJiraAccessCredentials.TabStop = false;
+            groupBoxJiraAccessCredentials.Text = "Credenciais de Acesso do Jira";
             // 
-            // textBoxUrlBase
+            // textBoxToken
             // 
-            textBoxUrlBase.Location = new Point(84, 31);
-            textBoxUrlBase.Name = "textBoxUrlBase";
-            textBoxUrlBase.Size = new Size(353, 23);
-            textBoxUrlBase.TabIndex = 2;
+            textBoxToken.Location = new Point(84, 95);
+            textBoxToken.Name = "textBoxToken";
+            textBoxToken.Size = new Size(353, 23);
+            textBoxToken.TabIndex = 9;
             // 
-            // labelUrlBase
+            // labelEmail
             // 
-            labelUrlBase.AutoSize = true;
-            labelUrlBase.Location = new Point(26, 36);
-            labelUrlBase.Name = "labelUrlBase";
-            labelUrlBase.Size = new Size(52, 15);
-            labelUrlBase.TabIndex = 1;
-            labelUrlBase.Text = "Url Base:";
+            labelEmail.AutoSize = true;
+            labelEmail.Location = new Point(26, 31);
+            labelEmail.Name = "labelEmail";
+            labelEmail.Size = new Size(44, 15);
+            labelEmail.TabIndex = 4;
+            labelEmail.Text = "e-mail:";
             // 
-            // labelWarningRule
+            // linkLabel
             // 
-            labelWarningRule.AutoSize = true;
-            labelWarningRule.Location = new Point(12, 368);
-            labelWarningRule.Name = "labelWarningRule";
-            labelWarningRule.Size = new Size(86, 15);
-            labelWarningRule.TabIndex = 17;
-            labelWarningRule.Text = "{Warning Rule}";
+            linkLabel.AutoSize = true;
+            linkLabel.Location = new Point(151, 63);
+            linkLabel.Name = "linkLabel";
+            linkLabel.Size = new Size(286, 15);
+            linkLabel.TabIndex = 7;
+            linkLabel.TabStop = true;
+            linkLabel.Text = "id.atlassian.com/manage-profile/security/api-tokens";
+            linkLabel.LinkClicked += linkLabel_LinkClicked;
+            // 
+            // textBoxEmail
+            // 
+            textBoxEmail.Location = new Point(84, 26);
+            textBoxEmail.Name = "textBoxEmail";
+            textBoxEmail.Size = new Size(353, 23);
+            textBoxEmail.TabIndex = 5;
+            // 
+            // labelInformationToken
+            // 
+            labelInformationToken.AutoSize = true;
+            labelInformationToken.Location = new Point(26, 63);
+            labelInformationToken.Name = "labelInformationToken";
+            labelInformationToken.Size = new Size(111, 15);
+            labelInformationToken.TabIndex = 6;
+            labelInformationToken.Text = "Gere seu token em: ";
+            // 
+            // labelToken
+            // 
+            labelToken.AutoSize = true;
+            labelToken.Location = new Point(26, 98);
+            labelToken.Name = "labelToken";
+            labelToken.Size = new Size(42, 15);
+            labelToken.TabIndex = 8;
+            labelToken.Text = "Token:";
+            // 
+            // tabPageJiraQueries
+            // 
+            tabPageJiraQueries.Controls.Add(textBoxCommonAndActiveSprintIssues);
+            tabPageJiraQueries.Controls.Add(labelCommonAndActiveSprintIssues);
+            tabPageJiraQueries.Location = new Point(4, 24);
+            tabPageJiraQueries.Name = "tabPageJiraQueries";
+            tabPageJiraQueries.Padding = new Padding(3);
+            tabPageJiraQueries.Size = new Size(621, 395);
+            tabPageJiraQueries.TabIndex = 1;
+            tabPageJiraQueries.Text = "Consultas JQL";
+            tabPageJiraQueries.UseVisualStyleBackColor = true;
+            // 
+            // labelCommonAndActiveSprintIssues
+            // 
+            labelCommonAndActiveSprintIssues.AutoSize = true;
+            labelCommonAndActiveSprintIssues.Location = new Point(23, 26);
+            labelCommonAndActiveSprintIssues.Name = "labelCommonAndActiveSprintIssues";
+            labelCommonAndActiveSprintIssues.Size = new Size(223, 15);
+            labelCommonAndActiveSprintIssues.TabIndex = 0;
+            labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
+            // 
+            // textBoxCommonAndActiveSprintIssues
+            // 
+            textBoxCommonAndActiveSprintIssues.Location = new Point(23, 44);
+            textBoxCommonAndActiveSprintIssues.Name = "textBoxCommonAndActiveSprintIssues";
+            textBoxCommonAndActiveSprintIssues.Size = new Size(592, 23);
+            textBoxCommonAndActiveSprintIssues.TabIndex = 1;
             // 
             // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(489, 395);
-            Controls.Add(labelWarningRule);
-            Controls.Add(groupBoxWebSite);
-            Controls.Add(groupBoxDailyMeetingSchedule);
-            Controls.Add(groupBoxJiraAccessCredentials);
+            ClientSize = new Size(653, 476);
+            Controls.Add(tabControlDefault);
             Controls.Add(buttonClose);
             Controls.Add(buttonSave);
             Name = "ConfigurationForm";
             Text = "Configuração";
-            groupBoxJiraAccessCredentials.ResumeLayout(false);
-            groupBoxJiraAccessCredentials.PerformLayout();
-            groupBoxDailyMeetingSchedule.ResumeLayout(false);
-            groupBoxDailyMeetingSchedule.PerformLayout();
+            tabControlDefault.ResumeLayout(false);
+            tabPageDefault.ResumeLayout(false);
             groupBoxWebSite.ResumeLayout(false);
             groupBoxWebSite.PerformLayout();
+            groupBoxDailyMeetingSchedule.ResumeLayout(false);
+            groupBoxDailyMeetingSchedule.PerformLayout();
+            groupBoxJiraAccessCredentials.ResumeLayout(false);
+            groupBoxJiraAccessCredentials.PerformLayout();
+            tabPageJiraQueries.ResumeLayout(false);
+            tabPageJiraQueries.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-
-        private Label labelEmail;
-        private TextBox textBoxEmail;
-        private Label labelToken;
-        private TextBox textBoxToken;
         private Button buttonSave;
-        private Label labelInformationToken;
-        private LinkLabel linkLabel;
         private Button buttonClose;
-        private GroupBox groupBoxJiraAccessCredentials;
-        private GroupBox groupBoxDailyMeetingSchedule;
-        private MaskedTextBox maskedTextBoxStartTime;
-        private Label labelStartTime;
-        private Label labelEndTime;
-        private MaskedTextBox maskedTextBoxEndTime;
+        private TabControl tabControlDefault;
+        private TabPage tabPageDefault;
+        private Label labelWarningRule;
         private GroupBox groupBoxWebSite;
         private TextBox textBoxUrlBase;
         private Label labelUrlBase;
-        private Label labelWarningRule;
+        private GroupBox groupBoxDailyMeetingSchedule;
+        private MaskedTextBox maskedTextBoxEndTime;
+        private Label labelEndTime;
+        private MaskedTextBox maskedTextBoxStartTime;
+        private Label labelStartTime;
+        private GroupBox groupBoxJiraAccessCredentials;
+        private TextBox textBoxToken;
+        private Label labelEmail;
+        private LinkLabel linkLabel;
+        private TextBox textBoxEmail;
+        private Label labelInformationToken;
+        private Label labelToken;
+        private TabPage tabPageJiraQueries;
+        private TextBox textBoxCommonAndActiveSprintIssues;
+        private Label labelCommonAndActiveSprintIssues;
     }
 }

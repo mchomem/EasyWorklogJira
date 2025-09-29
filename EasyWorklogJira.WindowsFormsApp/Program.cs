@@ -65,6 +65,10 @@ public static class Program
                 {
                     startTime = string.Empty,
                     endTime = string.Empty
+                },
+                JiraQueries = new
+                {
+                    commonAndActiveSprintIssues = string.Empty
                 }
             };
             var options = new JsonSerializerOptions { WriteIndented = true };

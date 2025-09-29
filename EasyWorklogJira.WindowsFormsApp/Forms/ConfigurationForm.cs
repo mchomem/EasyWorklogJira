@@ -28,6 +28,7 @@ public partial class ConfigurationForm : MdiChieldFormBase
             var token = configuration["JiraConnection:token"];
             var startTime = configuration["DailyMeetingSchedule:startTime"];
             var endTime = configuration["DailyMeetingSchedule:endTime"];
+            var commonAndActiveSprintIssues = configuration["JiraQueries:commonAndActiveSprintIssues"];
 
             if (!string.IsNullOrEmpty(urlBase))
                 textBoxUrlBase.Text = urlBase;
@@ -38,11 +39,14 @@ public partial class ConfigurationForm : MdiChieldFormBase
             if (!string.IsNullOrEmpty(token))
                 textBoxToken.Text = token;
 
-            if(!string.IsNullOrEmpty(startTime))
+            if (!string.IsNullOrEmpty(startTime))
                 maskedTextBoxStartTime.Text = startTime;
 
-            if(!string.IsNullOrEmpty(endTime))
+            if (!string.IsNullOrEmpty(endTime))
                 maskedTextBoxEndTime.Text = endTime;
+
+            if(!string.IsNullOrEmpty(commonAndActiveSprintIssues))
+                textBoxCommonAndActiveSprintIssues.Text = commonAndActiveSprintIssues;
 
         }
         catch (Exception ex)
@@ -67,11 +71,21 @@ public partial class ConfigurationForm : MdiChieldFormBase
 
     private void buttonSave_Click(object sender, EventArgs e)
     {
+        #region Required fields.
+
         var urlBase = textBoxUrlBase.Text;
         var email = textBoxEmail.Text;
         var token = textBoxToken.Text;
+
+        #endregion
+
+        #region Optional fields.
+
         var startTime = maskedTextBoxStartTime.Text;
         var endTime = maskedTextBoxEndTime.Text;
+        var commonAndActiveSprintIssues = textBoxCommonAndActiveSprintIssues.Text;
+
+        #endregion
 
         if (string.IsNullOrEmpty(urlBase)
             || string.IsNullOrEmpty(email)
@@ -97,34 +111,38 @@ public partial class ConfigurationForm : MdiChieldFormBase
                 // Cria uma cópia do documento com as alterações
                 var root = document.RootElement.Clone();
                 var jsonObject = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(root);
-                
+
                 // Processa JiraConnection
-                var jiraConnectionElement = jsonObject.ContainsKey("JiraConnection") 
-                    ? jsonObject["JiraConnection"].Clone() 
+                var jiraConnectionElement = jsonObject.ContainsKey("JiraConnection")
+                    ? jsonObject["JiraConnection"].Clone()
                     : JsonDocument.Parse("{}").RootElement;
-                
+
                 var jiraConnectionObj = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(jiraConnectionElement);
 
-                // Atualiza as propriedades do JiraConnection
                 var updatedJiraConnection = new Dictionary<string, object>
                 {
                     { "baseUrl", urlBase },
                     { "email", email },
                     { "token", token }
                 };
-
-                // Cria a estrutura DailyMeetingSchedule
+                
                 var updatedDailyMeetingSchedule = new Dictionary<string, object>
                 {
                     { "startTime", startTime },
                     { "endTime", endTime }
                 };
 
-                // Atualiza os valores no objeto JSON principal
+                var updatedJiraQueries = new Dictionary<string, object>
+                {
+                    { "commonAndActiveSprintIssues", commonAndActiveSprintIssues }
+                };
+
+                // Update the values on the main JSON object
                 jsonObject["JiraConnection"] = JsonDocument.Parse(JsonSerializer.Serialize(updatedJiraConnection)).RootElement;
                 jsonObject["DailyMeetingSchedule"] = JsonDocument.Parse(JsonSerializer.Serialize(updatedDailyMeetingSchedule)).RootElement;
+                jsonObject["JiraQueries"] = JsonDocument.Parse(JsonSerializer.Serialize(updatedJiraQueries)).RootElement;
 
-                // Salva o arquivo atualizado
+                // Save updated json file
                 var options = new JsonSerializerOptions { WriteIndented = true };
                 string updatedJson = JsonSerializer.Serialize(jsonObject, options);
                 File.WriteAllText(_appSettingsPath, updatedJson);
@@ -144,5 +162,5 @@ public partial class ConfigurationForm : MdiChieldFormBase
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
         }
-    }    
+    }
 }

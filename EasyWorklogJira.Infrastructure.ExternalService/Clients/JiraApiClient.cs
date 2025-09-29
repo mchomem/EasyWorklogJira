@@ -38,8 +38,15 @@ public class JiraApiClient : IJiraApiClient
 
     public async Task<IEnumerable<AppDto.JiraIssueDto>> GetIssuesActiveProjectsAsync()
     {
-        // JQL para buscar issues do projeto AC (Atividades Complementares) e do projeto NS no sprint ativo atribuídas ao usuário logado.
-        var jql = $"(project = AC) OR (project = NS AND assignee = currentUser() AND sprint in openSprints()) ORDER BY created ASC";
+        // JQl para buscar as issues dos projetos auxiliares, e projetos da sprint ativa e que estão atribuídas ao usuário logado.
+        var jql = _configuration["JiraQueries:commonAndActiveSprintIssues"]; ;
+
+        if (string.IsNullOrEmpty(jql))
+        {
+            // Consulta padrão: buscar as issues da sprint ativa e que estão atribuídas ao usuário logado.
+            jql = "sprint in openSprints() AND assignee = currentUser() ORDER BY created DESC";
+        }
+
         var url = $"{_httpClient.BaseAddress}/rest/api/3/search?jql={Uri.EscapeDataString(jql)}";
 
         HttpResponseMessage response = await _httpClient.GetAsync(url);
