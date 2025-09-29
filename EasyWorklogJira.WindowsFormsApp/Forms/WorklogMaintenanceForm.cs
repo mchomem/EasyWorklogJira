@@ -12,6 +12,17 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
     public WorklogMaintenanceForm(IJiraService jiraService)
     {
         _jiraService = jiraService;
+
+        var worklogListingForm = Application.OpenForms.OfType<WorklogListingForm>().FirstOrDefault();
+
+        // If the WorklogListingForm is open, position this form relative to it.
+        if (worklogListingForm != null)
+        {
+            // Override the default StartPosition and Location;
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point((worklogListingForm?.Location.Y ?? 0) + 20 + worklogListingForm?.Size.Width ?? 0, 20);
+        }
+
         InitializeComponent();
         InitializeLoader();
 

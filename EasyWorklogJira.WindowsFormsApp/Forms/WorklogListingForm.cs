@@ -14,6 +14,10 @@ public partial class WorklogListingForm : MdiChieldFormBase
         _jiraService = jiraService;
         _configuration = configuration;
 
+        // Override the default StartPosition and Location;
+        this.StartPosition = FormStartPosition.Manual;
+        this.Location = new Point(20, 20);
+
         InitializeComponent();
         InitializeLoader();
     }
@@ -193,7 +197,6 @@ public partial class WorklogListingForm : MdiChieldFormBase
         if (mainForm is not null)
         {
             mainForm.ShowSingleInstanceForm<WorklogMaintenanceForm>();
-            Close();
         }
     }
 
