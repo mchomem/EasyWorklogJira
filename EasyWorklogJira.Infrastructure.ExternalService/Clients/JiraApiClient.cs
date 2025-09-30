@@ -44,7 +44,7 @@ public class JiraApiClient : IJiraApiClient
         if (string.IsNullOrEmpty(jql))
         {
             // Consulta padrão: buscar as issues da sprint ativa e que estão atribuídas ao usuário logado.
-            jql = "sprint in openSprints() AND assignee = currentUser() ORDER BY created DESC";
+            jql = "sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC";
         }
 
         var url = $"{_httpClient.BaseAddress}/rest/api/3/search?jql={Uri.EscapeDataString(jql)}";
