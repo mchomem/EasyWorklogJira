@@ -51,6 +51,7 @@
             tabPageJiraQueries = new TabPage();
             textBoxCommonAndActiveSprintIssues = new TextBox();
             labelCommonAndActiveSprintIssues = new Label();
+            labelNote = new Label();
             tabControlDefault.SuspendLayout();
             tabPageDefault.SuspendLayout();
             groupBoxWebSite.SuspendLayout();
@@ -255,6 +256,7 @@
             // 
             // tabPageJiraQueries
             // 
+            tabPageJiraQueries.Controls.Add(labelNote);
             tabPageJiraQueries.Controls.Add(textBoxCommonAndActiveSprintIssues);
             tabPageJiraQueries.Controls.Add(labelCommonAndActiveSprintIssues);
             tabPageJiraQueries.Location = new Point(4, 24);
@@ -281,6 +283,15 @@
             labelCommonAndActiveSprintIssues.Size = new Size(223, 15);
             labelCommonAndActiveSprintIssues.TabIndex = 0;
             labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
+            // 
+            // labelNote
+            // 
+            labelNote.AutoSize = true;
+            labelNote.Location = new Point(23, 122);
+            labelNote.Name = "labelNote";
+            labelNote.Size = new Size(39, 15);
+            labelNote.TabIndex = 2;
+            labelNote.Text = "{note}";
             // 
             // ConfigurationForm
             // 
@@ -329,5 +340,6 @@
         private TabPage tabPageJiraQueries;
         private TextBox textBoxCommonAndActiveSprintIssues;
         private Label labelCommonAndActiveSprintIssues;
+        private Label labelNote;
     }
 }

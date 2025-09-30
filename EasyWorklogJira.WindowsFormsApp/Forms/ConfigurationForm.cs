@@ -9,6 +9,7 @@ public partial class ConfigurationForm : MdiChieldFormBase
         InitializeComponent();
 
         labelWarningRule.Text = "* Ao configurar a janela de horários da daily, consulta as tarefas do dia anterior";
+        labelNote.Text = "Nota: caso a JQL não seja configurada neste campo, a seguinte JQL será utilizada:\n 'sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC'";
 
         _appSettingsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
         LoadAppSettings();
