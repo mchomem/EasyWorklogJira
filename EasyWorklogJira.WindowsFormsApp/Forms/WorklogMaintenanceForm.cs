@@ -120,7 +120,7 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
         try
         {
-            ShowLoader("Salvando worklog...");
+            ShowLoader("Salvando regsitro...");
 
             var selectedIssue = comboBoxIssues?.SelectedValue?.ToString()!;
 
@@ -129,12 +129,12 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
             else
                 await _jiraService.UpdateWorklogAsync(selectedIssue, TransferData.WorklogId, worklog);
 
-            MessageBox.Show("Worklog registrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Registro de atividade salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erro ao registrar o worklog: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Erro ao registrar a atividade: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
         {

@@ -176,7 +176,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
         }
         else if (dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "Delete")
         {
-            var resultDialog = MessageBox.Show("Tem certeza que deseja excluir este Worklog?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var resultDialog = MessageBox.Show("Tem certeza que deseja excluir este registro de atividade?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultDialog == DialogResult.Yes)
             {
