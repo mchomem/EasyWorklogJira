@@ -49,9 +49,9 @@
             labelInformationToken = new Label();
             labelToken = new Label();
             tabPageJiraQueries = new TabPage();
+            labelNote = new Label();
             textBoxCommonAndActiveSprintIssues = new TextBox();
             labelCommonAndActiveSprintIssues = new Label();
-            labelNote = new Label();
             tabControlDefault.SuspendLayout();
             tabPageDefault.SuspendLayout();
             groupBoxWebSite.SuspendLayout();
@@ -62,7 +62,7 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(562, 441);
+            buttonSave.Location = new Point(444, 441);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 16;
@@ -72,7 +72,7 @@
             // 
             // buttonClose
             // 
-            buttonClose.Location = new Point(481, 441);
+            buttonClose.Location = new Point(363, 441);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 15;
@@ -87,7 +87,7 @@
             tabControlDefault.Location = new Point(12, 12);
             tabControlDefault.Name = "tabControlDefault";
             tabControlDefault.SelectedIndex = 0;
-            tabControlDefault.Size = new Size(629, 423);
+            tabControlDefault.Size = new Size(511, 423);
             tabControlDefault.TabIndex = 18;
             // 
             // tabPageDefault
@@ -262,27 +262,10 @@
             tabPageJiraQueries.Location = new Point(4, 24);
             tabPageJiraQueries.Name = "tabPageJiraQueries";
             tabPageJiraQueries.Padding = new Padding(3);
-            tabPageJiraQueries.Size = new Size(621, 395);
+            tabPageJiraQueries.Size = new Size(503, 395);
             tabPageJiraQueries.TabIndex = 1;
             tabPageJiraQueries.Text = "Consultas JQL";
             tabPageJiraQueries.UseVisualStyleBackColor = true;
-            // 
-            // textBoxCommonAndActiveSprintIssues
-            // 
-            textBoxCommonAndActiveSprintIssues.Location = new Point(23, 44);
-            textBoxCommonAndActiveSprintIssues.Multiline = true;
-            textBoxCommonAndActiveSprintIssues.Name = "textBoxCommonAndActiveSprintIssues";
-            textBoxCommonAndActiveSprintIssues.Size = new Size(592, 64);
-            textBoxCommonAndActiveSprintIssues.TabIndex = 1;
-            // 
-            // labelCommonAndActiveSprintIssues
-            // 
-            labelCommonAndActiveSprintIssues.AutoSize = true;
-            labelCommonAndActiveSprintIssues.Location = new Point(23, 26);
-            labelCommonAndActiveSprintIssues.Name = "labelCommonAndActiveSprintIssues";
-            labelCommonAndActiveSprintIssues.Size = new Size(223, 15);
-            labelCommonAndActiveSprintIssues.TabIndex = 0;
-            labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
             // 
             // labelNote
             // 
@@ -293,11 +276,28 @@
             labelNote.TabIndex = 2;
             labelNote.Text = "{note}";
             // 
+            // textBoxCommonAndActiveSprintIssues
+            // 
+            textBoxCommonAndActiveSprintIssues.Location = new Point(18, 44);
+            textBoxCommonAndActiveSprintIssues.Multiline = true;
+            textBoxCommonAndActiveSprintIssues.Name = "textBoxCommonAndActiveSprintIssues";
+            textBoxCommonAndActiveSprintIssues.Size = new Size(465, 64);
+            textBoxCommonAndActiveSprintIssues.TabIndex = 1;
+            // 
+            // labelCommonAndActiveSprintIssues
+            // 
+            labelCommonAndActiveSprintIssues.AutoSize = true;
+            labelCommonAndActiveSprintIssues.Location = new Point(18, 26);
+            labelCommonAndActiveSprintIssues.Name = "labelCommonAndActiveSprintIssues";
+            labelCommonAndActiveSprintIssues.Size = new Size(223, 15);
+            labelCommonAndActiveSprintIssues.TabIndex = 0;
+            labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
+            // 
             // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(653, 476);
+            ClientSize = new Size(536, 476);
             Controls.Add(tabControlDefault);
             Controls.Add(buttonClose);
             Controls.Add(buttonSave);
