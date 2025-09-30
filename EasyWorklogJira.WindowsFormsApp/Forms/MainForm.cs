@@ -17,6 +17,11 @@ public partial class MainForm : Form
         ShowSingleInstanceForm<ConfigurationForm>();
     }
 
+    private void userApplicationToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        ShowSingleInstanceForm<CurrentUserForm>();
+    }
+
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
     {
         Exit();

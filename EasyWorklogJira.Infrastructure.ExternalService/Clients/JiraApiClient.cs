@@ -150,4 +150,16 @@ public class JiraApiClient : IJiraApiClient
         HttpResponseMessage response = await _httpClient.DeleteAsync(url);
         response.EnsureSuccessStatusCode();
     }
+
+    public async Task<AppDto.UserDto> GetCurrentUserAsync()
+    {
+        var url = $"{_httpClient.BaseAddress}/rest/api/3/myself";
+        HttpResponseMessage response = await _httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+        var userResult = JsonSerializer.Deserialize<UserDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+
+        return _mapper.Map<AppDto.UserDto>(userResult!);
+    }
 }

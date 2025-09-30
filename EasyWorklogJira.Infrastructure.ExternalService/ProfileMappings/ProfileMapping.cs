@@ -20,5 +20,7 @@ public static class ProfileMapping
         config.NewConfig<InfraDto.Maintenance.CommentMaintenanceDto, AppDto.Maintenance.CommentMaintenanceDto>().TwoWays();
         config.NewConfig<InfraDto.Maintenance.ContentMaintenanceDto, AppDto.Maintenance.ContentMaintenanceDto>().TwoWays();
         config.NewConfig<InfraDto.Maintenance.InnerContentMaintenanceDto, AppDto.Maintenance.InnerContentMaintenanceDto>().TwoWays();
+
+        config.NewConfig<InfraDto.UserDto, AppDto.UserDto>().TwoWays();
     }
 }
