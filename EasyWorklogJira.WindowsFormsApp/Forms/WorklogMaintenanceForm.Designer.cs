@@ -179,7 +179,6 @@
             Controls.Add(dateTimePickerStarted);
             Name = "WorklogMaintenanceForm";
             Text = "Registro de Tarefas";
-            FormClosing += WorklogMaintenanceForm_FormClosing;
             Load += WorklogMaintenanceForm_Load;
             ResumeLayout(false);
             PerformLayout();

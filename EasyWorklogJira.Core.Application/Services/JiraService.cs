@@ -9,21 +9,21 @@ public class JiraService : IJiraService
         _jiraApiClient = jiraApiClient;
     }
 
-    public Task<IEnumerable<JiraIssueDto>> GetIssuesWithWorklogsByDateTimeAsync(DateTimeOffset selectedDateTimeFilter)
+    public async Task<IEnumerable<JiraIssueDto>> GetIssuesWithWorklogsByDateTimeAsync(DateTimeOffset selectedDateTimeFilter)
     {
-        var issues = _jiraApiClient.GetIssuesWithWorklogsByDateTimeAsync(selectedDateTimeFilter);
+        var issues = await _jiraApiClient.GetIssuesWithWorklogsByDateTimeAsync(selectedDateTimeFilter);
         return issues;
     }
 
-    public Task<IEnumerable<JiraIssueDto>> GetIssuesActiveProjectsAsync()
+    public async Task<IEnumerable<JiraIssueDto>> GetIssuesActiveProjectsAsync()
     {
-        var issues = _jiraApiClient.GetIssuesActiveProjectsAsync();
+        var issues = await _jiraApiClient.GetIssuesActiveProjectsAsync();
         return issues;
     }
 
-    public Task<IEnumerable<WorklogDto>> GetIssueWorklogsAsync(string issueKey, DateTimeOffset dateTime, string userEmailAddress)
+    public async Task<IEnumerable<WorklogDto>> GetIssueWorklogsAsync(string issueKey, DateTimeOffset dateTime, string userEmailAddress)
     {
-        var worklogs = _jiraApiClient.GetIssueWorklogsAsync(issueKey, dateTime, userEmailAddress);
+        var worklogs = await _jiraApiClient.GetIssueWorklogsAsync(issueKey, dateTime, userEmailAddress);
         return worklogs;
     }
 

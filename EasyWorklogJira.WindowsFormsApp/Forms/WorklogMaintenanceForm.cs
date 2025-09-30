@@ -3,30 +3,30 @@
 public partial class WorklogMaintenanceForm : MdiChieldFormBase
 {
     private readonly IJiraService _jiraService;
+    private readonly string? _issueKey;
+    private readonly string? _worklogId;
+    private readonly bool _isEditMode;
 
     // Loader components
     private Panel loaderPanel;
     private Label loaderLabel;
     private PictureBox loaderGif;
 
-    public WorklogMaintenanceForm(IJiraService jiraService)
+    public WorklogMaintenanceForm(IJiraService jiraService) : this(jiraService, null, null) { }
+
+    public WorklogMaintenanceForm(IJiraService jiraService, string? issueKey, string? worklogId)
     {
         _jiraService = jiraService;
-
-        var worklogListingForm = Application.OpenForms.OfType<WorklogListingForm>().FirstOrDefault();
-
-        // If the WorklogListingForm is open, position this form relative to it.
-        if (worklogListingForm != null)
-        {
-            // Override the default StartPosition and Location;
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new Point((worklogListingForm?.Location.Y ?? 0) + 20 + worklogListingForm?.Size.Width ?? 0, 20);
-        }
+        _issueKey = issueKey;
+        _worklogId = worklogId;
+        _isEditMode = !string.IsNullOrEmpty(issueKey) && !string.IsNullOrEmpty(worklogId);
 
         InitializeComponent();
         InitializeLoader();
 
         maskedTextBoxStartTime.Text = DateTime.Now.ToString("HH:mm");
+
+        this.Text = _isEditMode ? "Editar Registro de Tarefa" : "Registro de Tarefas";
     }
 
     public async Task LoadIssuesOnActiveSprint()
@@ -124,10 +124,10 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
             var selectedIssue = comboBoxIssues?.SelectedValue?.ToString()!;
 
-            if (string.IsNullOrEmpty(TransferData.IssueKey) && string.IsNullOrEmpty(TransferData.WorklogId))
-                await _jiraService.AddWorklogAsync(selectedIssue, worklog);
+            if (_isEditMode)
+                await _jiraService.UpdateWorklogAsync(_issueKey!, _worklogId!, worklog);
             else
-                await _jiraService.UpdateWorklogAsync(selectedIssue, TransferData.WorklogId, worklog);
+                await _jiraService.AddWorklogAsync(selectedIssue, worklog);
 
             MessageBox.Show("Registro de atividade salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
@@ -172,11 +172,11 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
             await LoadIssuesOnActiveSprint();
 
             // If editing record, load each field with recovered data.
-            if (!string.IsNullOrEmpty(TransferData.IssueKey) && !string.IsNullOrEmpty(TransferData.WorklogId))
+            if (_isEditMode)
             {
-                var worklog = await _jiraService.GetWorklogByIdAsync(TransferData.IssueKey, TransferData.WorklogId);
+                var worklog = await _jiraService.GetWorklogByIdAsync(_issueKey!, _worklogId!);
 
-                comboBoxIssues.SelectedValue = TransferData.IssueKey;
+                comboBoxIssues.SelectedValue = _issueKey!;
                 dateTimePickerStarted.Value = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture);
                 maskedTextBoxStartTime.Text = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture).ToString("HH:mm");
                 maskedTextBoxTimeSpent.Text = $"{(worklog.TimeSpentSeconds / 3600):00}:{((worklog.TimeSpentSeconds % 3600) / 60):00}";
@@ -215,13 +215,6 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
     private void maskedTextBoxTimeSpent_Leave(object sender, EventArgs e)
     {
         SetFinalTime();
-    }
-
-    private void WorklogMaintenanceForm_FormClosing(object sender, FormClosingEventArgs e)
-    {
-        // Clear transfer data before closing this form.
-        TransferData.IssueKey = string.Empty;
-        TransferData.WorklogId = string.Empty;
     }
 
     private static List<string> ExtractTextFromComment(CommentDto comment)

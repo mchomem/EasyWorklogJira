@@ -14,10 +14,6 @@ public partial class WorklogListingForm : MdiChieldFormBase
         _jiraService = jiraService;
         _configuration = configuration;
 
-        // Override the default StartPosition and Location;
-        this.StartPosition = FormStartPosition.Manual;
-        this.Location = new Point(20, 20);
-
         InitializeComponent();
         InitializeLoader();
     }
@@ -137,7 +133,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
     private async void dataGridViewDayWorklogs_CellContentClick(object sender, DataGridViewCellEventArgs e)
     {
         var worklogId = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["WorklogId"].Value?.ToString()!;
-        var IssueId = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString()!;
+        var issueId = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString()!;
 
         // Ignore header clicks
         if (e.RowIndex < 0) return;
@@ -167,10 +163,11 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
             if (mainForm is not null)
             {
-                TransferData.IssueKey = IssueId;
-                TransferData.WorklogId = worklogId;
+                // Passar os dados diretamente para o formulário de manutenção
+                var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, issueId, worklogId);
+                worklogMaintenanceForm.MdiParent = mainForm;
+                worklogMaintenanceForm.Show();
 
-                mainForm.ShowSingleInstanceForm<WorklogMaintenanceForm>();
                 Close();
             }
         }
@@ -180,7 +177,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
             if (resultDialog == DialogResult.Yes)
             {
-                await _jiraService.DeleteWorklogAsync(IssueId, worklogId);
+                await _jiraService.DeleteWorklogAsync(issueId, worklogId);
 
                 MessageBox.Show($"Registro id: {worklogId} de tarefa excluída.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -196,7 +193,11 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
         if (mainForm is not null)
         {
-            mainForm.ShowSingleInstanceForm<WorklogMaintenanceForm>();
+            // Criar novo worklog sem parâmetros (modo inserção)
+            var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService);
+            worklogMaintenanceForm.MdiParent = mainForm;
+            worklogMaintenanceForm.Show();
+            Close();
         }
     }
 

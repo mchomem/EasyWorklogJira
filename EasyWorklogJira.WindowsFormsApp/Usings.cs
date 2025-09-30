@@ -8,7 +8,6 @@ global using EasyWorklogJira.Core.Application.DTOs.Maintenance;
 global using EasyWorklogJira.Core.Application.Emuns;
 global using EasyWorklogJira.Core.Application.Extensions;
 global using EasyWorklogJira.Core.Application.Interfaces;
-global using EasyWorklogJira.Core.Application.Models;
 global using EasyWorklogJira.Infrastructure.IoC;
 global using EasyWorklogJira.WindowsFormsApp.Forms;
 global using EasyWorklogJira.WindowsFormsApp.Forms.Base;
