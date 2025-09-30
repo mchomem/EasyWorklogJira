@@ -47,7 +47,7 @@
             ClientSize = new Size(484, 261);
             Controls.Add(labelTextAbout);
             Name = "AboutForm";
-            Text = "AboutForm";
+            Text = "Sobre";
             Load += AboutForm_Load;
             ResumeLayout(false);
             PerformLayout();
