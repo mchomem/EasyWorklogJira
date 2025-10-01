@@ -7,6 +7,10 @@ public class JiraApiClient : IJiraApiClient
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
+    private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true
+    };
 
     public JiraApiClient(HttpClient httpClient, IConfiguration configuration, IMapper mapper)
     {
@@ -38,7 +42,7 @@ public class JiraApiClient : IJiraApiClient
         response.EnsureSuccessStatusCode();
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, _jsonSerializerOptions);
 
         return _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
     }
@@ -66,7 +70,7 @@ public class JiraApiClient : IJiraApiClient
         response.EnsureSuccessStatusCode();
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, _jsonSerializerOptions);
 
         return _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
     }
@@ -93,7 +97,7 @@ public class JiraApiClient : IJiraApiClient
             response.EnsureSuccessStatusCode();
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
-            var worklogsResult = JsonSerializer.Deserialize<WorklogResponseDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+            var worklogsResult = JsonSerializer.Deserialize<WorklogResponseDto>(jsonResponse, _jsonSerializerOptions);
 
             if (worklogsResult?.Worklogs != null)
                 allWorklogs.AddRange(worklogsResult.Worklogs);
@@ -118,7 +122,7 @@ public class JiraApiClient : IJiraApiClient
         response.EnsureSuccessStatusCode();
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        var worklogResult = JsonSerializer.Deserialize<WorklogDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        var worklogResult = JsonSerializer.Deserialize<WorklogDto>(jsonResponse, _jsonSerializerOptions);
 
         return _mapper.Map<AppDto.WorklogDto>(worklogResult!);
     }
@@ -171,7 +175,7 @@ public class JiraApiClient : IJiraApiClient
         response.EnsureSuccessStatusCode();
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        var userResult = JsonSerializer.Deserialize<UserDto>(jsonResponse, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+        var userResult = JsonSerializer.Deserialize<UserDto>(jsonResponse, _jsonSerializerOptions);
 
         return _mapper.Map<AppDto.UserDto>(userResult!);
     }
