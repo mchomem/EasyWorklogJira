@@ -25,7 +25,7 @@ public class JiraApiClient : IJiraApiClient
     {
         // JQL para buscar issues com worklogs do usuário logados hoje.
         var jql = $"worklogDate = \"{selectedDateTimeFilter.ToString("yyyy-MM-dd")}\" AND worklogAuthor = currentUser() ORDER BY created ASC";
-        var url = $"{_httpClient.BaseAddress}/rest/api/3/search?jql={Uri.EscapeDataString(jql)}";
+        var url = $"{_httpClient.BaseAddress}/rest/api/3/search/jql?jql={Uri.EscapeDataString(jql)}&fields=*all";
 
         HttpResponseMessage response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
@@ -39,7 +39,7 @@ public class JiraApiClient : IJiraApiClient
     public async Task<IEnumerable<AppDto.JiraIssueDto>> GetIssuesActiveProjectsAsync()
     {
         // JQl para buscar as issues dos projetos auxiliares, e projetos da sprint ativa e que estão atribuídas ao usuário logado.
-        var jql = _configuration["JiraQueries:commonAndActiveSprintIssues"]; ;
+        var jql = _configuration["JiraQueries:commonAndActiveSprintIssues"];
 
         if (string.IsNullOrEmpty(jql))
         {
@@ -47,7 +47,7 @@ public class JiraApiClient : IJiraApiClient
             jql = "sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC";
         }
 
-        var url = $"{_httpClient.BaseAddress}/rest/api/3/search?jql={Uri.EscapeDataString(jql)}";
+        var url = $"{_httpClient.BaseAddress}/rest/api/3/search/jql?jql={Uri.EscapeDataString(jql)}&fields=*all";
 
         HttpResponseMessage response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
