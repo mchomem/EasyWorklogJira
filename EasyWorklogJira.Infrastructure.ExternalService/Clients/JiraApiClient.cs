@@ -21,6 +21,13 @@ public class JiraApiClient : IJiraApiClient
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encodedAuthString);
     }
 
+    /// <summary>
+    /// Get issues with worklogs for the specified date.
+    /// Note: On 2025-01-01, there was a change in the Jira API which caused slight changes in the url of the get route,
+    /// as per documentation: https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-jql-get
+    /// </summary>
+    /// <param name="selectedDateTimeFilter">Datetime with timezone</param>
+    /// <returns>Returns a JiraIssueDto object containing the relevant issue information.</returns>
     public async Task<IEnumerable<AppDto.JiraIssueDto>> GetIssuesWithWorklogsByDateTimeAsync(DateTimeOffset selectedDateTimeFilter)
     {
         // JQL para buscar issues com worklogs do usuário logados hoje.
@@ -36,6 +43,12 @@ public class JiraApiClient : IJiraApiClient
         return _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
     }
 
+    /// <summary>
+    /// Get issues from active sprint projects and auxiliary projects.
+    /// Note: On 2025-01-01, there was a change in the Jira API which caused slight changes in the url of the get route,
+    /// as per documentation: https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-issue-search/#api-rest-api-3-search-jql-get
+    /// </summary>
+    /// <returns>Returns a JiraIssueDto object containing the relevant issue information.</returns>
     public async Task<IEnumerable<AppDto.JiraIssueDto>> GetIssuesActiveProjectsAsync()
     {
         // JQl para buscar as issues dos projetos auxiliares, e projetos da sprint ativa e que estão atribuídas ao usuário logado.
