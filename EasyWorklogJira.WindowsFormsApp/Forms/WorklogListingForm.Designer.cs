@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
             monthCalendar = new MonthCalendar();
             dataGridViewDayWorklogs = new DataGridView();
             WorklogId = new DataGridViewTextBoxColumn();
@@ -43,6 +43,7 @@
             labelTotalHoursDay = new Label();
             labelTotalHoursDayValue = new Label();
             buttonNewWorklog = new Button();
+            labelResumeValue = new Label();
             ((System.ComponentModel.ISupportInitialize)dataGridViewDayWorklogs).BeginInit();
             SuspendLayout();
             // 
@@ -81,9 +82,9 @@
             // 
             // IssueKey
             // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            IssueKey.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IssueKey.DefaultCellStyle = dataGridViewCellStyle13;
             IssueKey.FillWeight = 70F;
             IssueKey.HeaderText = "Tarefa";
             IssueKey.Name = "IssueKey";
@@ -94,8 +95,8 @@
             // 
             // StartTime
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            StartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StartTime.DefaultCellStyle = dataGridViewCellStyle14;
             StartTime.FillWeight = 50F;
             StartTime.HeaderText = "Início";
             StartTime.Name = "StartTime";
@@ -105,8 +106,8 @@
             // 
             // EndTime
             // 
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            EndTime.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            EndTime.DefaultCellStyle = dataGridViewCellStyle15;
             EndTime.FillWeight = 50F;
             EndTime.HeaderText = "Fim";
             EndTime.Name = "EndTime";
@@ -137,10 +138,10 @@
             labelResume.Font = new Font("Segoe UI", 12F);
             labelResume.Location = new Point(18, 195);
             labelResume.Name = "labelResume";
-            labelResume.Size = new Size(292, 32);
+            labelResume.Size = new Size(129, 32);
             labelResume.TabIndex = 2;
-            labelResume.Text = "Resumo do dia 00/00/0000";
-            labelResume.TextAlign = ContentAlignment.MiddleCenter;
+            labelResume.Text = "Resumo do dia";
+            labelResume.TextAlign = ContentAlignment.MiddleRight;
             // 
             // labelTotalHoursDay
             // 
@@ -172,6 +173,16 @@
             buttonNewWorklog.UseVisualStyleBackColor = true;
             buttonNewWorklog.Click += buttonNewWorklog_Click;
             // 
+            // labelResumeValue
+            // 
+            labelResumeValue.Font = new Font("Segoe UI", 12F);
+            labelResumeValue.Location = new Point(150, 195);
+            labelResumeValue.Name = "labelResumeValue";
+            labelResumeValue.Size = new Size(160, 32);
+            labelResumeValue.TabIndex = 6;
+            labelResumeValue.Text = "00/00/0000";
+            labelResumeValue.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // WorklogListingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -183,6 +194,7 @@
             Controls.Add(labelResume);
             Controls.Add(dataGridViewDayWorklogs);
             Controls.Add(monthCalendar);
+            Controls.Add(labelResumeValue);
             Name = "WorklogListingForm";
             Text = "Registro de tarefas";
             Load += WorklogForm_Load;
@@ -205,5 +217,6 @@
         private DataGridViewTextBoxColumn EndTime;
         private DataGridViewImageColumn Update;
         private DataGridViewImageColumn Delete;
+        private Label labelResumeValue;
     }
 }

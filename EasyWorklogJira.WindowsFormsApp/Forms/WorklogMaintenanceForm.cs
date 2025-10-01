@@ -176,6 +176,7 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
             {
                 var worklog = await _jiraService.GetWorklogByIdAsync(_issueKey!, _worklogId!);
 
+                // TODO: se issue não estiver atribuída ao responsável (usuário atual), o comboBoxIssues não carrega o valor, modificar a JQL para trazer também as issues que já tem worklog do usuário.
                 comboBoxIssues.SelectedValue = _issueKey!;
                 dateTimePickerStarted.Value = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture);
                 maskedTextBoxStartTime.Text = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture).ToString("HH:mm");

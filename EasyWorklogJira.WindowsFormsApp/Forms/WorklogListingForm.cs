@@ -43,7 +43,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
             }
 
             var selectedDate = monthCalendar.SelectionStart;
-            labelResume.Text = $"Resumo do dia {selectedDate:dd/MM/yyyy}";
+            labelResumeValue.Text = $"{selectedDate:dd/MM/yyyy}";
             var selectedDateTimeOffiset = new DateTimeOffset(selectedDate);
             var issues = await _jiraService.GetIssuesWithWorklogsByDateTimeAsync(selectedDateTimeOffiset);
 
