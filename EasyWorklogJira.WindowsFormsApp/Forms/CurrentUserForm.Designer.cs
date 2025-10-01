@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             groupBoxUserData = new GroupBox();
+            labelName = new Label();
             labelAccountId = new Label();
             labelDisplayName = new Label();
             pictureBoxUserAvatar = new PictureBox();
@@ -38,6 +39,7 @@
             // 
             // groupBoxUserData
             // 
+            groupBoxUserData.Controls.Add(labelName);
             groupBoxUserData.Controls.Add(labelAccountId);
             groupBoxUserData.Controls.Add(labelDisplayName);
             groupBoxUserData.Controls.Add(pictureBoxUserAvatar);
@@ -47,6 +49,16 @@
             groupBoxUserData.TabIndex = 0;
             groupBoxUserData.TabStop = false;
             groupBoxUserData.Text = "Dados";
+            // 
+            // labelName
+            // 
+            labelName.AutoSize = true;
+            labelName.Font = new Font("Segoe UI", 15.75F);
+            labelName.Location = new Point(103, 68);
+            labelName.Name = "labelName";
+            labelName.Size = new Size(75, 30);
+            labelName.TabIndex = 3;
+            labelName.Text = "Nome:";
             // 
             // labelAccountId
             // 
@@ -61,7 +73,7 @@
             // 
             labelDisplayName.AutoSize = true;
             labelDisplayName.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            labelDisplayName.Location = new Point(99, 73);
+            labelDisplayName.Location = new Point(177, 68);
             labelDisplayName.Name = "labelDisplayName";
             labelDisplayName.Size = new Size(154, 30);
             labelDisplayName.TabIndex = 1;
@@ -97,5 +109,6 @@
         private PictureBox pictureBoxUserAvatar;
         private Label labelDisplayName;
         private Label labelAccountId;
+        private Label labelName;
     }
 }

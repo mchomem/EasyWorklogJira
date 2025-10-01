@@ -26,7 +26,7 @@ public partial class CurrentUserForm : MdiChieldFormBase
             var user = await _jiraService.GetCurrentUserAsync();
 
             pictureBoxUserAvatar.Load(user.AvatarUrls.Size48x48);
-            labelDisplayName.Text = $"Nome: {user.DisplayName}";
+            labelDisplayName.Text = user.DisplayName;
             labelAccountId.Text = $"ID: {user.AccountId}";
         }
         catch (Exception ex)
