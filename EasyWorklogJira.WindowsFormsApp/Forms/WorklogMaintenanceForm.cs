@@ -198,6 +198,13 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         finally
         {
             HideLoader();
+
+            // Disable comboBoxIssues AFTER hiding the loader in edit mode
+            if (_isEditMode)
+            {
+                comboBoxIssues.Enabled = false;
+            }
+
             maskedTextBoxTimeSpent.Focus();
             textBoxIssueDescription.Focus();
         }
