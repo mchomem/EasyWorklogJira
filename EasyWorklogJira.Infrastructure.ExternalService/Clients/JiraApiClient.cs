@@ -44,7 +44,9 @@ public class JiraApiClient : IJiraApiClient
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, _jsonSerializerOptions);
 
-        return _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
+        var results = _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
+
+        return results;
     }
 
     /// <summary>
@@ -72,7 +74,9 @@ public class JiraApiClient : IJiraApiClient
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, _jsonSerializerOptions);
 
-        return _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
+        var results = _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
+
+        return results;
     }
 
     public async Task<IEnumerable<AppDto.WorklogDto>> GetIssueWorklogsAsync(string issueKey, DateTimeOffset dateTime, string userEmailAddress)
@@ -112,7 +116,9 @@ public class JiraApiClient : IJiraApiClient
 
         } while (startAt < total);
 
-        return _mapper.Map<IEnumerable<AppDto.WorklogDto>>(allWorklogs);
+        var results = _mapper.Map<IEnumerable<AppDto.WorklogDto>>(allWorklogs);
+
+        return results;
     }
 
     public async Task<AppDto.WorklogDto> GetWorklogByIdAsync(string issueKey, string worklogId)
@@ -177,6 +183,8 @@ public class JiraApiClient : IJiraApiClient
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var userResult = JsonSerializer.Deserialize<UserDto>(jsonResponse, _jsonSerializerOptions);
 
-        return _mapper.Map<AppDto.UserDto>(userResult!);
+        var result = _mapper.Map<AppDto.UserDto>(userResult!);
+
+        return result;
     }
 }
