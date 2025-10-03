@@ -137,6 +137,9 @@ public class ControlLocalization
 
     [JsonPropertyName("labelLanguage")]
     public string LabelLanguage { get; set; }
+
+    [JsonPropertyName("labelResetInformation")]
+    public string LabelResetInformation { get; set; }
 }
 
 public class CurrentUserFormLocalization

@@ -32,6 +32,9 @@
             buttonClose = new Button();
             tabControlDefault = new TabControl();
             tabPageDefault = new TabPage();
+            groupBoxLocalization = new GroupBox();
+            comboBoxLanguage = new ComboBox();
+            labelLanguage = new Label();
             groupBoxWebSite = new GroupBox();
             textBoxUrlBase = new TextBox();
             labelUrlBase = new Label();
@@ -52,16 +55,14 @@
             labelNote = new Label();
             textBoxCommonAndActiveSprintIssues = new TextBox();
             labelCommonAndActiveSprintIssues = new Label();
-            groupBoxLocalization = new GroupBox();
-            labelLanguage = new Label();
-            comboBoxLanguage = new ComboBox();
+            labelResetInformation = new Label();
             tabControlDefault.SuspendLayout();
             tabPageDefault.SuspendLayout();
+            groupBoxLocalization.SuspendLayout();
             groupBoxWebSite.SuspendLayout();
             groupBoxDailyMeetingSchedule.SuspendLayout();
             groupBoxJiraAccessCredentials.SuspendLayout();
             tabPageJiraQueries.SuspendLayout();
-            groupBoxLocalization.SuspendLayout();
             SuspendLayout();
             // 
             // buttonSave
@@ -107,6 +108,36 @@
             tabPageDefault.TabIndex = 0;
             tabPageDefault.Text = "Padrão";
             tabPageDefault.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxLocalization
+            // 
+            groupBoxLocalization.Controls.Add(labelResetInformation);
+            groupBoxLocalization.Controls.Add(comboBoxLanguage);
+            groupBoxLocalization.Controls.Add(labelLanguage);
+            groupBoxLocalization.Location = new Point(18, 370);
+            groupBoxLocalization.Name = "groupBoxLocalization";
+            groupBoxLocalization.Size = new Size(462, 74);
+            groupBoxLocalization.TabIndex = 14;
+            groupBoxLocalization.TabStop = false;
+            groupBoxLocalization.Text = "Localização";
+            // 
+            // comboBoxLanguage
+            // 
+            comboBoxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxLanguage.FormattingEnabled = true;
+            comboBoxLanguage.Location = new Point(84, 33);
+            comboBoxLanguage.Name = "comboBoxLanguage";
+            comboBoxLanguage.Size = new Size(121, 23);
+            comboBoxLanguage.TabIndex = 1;
+            // 
+            // labelLanguage
+            // 
+            labelLanguage.AutoSize = true;
+            labelLanguage.Location = new Point(26, 36);
+            labelLanguage.Name = "labelLanguage";
+            labelLanguage.Size = new Size(47, 15);
+            labelLanguage.TabIndex = 0;
+            labelLanguage.Text = "Idioma:";
             // 
             // groupBoxWebSite
             // 
@@ -267,7 +298,7 @@
             tabPageJiraQueries.Location = new Point(4, 24);
             tabPageJiraQueries.Name = "tabPageJiraQueries";
             tabPageJiraQueries.Padding = new Padding(3);
-            tabPageJiraQueries.Size = new Size(503, 395);
+            tabPageJiraQueries.Size = new Size(503, 455);
             tabPageJiraQueries.TabIndex = 1;
             tabPageJiraQueries.Text = "Consultas JQL";
             tabPageJiraQueries.UseVisualStyleBackColor = true;
@@ -298,34 +329,14 @@
             labelCommonAndActiveSprintIssues.TabIndex = 0;
             labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
             // 
-            // groupBoxLocalization
+            // labelResetInformation
             // 
-            groupBoxLocalization.Controls.Add(comboBoxLanguage);
-            groupBoxLocalization.Controls.Add(labelLanguage);
-            groupBoxLocalization.Location = new Point(18, 370);
-            groupBoxLocalization.Name = "groupBoxLocalization";
-            groupBoxLocalization.Size = new Size(462, 74);
-            groupBoxLocalization.TabIndex = 14;
-            groupBoxLocalization.TabStop = false;
-            groupBoxLocalization.Text = "Localização";
-            // 
-            // labelLanguage
-            // 
-            labelLanguage.AutoSize = true;
-            labelLanguage.Location = new Point(26, 36);
-            labelLanguage.Name = "labelLanguage";
-            labelLanguage.Size = new Size(47, 15);
-            labelLanguage.TabIndex = 0;
-            labelLanguage.Text = "Idioma:";
-            // 
-            // comboBoxLanguage
-            // 
-            comboBoxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxLanguage.FormattingEnabled = true;
-            comboBoxLanguage.Location = new Point(84, 33);
-            comboBoxLanguage.Name = "comboBoxLanguage";
-            comboBoxLanguage.Size = new Size(121, 23);
-            comboBoxLanguage.TabIndex = 1;
+            labelResetInformation.AutoSize = true;
+            labelResetInformation.Location = new Point(224, 36);
+            labelResetInformation.Name = "labelResetInformation";
+            labelResetInformation.Size = new Size(117, 15);
+            labelResetInformation.TabIndex = 2;
+            labelResetInformation.Text = "OBS: precisa reiniciar";
             // 
             // ConfigurationForm
             // 
@@ -339,6 +350,8 @@
             Text = "Configuração";
             tabControlDefault.ResumeLayout(false);
             tabPageDefault.ResumeLayout(false);
+            groupBoxLocalization.ResumeLayout(false);
+            groupBoxLocalization.PerformLayout();
             groupBoxWebSite.ResumeLayout(false);
             groupBoxWebSite.PerformLayout();
             groupBoxDailyMeetingSchedule.ResumeLayout(false);
@@ -347,8 +360,6 @@
             groupBoxJiraAccessCredentials.PerformLayout();
             tabPageJiraQueries.ResumeLayout(false);
             tabPageJiraQueries.PerformLayout();
-            groupBoxLocalization.ResumeLayout(false);
-            groupBoxLocalization.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -380,5 +391,6 @@
         private GroupBox groupBoxLocalization;
         private Label labelLanguage;
         private ComboBox comboBoxLanguage;
+        private Label labelResetInformation;
     }
 }

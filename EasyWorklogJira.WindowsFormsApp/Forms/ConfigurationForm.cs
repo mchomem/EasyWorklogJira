@@ -89,6 +89,7 @@ public partial class ConfigurationForm : MdiChieldFormBase
 
         groupBoxLocalization.Text = configurationForm.Control.GroupBoxLocalization;
         labelLanguage.Text = configurationForm.Control.LabelLanguage;
+        labelResetInformation.Text = configurationForm.Control.LabelResetInformation;
 
         tabPageJiraQueries.Text = configurationForm.Control.TabPageJiraQueries;
         labelCommonAndActiveSprintIssues.Text = configurationForm.Control.LabelCommonAndActiveSprintIssues;
