@@ -70,6 +70,10 @@ public static class Program
                 JiraQueries = new
                 {
                     commonAndActiveSprintIssues = string.Empty
+                },
+                Localization = new
+                {
+                    language = "en_US"
                 }
             };
             var options = new JsonSerializerOptions { WriteIndented = true };

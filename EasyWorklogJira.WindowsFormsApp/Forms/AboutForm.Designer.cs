@@ -48,7 +48,6 @@
             Controls.Add(labelTextAbout);
             Name = "AboutForm";
             Text = "Sobre";
-            Load += AboutForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

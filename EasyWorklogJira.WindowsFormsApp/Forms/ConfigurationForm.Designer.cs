@@ -52,17 +52,21 @@
             labelNote = new Label();
             textBoxCommonAndActiveSprintIssues = new TextBox();
             labelCommonAndActiveSprintIssues = new Label();
+            groupBoxLocalization = new GroupBox();
+            labelLanguage = new Label();
+            comboBoxLanguage = new ComboBox();
             tabControlDefault.SuspendLayout();
             tabPageDefault.SuspendLayout();
             groupBoxWebSite.SuspendLayout();
             groupBoxDailyMeetingSchedule.SuspendLayout();
             groupBoxJiraAccessCredentials.SuspendLayout();
             tabPageJiraQueries.SuspendLayout();
+            groupBoxLocalization.SuspendLayout();
             SuspendLayout();
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(444, 441);
+            buttonSave.Location = new Point(444, 511);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 16;
@@ -72,7 +76,7 @@
             // 
             // buttonClose
             // 
-            buttonClose.Location = new Point(363, 441);
+            buttonClose.Location = new Point(363, 511);
             buttonClose.Name = "buttonClose";
             buttonClose.Size = new Size(75, 23);
             buttonClose.TabIndex = 15;
@@ -87,18 +91,19 @@
             tabControlDefault.Location = new Point(12, 12);
             tabControlDefault.Name = "tabControlDefault";
             tabControlDefault.SelectedIndex = 0;
-            tabControlDefault.Size = new Size(511, 423);
+            tabControlDefault.Size = new Size(511, 483);
             tabControlDefault.TabIndex = 18;
             // 
             // tabPageDefault
             // 
+            tabPageDefault.Controls.Add(groupBoxLocalization);
             tabPageDefault.Controls.Add(groupBoxWebSite);
             tabPageDefault.Controls.Add(groupBoxDailyMeetingSchedule);
             tabPageDefault.Controls.Add(groupBoxJiraAccessCredentials);
             tabPageDefault.Location = new Point(4, 24);
             tabPageDefault.Name = "tabPageDefault";
             tabPageDefault.Padding = new Padding(3);
-            tabPageDefault.Size = new Size(621, 395);
+            tabPageDefault.Size = new Size(503, 455);
             tabPageDefault.TabIndex = 0;
             tabPageDefault.Text = "Padrão";
             tabPageDefault.UseVisualStyleBackColor = true;
@@ -293,11 +298,40 @@
             labelCommonAndActiveSprintIssues.TabIndex = 0;
             labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
             // 
+            // groupBoxLocalization
+            // 
+            groupBoxLocalization.Controls.Add(comboBoxLanguage);
+            groupBoxLocalization.Controls.Add(labelLanguage);
+            groupBoxLocalization.Location = new Point(18, 370);
+            groupBoxLocalization.Name = "groupBoxLocalization";
+            groupBoxLocalization.Size = new Size(462, 74);
+            groupBoxLocalization.TabIndex = 14;
+            groupBoxLocalization.TabStop = false;
+            groupBoxLocalization.Text = "Localização";
+            // 
+            // labelLanguage
+            // 
+            labelLanguage.AutoSize = true;
+            labelLanguage.Location = new Point(26, 36);
+            labelLanguage.Name = "labelLanguage";
+            labelLanguage.Size = new Size(47, 15);
+            labelLanguage.TabIndex = 0;
+            labelLanguage.Text = "Idioma:";
+            // 
+            // comboBoxLanguage
+            // 
+            comboBoxLanguage.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxLanguage.FormattingEnabled = true;
+            comboBoxLanguage.Location = new Point(84, 33);
+            comboBoxLanguage.Name = "comboBoxLanguage";
+            comboBoxLanguage.Size = new Size(121, 23);
+            comboBoxLanguage.TabIndex = 1;
+            // 
             // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(536, 476);
+            ClientSize = new Size(536, 546);
             Controls.Add(tabControlDefault);
             Controls.Add(buttonClose);
             Controls.Add(buttonSave);
@@ -313,6 +347,8 @@
             groupBoxJiraAccessCredentials.PerformLayout();
             tabPageJiraQueries.ResumeLayout(false);
             tabPageJiraQueries.PerformLayout();
+            groupBoxLocalization.ResumeLayout(false);
+            groupBoxLocalization.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -341,5 +377,8 @@
         private TextBox textBoxCommonAndActiveSprintIssues;
         private Label labelCommonAndActiveSprintIssues;
         private Label labelNote;
+        private GroupBox groupBoxLocalization;
+        private Label labelLanguage;
+        private ComboBox comboBoxLanguage;
     }
 }

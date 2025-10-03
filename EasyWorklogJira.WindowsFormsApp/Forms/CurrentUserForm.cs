@@ -3,18 +3,23 @@
 public partial class CurrentUserForm : MdiChieldFormBase
 {
     private readonly IJiraService _jiraService;
+    private readonly ILocalizationService _localizationService;
+    private readonly IConfiguration _configuration;
 
     // Loader components
     private Panel loaderPanel;
     private Label loaderLabel;
     private PictureBox loaderGif;
 
-    public CurrentUserForm(IJiraService jiraService)
+    public CurrentUserForm(IJiraService jiraService, ILocalizationService localizationService, IConfiguration configuration)
     {
         _jiraService = jiraService;
+        _localizationService = localizationService;
+        _configuration = configuration;
 
         InitializeComponent();
         InitializeLoader();
+        GetTranslate();
     }
 
     private async void CurrentUserForm_Load(object sender, EventArgs e)
@@ -37,6 +42,16 @@ public partial class CurrentUserForm : MdiChieldFormBase
         {
             HideLoader();
         }
+    }
+
+    private void GetTranslate()
+    {
+        var language = _configuration.GetValue<string>("Localization:language");
+        var currentUserForm = _localizationService.GetForm<CurrentUserFormLocalization>(language!);
+
+        this.Text = currentUserForm.Title;
+        groupBoxUserData.Text = currentUserForm.Control.GroupBoxUserData;
+        labelName.Text = currentUserForm.Control.LabelName;
     }
 
     #region Loader methods

@@ -3,19 +3,40 @@
 public partial class WorklogListingForm : MdiChieldFormBase
 {
     private readonly IJiraService _jiraService;
+    private readonly ILocalizationService _localizationService;
     private readonly IConfiguration _configuration;
 
     private Panel loaderPanel;
     private Label loaderLabel;
     private PictureBox loaderGif;
 
-    public WorklogListingForm(IJiraService jiraService, IConfiguration configuration)
+    public WorklogListingForm(IJiraService jiraService, ILocalizationService localizationService, IConfiguration configuration)
     {
         _jiraService = jiraService;
+        _localizationService = localizationService;
         _configuration = configuration;
 
         InitializeComponent();
         InitializeLoader();
+        GetTranslate();
+    }
+
+    private void GetTranslate()
+    {
+        var language = _configuration.GetValue<string>("Localization:language");
+        var worklogListingForm = _localizationService.GetForm<WorklogListingFormLocalization>(language!);
+
+        Text = worklogListingForm.Title;
+        labelResume.Text = worklogListingForm.Control.LabelResume;
+
+        dataGridViewDayWorklogs.Columns["IssueKey"].HeaderText = worklogListingForm.Control.ColumnIssueKey;
+        dataGridViewDayWorklogs.Columns["StartTime"].HeaderText = worklogListingForm.Control.ColumnStartTime;
+        dataGridViewDayWorklogs.Columns["EndTime"].HeaderText = worklogListingForm.Control.ColumnEndTime;
+        dataGridViewDayWorklogs.Columns["Update"].HeaderText = worklogListingForm.Control.ColumnUpdate;
+        dataGridViewDayWorklogs.Columns["Delete"].HeaderText = worklogListingForm.Control.ColumnDelete;
+
+        labelTotalHoursDay.Text = worklogListingForm.Control.LabelTotalHoursDay;
+        buttonNewWorklog.Text = worklogListingForm.Control.ButtonNew;
     }
 
     private async Task LoadWorklogs(bool getPreviousDay = false)
@@ -164,7 +185,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
             if (mainForm is not null)
             {
                 // Passar os dados diretamente para o formulário de manutenção
-                var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, issueId, worklogId);
+                var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, _localizationService, _configuration, issueId, worklogId);
                 worklogMaintenanceForm.MdiParent = mainForm;
                 worklogMaintenanceForm.Show();
 
@@ -194,7 +215,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
         if (mainForm is not null)
         {
             // Criar novo worklog sem parâmetros (modo inserção)
-            var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService);
+            var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, _localizationService, _configuration);
             worklogMaintenanceForm.MdiParent = mainForm;
             worklogMaintenanceForm.Show();
             Close();

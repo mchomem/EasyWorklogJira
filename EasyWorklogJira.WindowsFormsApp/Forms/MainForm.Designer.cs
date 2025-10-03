@@ -28,53 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
-            menuStrip1 = new MenuStrip();
-            sistemaToolStripMenuItem = new ToolStripMenuItem();
-            configuraçãoToolStripMenuItem = new ToolStripMenuItem();
+            menuStripMain = new MenuStrip();
+            systemToolStripMenuItem = new ToolStripMenuItem();
+            configurationToolStripMenuItem = new ToolStripMenuItem();
             toolStripMenuItem1 = new ToolStripSeparator();
-            sairToolStripMenuItem = new ToolStripMenuItem();
+            currentUserToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
             resourcesToolStripMenuItem = new ToolStripMenuItem();
             worklogToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
-            usuárioDaAplicaçãoToolStripMenuItem = new ToolStripMenuItem();
-            menuStrip1.SuspendLayout();
+            menuStripMain.SuspendLayout();
             SuspendLayout();
             // 
-            // menuStrip1
+            // menuStripMain
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { sistemaToolStripMenuItem, resourcesToolStripMenuItem, helpToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(1008, 24);
-            menuStrip1.TabIndex = 0;
-            menuStrip1.Text = "menuStrip1";
+            menuStripMain.Items.AddRange(new ToolStripItem[] { systemToolStripMenuItem, resourcesToolStripMenuItem, helpToolStripMenuItem });
+            menuStripMain.Location = new Point(0, 0);
+            menuStripMain.Name = "menuStripMain";
+            menuStripMain.Size = new Size(1008, 24);
+            menuStripMain.TabIndex = 0;
+            menuStripMain.Text = "menuStrip1";
             // 
             // sistemaToolStripMenuItem
             // 
-            sistemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { configuraçãoToolStripMenuItem, toolStripMenuItem1, usuárioDaAplicaçãoToolStripMenuItem, sairToolStripMenuItem });
-            sistemaToolStripMenuItem.Name = "sistemaToolStripMenuItem";
-            sistemaToolStripMenuItem.Size = new Size(60, 20);
-            sistemaToolStripMenuItem.Text = "Sistema";
+            systemToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { configurationToolStripMenuItem, toolStripMenuItem1, currentUserToolStripMenuItem, exitToolStripMenuItem });
+            systemToolStripMenuItem.Name = "sistemaToolStripMenuItem";
+            systemToolStripMenuItem.Size = new Size(60, 20);
+            systemToolStripMenuItem.Text = "Sistema";
             // 
             // configuraçãoToolStripMenuItem
             // 
-            configuraçãoToolStripMenuItem.Name = "configuraçãoToolStripMenuItem";
-            configuraçãoToolStripMenuItem.Size = new Size(183, 22);
-            configuraçãoToolStripMenuItem.Text = "Configuração";
-            configuraçãoToolStripMenuItem.Click += setupToolStripMenuItem_Click;
+            configurationToolStripMenuItem.Name = "configuraçãoToolStripMenuItem";
+            configurationToolStripMenuItem.Size = new Size(183, 22);
+            configurationToolStripMenuItem.Text = "Configuração";
+            configurationToolStripMenuItem.Click += setupToolStripMenuItem_Click;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(180, 6);
             // 
+            // usuárioDaAplicaçãoToolStripMenuItem
+            // 
+            currentUserToolStripMenuItem.Name = "usuárioDaAplicaçãoToolStripMenuItem";
+            currentUserToolStripMenuItem.Size = new Size(183, 22);
+            currentUserToolStripMenuItem.Text = "Usuário da aplicação";
+            currentUserToolStripMenuItem.Click += userApplicationToolStripMenuItem_Click;
+            // 
             // sairToolStripMenuItem
             // 
-            sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            sairToolStripMenuItem.Size = new Size(183, 22);
-            sairToolStripMenuItem.Text = "Sair";
-            sairToolStripMenuItem.Click += exitToolStripMenuItem_Click;
+            exitToolStripMenuItem.Name = "sairToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(183, 22);
+            exitToolStripMenuItem.Text = "Sair";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // resourcesToolStripMenuItem
             // 
@@ -104,41 +111,34 @@
             aboutToolStripMenuItem.Text = "Sobre";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
-            // usuárioDaAplicaçãoToolStripMenuItem
-            // 
-            usuárioDaAplicaçãoToolStripMenuItem.Name = "usuárioDaAplicaçãoToolStripMenuItem";
-            usuárioDaAplicaçãoToolStripMenuItem.Size = new Size(183, 22);
-            usuárioDaAplicaçãoToolStripMenuItem.Text = "Usuário da aplicação";
-            usuárioDaAplicaçãoToolStripMenuItem.Click += userApplicationToolStripMenuItem_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 729);
-            Controls.Add(menuStrip1);
+            Controls.Add(menuStripMain);
             IsMdiContainer = true;
-            MainMenuStrip = menuStrip1;
+            MainMenuStrip = menuStripMain;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Easy Worklog Jira";
-            menuStrip1.ResumeLayout(false);
-            menuStrip1.PerformLayout();
+            menuStripMain.ResumeLayout(false);
+            menuStripMain.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem sistemaToolStripMenuItem;
-        private ToolStripMenuItem configuraçãoToolStripMenuItem;
+        private MenuStrip menuStripMain;
+        private ToolStripMenuItem systemToolStripMenuItem;
+        private ToolStripMenuItem configurationToolStripMenuItem;
         private ToolStripSeparator toolStripMenuItem1;
-        private ToolStripMenuItem sairToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem resourcesToolStripMenuItem;
         private ToolStripMenuItem worklogToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
-        private ToolStripMenuItem usuárioDaAplicaçãoToolStripMenuItem;
+        private ToolStripMenuItem currentUserToolStripMenuItem;
     }
 }

@@ -3,13 +3,36 @@
 public partial class MainForm : Form
 {
     private readonly IServiceProvider _serviceProvider;
+    private readonly ILocalizationService _localizationService;
+    private readonly IConfiguration _configuration;
     private Dictionary<Type, Form> _openForms = new Dictionary<Type, Form>();
 
-    public MainForm(IServiceProvider serviceProvider)
+    public MainForm(IServiceProvider serviceProvider, ILocalizationService localizationService, IConfiguration configuration)
     {
         _serviceProvider = serviceProvider;
+        _localizationService = localizationService;
+        _configuration = configuration;
+
         InitializeComponent();
-        this.Focus();
+        GetTranslate();
+        Focus();
+    }
+
+    private void GetTranslate()
+    {
+        var language = _configuration.GetValue<string>("Localization:language");
+
+        var mainForm = _localizationService.GetForm<Infrastructure.Localization.Models.MainFormLocalization>(language);
+        systemToolStripMenuItem.Text = mainForm.MainMenu.SystemMenu.Text;
+        configurationToolStripMenuItem.Text = mainForm.MainMenu.SystemMenu.Chieldren.ConfigurationMenuItem;
+        currentUserToolStripMenuItem.Text = mainForm.MainMenu.SystemMenu.Chieldren.CurrentUserMenuItem;
+        exitToolStripMenuItem.Text = mainForm.MainMenu.SystemMenu.Chieldren.ExitMenuItem;
+
+        resourcesToolStripMenuItem.Text = mainForm.MainMenu.ResourcesMenu.Text;
+        worklogToolStripMenuItem.Text = mainForm.MainMenu.ResourcesMenu.Chieldren.WorklogMenuItem;
+
+        helpToolStripMenuItem.Text = mainForm.MainMenu.HelpMenu.Text;
+        aboutToolStripMenuItem.Text = mainForm.MainMenu.HelpMenu.Chieldren.AboutMenuItem;
     }
 
     private void setupToolStripMenuItem_Click(object sender, EventArgs e)
@@ -70,5 +93,5 @@ public partial class MainForm : Form
     private static void Exit()
     {
         Environment.Exit(0);
-    }    
+    }
 }

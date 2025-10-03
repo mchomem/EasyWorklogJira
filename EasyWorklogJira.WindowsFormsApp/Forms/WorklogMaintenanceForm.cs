@@ -3,6 +3,8 @@
 public partial class WorklogMaintenanceForm : MdiChieldFormBase
 {
     private readonly IJiraService _jiraService;
+    private readonly ILocalizationService _localizationService;
+    private readonly IConfiguration _configuration;
     private readonly string? _issueKey;
     private readonly string? _worklogId;
     private readonly bool _isEditMode;
@@ -12,11 +14,19 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
     private Label loaderLabel;
     private PictureBox loaderGif;
 
-    public WorklogMaintenanceForm(IJiraService jiraService) : this(jiraService, null, null) { }
+    public WorklogMaintenanceForm(IJiraService jiraService
+        , ILocalizationService _localizationService
+        , IConfiguration _configuration) : this(jiraService, _localizationService, _configuration, null, null) { }
 
-    public WorklogMaintenanceForm(IJiraService jiraService, string? issueKey, string? worklogId)
+    public WorklogMaintenanceForm(IJiraService jiraService
+        , ILocalizationService localizationService
+        , IConfiguration configuration
+        , string? issueKey
+        , string? worklogId)
     {
         _jiraService = jiraService;
+        _localizationService = localizationService;
+        _configuration = configuration;
         _issueKey = issueKey;
         _worklogId = worklogId;
         _isEditMode = !string.IsNullOrEmpty(issueKey) && !string.IsNullOrEmpty(worklogId);
@@ -25,8 +35,23 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         InitializeLoader();
 
         maskedTextBoxStartTime.Text = DateTime.Now.ToString("HH:mm");
-
         this.Text = _isEditMode ? "Editar Registro de Tarefa" : "Registro de Tarefas";
+        GetTranslate();
+    }
+
+    private void GetTranslate()
+    {
+        var language = _configuration.GetValue<string>("Localization:language");
+        var worklogMaintenanceForm = _localizationService.GetForm<WorklogMaintenanceFormLocalization>(language!);
+
+        Text = worklogMaintenanceForm.Title;
+        labelIssue.Text = worklogMaintenanceForm.Control.LabelIssue;
+        labelDate.Text = worklogMaintenanceForm.Control.LabelDate;
+        labelStartTime.Text = worklogMaintenanceForm.Control.LabelStartTime;
+        labelEndTime.Text = worklogMaintenanceForm.Control.LabelEndTime;
+        labelTimeSpent.Text = worklogMaintenanceForm.Control.LabelTimeSpent;
+        labelWorklogDescription.Text = worklogMaintenanceForm.Control.LabelWorklogDescription;
+        buttonSave.Text = worklogMaintenanceForm.Control.ButtonSave;
     }
 
     public async Task LoadIssuesOnActiveSprint()
@@ -176,7 +201,6 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
             {
                 var worklog = await _jiraService.GetWorklogByIdAsync(_issueKey!, _worklogId!);
 
-                // TODO: se issue não estiver atribuída ao responsável (usuário atual), o comboBoxIssues não carrega o valor, modificar a JQL para trazer também as issues que já tem worklog do usuário.
                 comboBoxIssues.SelectedValue = _issueKey!;
                 dateTimePickerStarted.Value = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture);
                 maskedTextBoxStartTime.Text = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture).ToString("HH:mm");

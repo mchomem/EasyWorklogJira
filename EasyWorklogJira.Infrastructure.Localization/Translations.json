@@ -1,0 +1,180 @@
+{
+  "en_US": {
+    "form": {
+      "mainForm": {
+        "mainMenu": {
+          "systemMenu": {
+            "text": "System",
+            "chieldren": {
+              "configurationMenuItem": "Configuration",
+              "currentUserMenuItem": "Current User",
+              "exitMenuItem": "Exit"
+            }
+          },
+          "resourcesMenu": {
+            "text": "Resources",
+            "chieldren": {
+              "worklogMenuItem": "Worklog"
+            }
+          },
+          "helpMenu": {
+            "text": "Help",
+            "chieldren": {
+              "aboutMenuItem": "About"
+            }
+          }
+        }
+      },
+      "aboutForm": {
+        "title": "About",
+        "control": {
+          "labelTextAbout": "Easy Worklog Jira\n\nDesktop application designed to dramatically simplify the recording of working hours\nin the Jira system.\n\nVersion 1.0.0\n\nDeveloped by Misael C. Homem\n\n2025"
+        }
+      },
+      "configurationForm": {
+        "title": "Configuration",
+        "control": {
+          "tabPageDefault": "Default",
+          "groupBoxWebSite": "Web Site",
+          "labelUrlBase": "Url Base:",
+          "groupBoxJiraAccessCredentials": "Jira Access Credentials",
+          "labelEmail": "e-mail:",
+          "labelInformationToken": "Generate your token at:",
+          "labelToken": "Token:",
+          "groupBoxDailyMeetingSchedule": "Daily meeting schedule *",
+          "labelStartTime": "Start Time:",
+          "labelEndTime": "End Time:",
+          "labelWarningRule": "* When setting the daily time window, consult the tasks from the previous day.",
+          "groupBoxLocalization": "Localization",
+          "labelLanguage": "Language",
+          "tabPageJiraQueries": "JQl queries",
+          "labelCommonAndActiveSprintIssues": "Common projects and within the active sprint:",
+          "labelNote": "Note: If JQL is not configured in this field, the following JQL will be used:\n 'sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC'",
+          "buttonClose": "Close",
+          "buttonSave": "Save"
+        }
+      },
+      "currentUserForm": {
+        "title": "Current User",
+        "control": {
+          "groupBoxUserData": "Data",
+          "labelName": "Name:"
+        }
+      },
+      "worklogListingForm": {
+        "title": "Worklog",
+        "control": {
+          "labelResume": "Day summary",
+          "columnIssueKey": "Issue",
+          "columnStartTime": "Start",
+          "columnEndTime": "End",
+          "columnUpdate": "Update",
+          "columnDelete": "Delete",
+          "labelTotalHoursDay": "Hours worked",
+          "buttonNew": "New"
+        }
+      },
+      "worklogMaintenanceForm": {
+        "title": "Worklog",
+        "control": {
+          "labelIssue": "Task:",
+          "labelDate": "Date:",
+          "labelStartTime": "Start Time:",
+          "labelEndTime": "End Time:",
+          "labelTimeSpent": "Time Spent:",
+          "labelWorklogDescription": "Activity description:",
+          "buttonSave": "Save"
+        }
+      }
+    }
+  },
+  "pt_BR": {
+    "form": {
+      "mainForm": {
+        "mainMenu": {
+          "systemMenu": {
+            "text": "Sistema",
+            "chieldren": {
+              "configurationMenuItem": "Configuração",
+              "currentUserMenuItem": "Usuário da aplicação",
+              "exitMenuItem": "Sair"
+            }
+          },
+          "resourcesMenu": {
+            "text": "Recursos",
+            "chieldren": {
+              "worklogMenuItem": "Registro de Tarefas"
+            }
+          },
+          "helpMenu": {
+            "text": "Ajuda",
+            "chieldren": {
+              "aboutMenuItem": "Sobre"
+            }
+          }
+        }
+      },
+      "aboutForm": {
+        "title": "Sobre",
+        "control": {
+          "labelTextAbout": "Easy Worklog Jira\n\nAplicativo desktop projetado para simplificar drasticamente o registro de horas\nde trabalho no sistema Jira.\n\nVersão 1.0.0\n\nDesenvolvido por Misael C. Homem\n\n2025"
+        }
+      },
+      "configurationForm": {
+        "title": "Configuração",
+        "control": {
+          "tabPageDefault": "Padrão",
+          "groupBoxWebSite": "Web Site",
+          "labelUrlBase": "Url Base:",
+          "groupBoxJiraAccessCredentials": "Credenciais de Acesso do Jira",
+          "labelEmail": "e-mail:",
+          "labelInformationToken": "Gere seu token em:",
+          "labelToken": "Token:",
+          "groupBoxDailyMeetingSchedule": "Horário da daily *",
+          "labelStartTime": "Hora de Início:",
+          "labelEndTime": "Hora de Términio:",
+          "labelWarningRule": "* Ao configurar a janela de horários da daily, consulta as tarefas do dia anterior.",
+          "groupBoxLocalization": "Localização",
+          "labelLanguage": "Idioma",
+          "tabPageJiraQueries": "Consultas JQl",
+          "labelCommonAndActiveSprintIssues": "Projetos comuns e dentro da sprint ativa:",
+          "labelNote": "Nota: caso a JQL naõ seja configurada neste campo, a seguinte JQL será utilizada:\n 'sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC'",
+          "buttonClose": "Fechar",
+          "buttonSave": "Salvar"
+        }
+      },
+      "currentUserForm": {
+        "title": "Usuário da aplicação",
+        "control": {
+          "groupBoxUserData": "Dados",
+          "labelName": "Nome:"
+        }
+      },
+      "worklogListingForm": {
+        "title": "Registro de tarefas",
+        "control": {
+          "labelResume": "Resumo do dia",
+          "columnIssueKey": "Tarefa",
+          "columnStartTime": "Início",
+          "columnEndTime": "Fim",
+          "columnUpdate": "Atualizar",
+          "columnDelete": "Excluir",
+          "labelTotalHoursDay": "Horas trabalhadas:",
+          "buttonNew": "Novo"
+        }
+      },
+      "worklogMaintenanceForm": {
+        "title": "Registro de tarefas",
+        "control": {
+          "labelIssue": "Tarefa:",
+          "labelDate": "Data:",
+          "labelStartTime": "Hora inicial:",
+          "labelEndTime": "Hora final:",
+          "labelTimeSpent": "Tempo gasto:",
+          "labelWorklogDescription": "Descrição da atividade:",
+          "buttonSave": "Salvar"
+        }
+      }
+    }
+  }
+}

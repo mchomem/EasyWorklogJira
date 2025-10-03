@@ -21,6 +21,12 @@ public static class DependenceInjectionWindowsFormsApp
 
         #endregion
 
+        #region Localization Service
+
+        services.AddScoped<ILocalizationService, LocalizationService>();
+
+        #endregion
+
         #region Configuration
 
         services.AddSingleton(configuration);
