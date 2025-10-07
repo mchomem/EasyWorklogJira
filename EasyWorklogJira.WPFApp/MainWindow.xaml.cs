@@ -11,6 +11,44 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        ShowDateToday();
+    }
+
+    private void ShowDateToday()
+    {
+        var index = 0;
+
+        TextBlockDateTimeNow.Text = string.Join("", DateTime.Now
+            .ToString("dddd - dd/MM/yyyy")
+            .Replace(".", string.Empty)
+            .Select(x =>
+            {
+                if (index == 0)
+                {
+                    index++;
+                    x = char.ToUpper(x);
+                    return x;
+                }
+
+                return x;
+            }));
+    }
+
+    private void Grid_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == System.Windows.Input.MouseButton.Left)
+            this.DragMove();
+    }
+
+    private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+    {
+        if (WindowState == WindowState.Normal)
+            WindowState = WindowState.Minimized;
+    }
+
+    private void ButtonClose_Click(object sender, RoutedEventArgs e)
+    {
+        Environment.Exit(0);
     }
 
     private void buttonIssueCalendar_Click(object sender, RoutedEventArgs e)

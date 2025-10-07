@@ -6,22 +6,63 @@
         xmlns:local="clr-namespace:EasyWorklogJira.WPFApp"
         mc:Ignorable="d"
         Title="Easy Worklog Jira"
-        Height="600"
-        Width="350"
+        Height="560"
+        Width="312"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="None"
+        ResizeMode="NoResize">
 
     <Grid Background="Silver">
 
-        <DockPanel VerticalAlignment="Top" Height="40" Background="#0078D7">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" /><!-- Top bar -->
+            <RowDefinition Height="*" /><!-- Conteúdo -->
+            <RowDefinition Height="40" /><!-- Menu inferior -->
+        </Grid.RowDefinitions>
 
-        </DockPanel>
+        <Grid VerticalAlignment="Top" Height="40" Background="Black" MouseDown="Grid_MouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+                x:Name="TextBlockDateTimeNow"
+                Text="..."
+                FontWeight="Bold"
+                FontSize="16"
+                Margin="10,10,0,0"
+                Foreground="White"></TextBlock>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button
+                    x:Name="buttonMinimize"
+                    BorderBrush="Transparent"
+                    Content="_"
+                    Click="ButtonMinimize_Click"
+                    Background="Transparent"
+                    FontSize="24"
+                    Foreground="White"
+                    ToolTip="Minimizar"
+                    Width="40" />
+                <Button
+                    x:Name="buttonClose"
+                    BorderBrush="Transparent"
+                    Content="X"
+                    Click="ButtonClose_Click"
+                    Background="Transparent"
+                    FontSize="24"
+                    Foreground="White"
+                    ToolTip="Fechar"
+                    Width="40" />
+            </StackPanel>
+        </Grid>
 
         <!-- Conteúdo principal -->
-        <ContentControl x:Name="MainContent" />
+        <ContentControl Grid.Row="1" x:Name="MainContent" />
 
-        <!--Menu ninferior-->
-        <DockPanel VerticalAlignment="Bottom" Height="40" Background="#FFF0F0F0">
+        <!-- Menu inferior -->
+        <DockPanel Grid.Row="2" VerticalAlignment="Bottom" Height="40" Background="#FFF0F0F0">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <Button x:Name="buttonIssueCalendar" Click="buttonIssueCalendar_Click" Margin="20,0" Background="Transparent" BorderThickness="0">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">

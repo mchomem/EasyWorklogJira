@@ -3,14 +3,273 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:EasyWorklogJira.WPFApp.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="350">
-    <Grid Background="#FFF5F5F5">
-        <TextBlock Text="Configurações"
-                   FontSize="24"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Foreground="#333" />
+             xmlns:local="clr-namespace:EasyWorklogJira.WPFApp.Views" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="312">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Tab controls-->
+            <RowDefinition Height="*"/>
+            <!--Botões de fechar e salvar-->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TabControl>
+            <TabItem Header="Padrão">
+                <Grid Background="#FFF5F5F5">
+                    <Grid.RowDefinitions>
+                        <!--Web Site-->
+                        <RowDefinition Height="Auto"/>
+                        <!--Credenciais de Acesso do Jira-->
+                        <RowDefinition Height="Auto"/>
+                        <!--Horário da daily-->
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Web Site-->
+                    <GroupBox
+                        Grid.Row="0"
+                        Margin="10"
+                        Background="Transparent"
+                        Header="Web Site">
+                        <StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="Url Base:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    x:Name="textBoxUrl"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="Auto"
+                                    HorizontalAlignment="Stretch" />
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <!--Credenciais de Acesso do Jira-->
+                    <GroupBox
+                        Grid.Row="1"
+                        Margin="10"
+                        Background="Transparent"
+                        Header="Credenciais de Acesso ao Jira">
+                        <StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="e-mail:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Stretch"/>
+
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="Gere seu token em "/>
+
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,5,0,0">
+                                    <Hyperlink
+                                        Click="Hyperlink_Click"
+                                        NavigateUri="https://id.atlassian.com/manage-profile/security/api-tokens">Token Jira</Hyperlink>
+                                </TextBlock>
+
+                                <Label
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Content="Token:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+
+                                <TextBox
+                                    Grid.Row="2"
+                                    Grid.Column="1" />
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+
+                    <!--Horário da daily-->
+                    <GroupBox
+                        Grid.Row="2"
+                        Margin="10"
+                        Background="Transparent"
+                        Header="Horário da daily">
+                        <StackPanel>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="35"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="35"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="Início:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"/>
+
+                                <xctk:MaskedTextBox
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Mask="00:00"
+                                    PromptChar="_"
+                                    HorizontalAlignment="Stretch" />
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Content="Fim:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="20,0,0,0"/>
+
+                                <xctk:MaskedTextBox
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Mask="00:00"
+                                    PromptChar="_"
+                                    HorizontalAlignment="Stretch" />
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="280"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    Text="* Ao configurar a janela de horários da daily, consulta as tarefas do dia anterior."
+                                    TextWrapping="Wrap" />
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Consulta JQL">
+                <Grid Background="#FFF5F5F5">
+                    <Grid.RowDefinitions>
+                        <!--(controle label) Projetos comuns e detro da sprint ativa-->
+                        <RowDefinition Height="Auto"/>
+
+                        <!--(controle text área)-->
+                        <RowDefinition Height="100"/>
+
+                        <!--(controles Grid e label)-->
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Projetos comuns e dentro da sprint ativa:"
+                        Margin="10,20,0,0" />
+
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled"/>
+
+                    <Grid
+                        Grid.Row="2"
+                        Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="Nota: caso a JQL não seja configurada neste campo, a seguinte JQl será utlizada: 'sprint is openSprints() AND assignee = currentUser() ORDER BY created ASC'"
+                            TextWrapping="Wrap"
+                            Margin="10"/>
+                    </Grid>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Grid
+            Grid.Row="3"
+            Margin="0,10,0,0"
+            Background="Transparent"
+            HorizontalAlignment="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                x:Name="buttonSave"
+                Grid.Row="0"
+                Grid.Column="0"
+                Content="Salvar"
+                Width="50"
+                Margin="10,0,10,0"
+                HorizontalAlignment="Right"
+                Click="buttonSave_Click" />
+        </Grid>
+
     </Grid>
 </UserControl>
