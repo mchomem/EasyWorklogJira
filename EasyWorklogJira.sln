@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.Test.Functi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.Infrastructure.Localization", "EasyWorklogJira.Infrastructure.Localization\EasyWorklogJira.Infrastructure.Localization.csproj", "{EE303D5E-B5A1-4300-A8D1-3EFA907DA948}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWorklogJira.WPFApp", "EasyWorklogJira.WPFApp\EasyWorklogJira.WPFApp.csproj", "{CB9435F3-A65C-450E-B48E-F54695B9BF4E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{EE303D5E-B5A1-4300-A8D1-3EFA907DA948}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE303D5E-B5A1-4300-A8D1-3EFA907DA948}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE303D5E-B5A1-4300-A8D1-3EFA907DA948}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB9435F3-A65C-450E-B48E-F54695B9BF4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB9435F3-A65C-450E-B48E-F54695B9BF4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB9435F3-A65C-450E-B48E-F54695B9BF4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB9435F3-A65C-450E-B48E-F54695B9BF4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +84,7 @@ Global
 		{BC8F977A-1EC6-4316-BCC4-89B6617ECEDF} = {CCD086A6-8DFC-4D65-8ADE-1637C53B6195}
 		{BFE66D1E-15FD-465C-A538-726915643805} = {CCD086A6-8DFC-4D65-8ADE-1637C53B6195}
 		{EE303D5E-B5A1-4300-A8D1-3EFA907DA948} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{CB9435F3-A65C-450E-B48E-F54695B9BF4E} = {1A966735-2C86-482F-B80D-32FE75C32170}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE330931-4E3C-4C00-BAB3-CCEFEA0EA17E}
