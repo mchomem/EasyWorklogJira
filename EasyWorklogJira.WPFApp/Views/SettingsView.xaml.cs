@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Media;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,8 +26,7 @@ public partial class SettingsView : UserControl
 
     private void buttonSave_Click(object sender, System.Windows.RoutedEventArgs e)
     {
-
-
-        MessageBox.Show("Configurações salvas com sucesso.", "Sucesso");
+        SystemSounds.Asterisk.Play();
+        MessageBox.Show("Configurações salvas com sucesso.", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 }
