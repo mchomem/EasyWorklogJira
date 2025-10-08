@@ -1,16 +1,15 @@
 ﻿using System.Diagnostics;
 using System.Media;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace EasyWorklogJira.WPFApp.Views;
 
 /// <summary>
-/// Interaction logic for SettingsViewView.xaml
+/// Interaction logic for ConfigurationWindow.xaml
 /// </summary>
-public partial class SettingsView : UserControl
+public partial class ConfigurationWindow : Window
 {
-    public SettingsView()
+    public ConfigurationWindow()
     {
         InitializeComponent();
     }
@@ -28,5 +27,10 @@ public partial class SettingsView : UserControl
     {
         SystemSounds.Asterisk.Play();
         MessageBox.Show("Configurações salvas com sucesso.", "Sucesso", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
+    private void buttonClose_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
     }
 }

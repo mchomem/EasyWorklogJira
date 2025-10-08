@@ -72,7 +72,7 @@
 
                 <Button x:Name="buttonAdd" Click="buttonNew_Click" Margin="20,0" Background="Transparent" BorderThickness="0">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <TextBlock Text="💾" FontSize="24" HorizontalAlignment="Center" ToolTip="Adicionar registro de atividade"></TextBlock>
+                        <TextBlock Text="➕" FontSize="24" HorizontalAlignment="Center" ToolTip="Adicionar registro de atividade"></TextBlock>
                     </StackPanel>
                 </Button>
 

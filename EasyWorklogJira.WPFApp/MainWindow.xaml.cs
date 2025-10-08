@@ -68,6 +68,8 @@ public partial class MainWindow : Window
 
     private void buttonSettings_Click(object sender, RoutedEventArgs e)
     {
-        MainContent.Content = new SettingsView();
+        var configurationWindow = new ConfigurationWindow();
+        configurationWindow.Owner = Window.GetWindow(this);
+        configurationWindow.ShowDialog();
     }
 }
