@@ -26,7 +26,8 @@
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Content="Tarefa:" />
+            Content="Tarefa:"
+            VerticalAlignment="Center" />
 
         <ComboBox
             Grid.Row="0"
@@ -41,7 +42,8 @@
         <Label
             Grid.Row="1"
             Grid.Column="0"
-            Content="Data:" />
+            Content="Data:"
+            VerticalAlignment="Center"/>
 
         <DatePicker
             SelectedDate="{x:Static sys:DateTime.Now}"
@@ -56,7 +58,8 @@
         <Label
             Grid.Row="2"
             Grid.Column="0"
-            Content="Hora inicial:" />
+            Content="Hora inicial:"
+            VerticalAlignment="Center" />
 
         <StackPanel
             Grid.Row="2"
@@ -70,7 +73,9 @@
                 Mask="00:00"
                 PromptChar="_" />
             
-            <Label Content="Hora final:"/>
+            <Label
+                Content="Hora final:"
+                VerticalAlignment="Center"/>
             
             <xctk:MaskedTextBox
                 x:Name="maskedTextBoxEndTime"
@@ -78,13 +83,14 @@
                 Width="35"
                 Margin="5"
                 Mask="00:00"
-                PromptChar="_" />            
+                PromptChar="_"/>
         </StackPanel>
 
         <Label
             Grid.Row="3"
             Grid.Column="0"
-            Content="Tempo gasto:" />
+            Content="Tempo gasto:"
+            VerticalAlignment="Center"/>
 
         <xctk:MaskedTextBox
             x:Name="maskedTextBoxTimeSpent"
@@ -100,7 +106,8 @@
         <Label
             Grid.Row="4"
             Grid.Column="0"
-            Content="Descrição da atividade:"/>
+            Content="Descrição da atividade:"
+            Margin="0,5,0,0"/>
 
         <TextBox
             x:Name="textBoxIssueDescription"
