@@ -11,6 +11,7 @@ public partial class WorklogMaintenanceWindow : Window
     public WorklogMaintenanceWindow()
     {
         InitializeComponent();
+        maskedTextBoxStartTime.Text = DateTime.Now.ToString("HH:mm");
     }
 
     private void ButtonSave_Click(object sender, RoutedEventArgs e)
