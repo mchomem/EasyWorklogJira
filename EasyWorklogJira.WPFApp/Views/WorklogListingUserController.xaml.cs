@@ -5,9 +5,9 @@ namespace EasyWorklogJira.WPFApp.Views;
 /// <summary>
 /// Interaction logic for HomeView.xaml
 /// </summary>
-public partial class WorklogListingView : UserControl
+public partial class WorklogListingUserController : UserControl
 {
-    public WorklogListingView()
+    public WorklogListingUserController()
     {
         InitializeComponent();
     }

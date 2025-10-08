@@ -9,7 +9,7 @@
         WindowStartupLocation="CenterOwner"
         Title="Configuração"
         Height="450"
-        Width="400">
+        Width="400" Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <!--Tab controls-->
@@ -36,10 +36,10 @@
 
                     <!--Web Site-->
                     <GroupBox
-                    Grid.Row="0"
-                    Margin="10"
-                    Background="Transparent"
-                    Header="Web Site">
+                        Grid.Row="0"
+                        Margin="10"
+                        Background="Transparent"
+                        Header="Web Site">
                         <StackPanel>
                             <Grid Margin="0,10,0,0">
                                 <Grid.RowDefinitions>
@@ -52,29 +52,29 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Content="Url Base:"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center" />
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="Url Base:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
 
                                 <TextBox
-                                x:Name="textBoxUrl"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Width="Auto"
-                                VerticalContentAlignment="Center"
-                                HorizontalAlignment="Stretch" />
+                                    x:Name="textBoxUrl"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Width="Auto"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalAlignment="Stretch" />
                             </Grid>
                         </StackPanel>
                     </GroupBox>
 
                     <!--Credenciais de Acesso do Jira-->
                     <GroupBox
-                    Grid.Row="1"
-                    Margin="10"
-                    Background="Transparent"
-                    Header="Credenciais de Acesso ao Jira">
+                        Grid.Row="1"
+                        Margin="10"
+                        Background="Transparent"
+                        Header="Credenciais de Acesso ao Jira">
                         <StackPanel>
                             <Grid Margin="0,10,0,0">
                                 <Grid.RowDefinitions>
@@ -89,55 +89,55 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Content="e-mail:"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center" />
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="e-mail:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
 
                                 <TextBox
-                                x:Name="textBoxEmail"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                VerticalContentAlignment="Center"
-                                HorizontalAlignment="Stretch"/>
+                                    x:Name="textBoxEmail"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalAlignment="Stretch"/>
 
                                 <Label
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Content="Gere seu token em "/>
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Content="Gere seu token em "/>
 
                                 <TextBlock
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="0,5,0,0">
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,5,0,0">
                                 <Hyperlink
                                     Click="Hyperlink_Click"
                                     NavigateUri="https://id.atlassian.com/manage-profile/security/api-tokens">Token Jira</Hyperlink>
                                 </TextBlock>
 
                                 <Label
-                                Grid.Row="2"
-                                Grid.Column="0"
-                                Content="Token:"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center" />
+                                    Grid.Row="2"
+                                    Grid.Column="0"
+                                    Content="Token:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
 
                                 <TextBox
-                                x:Name="textBoxToken"
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                VerticalContentAlignment="Center"/>
+                                    x:Name="textBoxToken"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    VerticalContentAlignment="Center"/>
                             </Grid>
                         </StackPanel>
                     </GroupBox>
 
                     <!--Horário da daily-->
                     <GroupBox
-                    Grid.Row="2"
-                    Margin="10"
-                    Background="Transparent"
-                    Header="Horário da daily">
+                        Grid.Row="2"
+                        Margin="10"
+                        Background="Transparent"
+                        Header="Horário da daily">
                         <StackPanel>
                             <Grid Margin="0,10,0,0">
                                 <Grid.RowDefinitions>
@@ -152,35 +152,35 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Content="Início:"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"/>
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Content="Início:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"/>
 
                                 <xctk:MaskedTextBox
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Mask="00:00"
-                                PromptChar="_"
-                                HorizontalAlignment="Stretch"
-                                VerticalContentAlignment="Center"/>
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Mask="00:00"
+                                    PromptChar="_"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalContentAlignment="Center"/>
 
                                 <Label
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                Content="Fim:"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                Margin="20,0,0,0"/>
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Content="Fim:"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Margin="20,0,0,0"/>
 
                                 <xctk:MaskedTextBox
-                                Grid.Row="0"
-                                Grid.Column="3"
-                                Mask="00:00"
-                                PromptChar="_"
-                                HorizontalAlignment="Stretch"
-                                VerticalContentAlignment="Center"/>
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Mask="00:00"
+                                    PromptChar="_"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalContentAlignment="Center"/>
                             </Grid>
 
                             <Grid Margin="0,10,0,0">
@@ -193,8 +193,8 @@
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock
-                                Text="* Ao configurar a janela de horários da daily, consulta as tarefas do dia anterior."
-                                TextWrapping="Wrap" />
+                                    Text="* Ao configurar a janela de horários da daily, consulta as tarefas do dia anterior."
+                                    TextWrapping="Wrap" />
                             </Grid>
                         </StackPanel>
                     </GroupBox>
@@ -219,23 +219,23 @@
                     </Grid.ColumnDefinitions>
 
                     <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Content="Projetos comuns e dentro da sprint ativa:"
-                    Margin="10,20,0,0" />
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Content="Projetos comuns e dentro da sprint ativa:"
+                        Margin="10,20,0,0" />
 
                     <TextBox
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    Margin="10"
-                    AcceptsReturn="True"
-                    TextWrapping="Wrap"
-                    VerticalScrollBarVisibility="Auto"
-                    HorizontalScrollBarVisibility="Disabled"/>
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10"
+                        AcceptsReturn="True"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled"/>
 
                     <Grid
-                    Grid.Row="2"
-                    Grid.Column="0">
+                        Grid.Row="2"
+                        Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
@@ -245,11 +245,11 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Text="Nota: caso a JQL não seja configurada neste campo, a seguinte JQl será utlizada: 'sprint is openSprints() AND assignee = currentUser() ORDER BY created ASC'"
-                        TextWrapping="Wrap"
-                        Margin="10"/>
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="Nota: caso a JQL não seja configurada neste campo, a seguinte JQl será utlizada: 'sprint is openSprints() AND assignee = currentUser() ORDER BY created ASC'"
+                            TextWrapping="Wrap"
+                            Margin="10"/>
                     </Grid>
 
                 </Grid>
@@ -257,9 +257,9 @@
         </TabControl>
 
         <Grid
-        Grid.Row="3"
-        Background="Transparent"
-        HorizontalAlignment="Center">
+            Grid.Row="3"
+            Background="Transparent"
+            HorizontalAlignment="Right">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -278,7 +278,7 @@
                 FontWeight="Bold"
                 Foreground="Black"                
                 Height="25"
-                Width="70"
+                Width="80"
                 Margin="5"
                 Click="buttonClose_Click"/>
 
@@ -291,7 +291,7 @@
                 FontWeight="Bold"
                 Foreground="White"
                 Height="25"
-                Width="70"
+                Width="80"
                 Margin="5"         
                 Click="buttonSave_Click" />
         </Grid>

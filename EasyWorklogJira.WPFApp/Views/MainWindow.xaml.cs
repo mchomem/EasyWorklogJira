@@ -1,7 +1,6 @@
-﻿using EasyWorklogJira.WPFApp.Views;
-using System.Windows;
+﻿using System.Windows;
 
-namespace EasyWorklogJira.WPFApp;
+namespace EasyWorklogJira.WPFApp.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml
@@ -51,22 +50,24 @@ public partial class MainWindow : Window
         Environment.Exit(0);
     }
 
-    private void buttonIssueCalendar_Click(object sender, RoutedEventArgs e)
+    private void buttonGetCalendar_Click(object sender, RoutedEventArgs e)
     {
 
     }
 
     private void buttonNew_Click(object sender, RoutedEventArgs e)
     {
-
+        var worklogMaintenanceWindow = new WorklogMaintenanceWindow();
+        worklogMaintenanceWindow.Owner = Window.GetWindow(this);
+        worklogMaintenanceWindow.ShowDialog();
     }
 
-    private void buttonHome_Click(object sender, RoutedEventArgs e)
+    private void buttonIssueLiesting_Click(object sender, RoutedEventArgs e)
     {
-        MainContent.Content = new WorklogListingView();
+        
     }
 
-    private void buttonSettings_Click(object sender, RoutedEventArgs e)
+    private void buttonConfiguration_Click(object sender, RoutedEventArgs e)
     {
         var configurationWindow = new ConfigurationWindow();
         configurationWindow.Owner = Window.GetWindow(this);

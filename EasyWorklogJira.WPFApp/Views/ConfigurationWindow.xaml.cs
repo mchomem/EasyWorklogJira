@@ -14,6 +14,11 @@ public partial class ConfigurationWindow : Window
         InitializeComponent();
     }
 
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        // TODO: load json config
+    }
+
     private void Hyperlink_Click(object sender, System.Windows.RoutedEventArgs e)
     {
         Process.Start(new ProcessStartInfo()
@@ -32,5 +37,5 @@ public partial class ConfigurationWindow : Window
     private void buttonClose_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
-    }
+    }    
 }
