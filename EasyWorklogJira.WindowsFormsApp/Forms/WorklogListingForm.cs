@@ -39,6 +39,37 @@ public partial class WorklogListingForm : MdiChieldFormBase
         buttonNewWorklog.Text = worklogListingForm.Control.ButtonNew;
     }
 
+    private async Task LoadForm()
+    {
+        buttonRefreshList.Enabled = false;
+
+        var dateTimeNow = DateTime.Now;
+        var startTime = _configuration.GetSection("DailyMeetingSchedule:startTime").Value;
+        var endTime = _configuration.GetSection("DailyMeetingSchedule:endTime").Value;
+
+        if (TimeSpan.TryParse(startTime, out var meetingStartTime) && TimeSpan.TryParse(endTime, out var meetingEndTime))
+        {
+            var meetingStartDateTime = dateTimeNow.Date.Add(meetingStartTime);
+            var meetingEndDateTime = dateTimeNow.Date.Add(meetingEndTime);
+
+            // If the current time is within the meeting schedule, load the previous day's worklogs.
+            if (dateTimeNow >= meetingStartDateTime && dateTimeNow <= meetingEndDateTime)
+            {
+                await LoadWorklogs(getPreviousDay: true);
+            }
+            else
+            {
+                await LoadWorklogs();
+            }
+        }
+        else
+        {
+            await LoadWorklogs();
+        }
+
+        buttonRefreshList.Enabled = true;
+    }
+
     private async Task LoadWorklogs(bool getPreviousDay = false)
     {
         try
@@ -121,29 +152,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
     private async void WorklogForm_Load(object sender, EventArgs e)
     {
-        var dateTimeNow = DateTime.Now;
-        var startTime = _configuration.GetSection("DailyMeetingSchedule:startTime").Value;
-        var endTime = _configuration.GetSection("DailyMeetingSchedule:endTime").Value;
-
-        if (TimeSpan.TryParse(startTime, out var meetingStartTime) && TimeSpan.TryParse(endTime, out var meetingEndTime))
-        {
-            var meetingStartDateTime = dateTimeNow.Date.Add(meetingStartTime);
-            var meetingEndDateTime = dateTimeNow.Date.Add(meetingEndTime);
-
-            // If the current time is within the meeting schedule, load the previous day's worklogs.
-            if (dateTimeNow >= meetingStartDateTime && dateTimeNow <= meetingEndDateTime)
-            {
-                await LoadWorklogs(getPreviousDay: true);
-            }
-            else
-            {
-                await LoadWorklogs();
-            }
-        }
-        else
-        {
-            await LoadWorklogs();
-        }
+        await LoadForm();
     }
 
     private async void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
@@ -359,4 +368,9 @@ public partial class WorklogListingForm : MdiChieldFormBase
     }
 
     #endregion
+
+    private async void buttonRefreshList_Click(object sender, EventArgs e)
+    {
+        await LoadForm();
+    }
 }

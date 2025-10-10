@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle13 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle14 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle15 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             monthCalendar = new MonthCalendar();
             dataGridViewDayWorklogs = new DataGridView();
             WorklogId = new DataGridViewTextBoxColumn();
@@ -44,6 +44,7 @@
             labelTotalHoursDayValue = new Label();
             buttonNewWorklog = new Button();
             labelResumeValue = new Label();
+            buttonRefreshList = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewDayWorklogs).BeginInit();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             dataGridViewDayWorklogs.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridViewDayWorklogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewDayWorklogs.Columns.AddRange(new DataGridViewColumn[] { WorklogId, IssueKey, StartTime, EndTime, Update, Delete });
-            dataGridViewDayWorklogs.Location = new Point(18, 240);
+            dataGridViewDayWorklogs.Location = new Point(18, 260);
             dataGridViewDayWorklogs.Name = "dataGridViewDayWorklogs";
             dataGridViewDayWorklogs.ReadOnly = true;
             dataGridViewDayWorklogs.RowHeadersVisible = false;
@@ -82,9 +83,9 @@
             // 
             // IssueKey
             // 
-            dataGridViewCellStyle13.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            IssueKey.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IssueKey.DefaultCellStyle = dataGridViewCellStyle1;
             IssueKey.FillWeight = 70F;
             IssueKey.HeaderText = "Tarefa";
             IssueKey.Name = "IssueKey";
@@ -95,8 +96,8 @@
             // 
             // StartTime
             // 
-            dataGridViewCellStyle14.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            StartTime.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StartTime.DefaultCellStyle = dataGridViewCellStyle2;
             StartTime.FillWeight = 50F;
             StartTime.HeaderText = "Início";
             StartTime.Name = "StartTime";
@@ -106,8 +107,8 @@
             // 
             // EndTime
             // 
-            dataGridViewCellStyle15.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            EndTime.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            EndTime.DefaultCellStyle = dataGridViewCellStyle3;
             EndTime.FillWeight = 50F;
             EndTime.HeaderText = "Fim";
             EndTime.Name = "EndTime";
@@ -147,7 +148,7 @@
             // 
             labelTotalHoursDay.AutoSize = true;
             labelTotalHoursDay.Font = new Font("Segoe UI", 12F);
-            labelTotalHoursDay.Location = new Point(18, 436);
+            labelTotalHoursDay.Location = new Point(18, 456);
             labelTotalHoursDay.Name = "labelTotalHoursDay";
             labelTotalHoursDay.Size = new Size(143, 21);
             labelTotalHoursDay.TabIndex = 3;
@@ -157,7 +158,7 @@
             // 
             labelTotalHoursDayValue.AutoSize = true;
             labelTotalHoursDayValue.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelTotalHoursDayValue.Location = new Point(167, 436);
+            labelTotalHoursDayValue.Location = new Point(167, 456);
             labelTotalHoursDayValue.Name = "labelTotalHoursDayValue";
             labelTotalHoursDayValue.Size = new Size(50, 21);
             labelTotalHoursDayValue.TabIndex = 4;
@@ -183,11 +184,22 @@
             labelResumeValue.Text = "00/00/0000";
             labelResumeValue.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // buttonRefreshList
+            // 
+            buttonRefreshList.Image = Resource.arrow_refresh_blue;
+            buttonRefreshList.Location = new Point(18, 230);
+            buttonRefreshList.Name = "buttonRefreshList";
+            buttonRefreshList.Size = new Size(25, 23);
+            buttonRefreshList.TabIndex = 7;
+            buttonRefreshList.UseVisualStyleBackColor = true;
+            buttonRefreshList.Click += buttonRefreshList_Click;
+            // 
             // WorklogListingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(326, 568);
+            Controls.Add(buttonRefreshList);
             Controls.Add(buttonNewWorklog);
             Controls.Add(labelTotalHoursDayValue);
             Controls.Add(labelTotalHoursDay);
@@ -218,5 +230,6 @@
         private DataGridViewImageColumn Update;
         private DataGridViewImageColumn Delete;
         private Label labelResumeValue;
+        private Button buttonRefreshList;
     }
 }
