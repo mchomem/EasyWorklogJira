@@ -94,4 +94,9 @@ public partial class MainForm : Form
     {
         Environment.Exit(0);
     }
+
+    private void MainForm_Load(object sender, EventArgs e)
+    {
+        ShowSingleInstanceForm<WorklogListingForm>();
+    }
 }

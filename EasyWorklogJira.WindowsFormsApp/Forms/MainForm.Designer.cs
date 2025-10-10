@@ -50,16 +50,16 @@
             menuStripMain.TabIndex = 0;
             menuStripMain.Text = "menuStrip1";
             // 
-            // sistemaToolStripMenuItem
+            // systemToolStripMenuItem
             // 
             systemToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { configurationToolStripMenuItem, toolStripMenuItem1, currentUserToolStripMenuItem, exitToolStripMenuItem });
-            systemToolStripMenuItem.Name = "sistemaToolStripMenuItem";
+            systemToolStripMenuItem.Name = "systemToolStripMenuItem";
             systemToolStripMenuItem.Size = new Size(60, 20);
             systemToolStripMenuItem.Text = "Sistema";
             // 
-            // configuraçãoToolStripMenuItem
+            // configurationToolStripMenuItem
             // 
-            configurationToolStripMenuItem.Name = "configuraçãoToolStripMenuItem";
+            configurationToolStripMenuItem.Name = "configurationToolStripMenuItem";
             configurationToolStripMenuItem.Size = new Size(183, 22);
             configurationToolStripMenuItem.Text = "Configuração";
             configurationToolStripMenuItem.Click += setupToolStripMenuItem_Click;
@@ -69,16 +69,16 @@
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.Size = new Size(180, 6);
             // 
-            // usuárioDaAplicaçãoToolStripMenuItem
+            // currentUserToolStripMenuItem
             // 
-            currentUserToolStripMenuItem.Name = "usuárioDaAplicaçãoToolStripMenuItem";
+            currentUserToolStripMenuItem.Name = "currentUserToolStripMenuItem";
             currentUserToolStripMenuItem.Size = new Size(183, 22);
             currentUserToolStripMenuItem.Text = "Usuário da aplicação";
             currentUserToolStripMenuItem.Click += userApplicationToolStripMenuItem_Click;
             // 
-            // sairToolStripMenuItem
+            // exitToolStripMenuItem
             // 
-            exitToolStripMenuItem.Name = "sairToolStripMenuItem";
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             exitToolStripMenuItem.Size = new Size(183, 22);
             exitToolStripMenuItem.Text = "Sair";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
@@ -122,6 +122,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Easy Worklog Jira";
+            Load += MainForm_Load;
             menuStripMain.ResumeLayout(false);
             menuStripMain.PerformLayout();
             ResumeLayout(false);
