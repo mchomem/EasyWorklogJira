@@ -4,6 +4,34 @@
              xmlns:local="clr-namespace:EasyWorklogJira.WPFApp"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+
+        <!--Estilo para os botões do carrossel-->
+        <Style TargetType="{x:Type Grid}" x:Key="CarouselGrid">
+            <Style.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Foreground" Value="#555"></Setter>
+                    <Setter Property="Background" Value="Transparent"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                    <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                    <Setter Property="FontSize" Value="14"></Setter>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="0">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.6"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
+        </Style>
+
     </Application.Resources>
 </Application>

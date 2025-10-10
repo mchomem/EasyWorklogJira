@@ -17,8 +17,18 @@
         <Border
             Grid.Row="0"
             Margin="0,2,0,0">
-            <Grid>
+            <Grid Style="{StaticResource CarouselGrid}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="◀"/>
+
+                <Grid Grid.Column="1"></Grid>
                 
+                <Button Grid.Column="2"  Content="▶"/>
             </Grid>
         </Border>
     </Grid>
