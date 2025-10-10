@@ -140,7 +140,7 @@
           "labelResetInformation": "OBS: precisa reiniciar.",
           "tabPageJiraQueries": "Consultas JQl",
           "labelCommonAndActiveSprintIssues": "Projetos comuns e dentro da sprint ativa:",
-          "labelNote": "Nota: caso a JQL naõ seja configurada neste campo, a seguinte JQL será utilizada:\n 'sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC'",
+          "labelNote": "Nota: caso a JQL não seja configurada neste campo, a seguinte JQL será utilizada:\n 'sprint in openSprints() AND assignee = currentUser() ORDER BY created ASC'",
           "buttonClose": "Fechar",
           "buttonSave": "Salvar"
         }
