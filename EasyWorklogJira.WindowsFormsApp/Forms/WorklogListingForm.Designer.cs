@@ -208,7 +208,7 @@
             Controls.Add(monthCalendar);
             Controls.Add(labelResumeValue);
             Name = "WorklogListingForm";
-            Text = "Registro de tarefas";
+            Text = "Registro de atividades";
             Load += WorklogForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewDayWorklogs).EndInit();
             ResumeLayout(false);

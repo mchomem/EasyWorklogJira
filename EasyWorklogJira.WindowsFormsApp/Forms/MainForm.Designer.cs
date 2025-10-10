@@ -93,8 +93,8 @@
             // worklogToolStripMenuItem
             // 
             worklogToolStripMenuItem.Name = "worklogToolStripMenuItem";
-            worklogToolStripMenuItem.Size = new Size(173, 22);
-            worklogToolStripMenuItem.Text = "Registro de Tarefas";
+            worklogToolStripMenuItem.Size = new Size(191, 22);
+            worklogToolStripMenuItem.Text = "Registro de Atividades";
             worklogToolStripMenuItem.Click += queryToolStripMenuItem_Click;
             // 
             // helpToolStripMenuItem

@@ -216,6 +216,11 @@ public partial class WorklogListingForm : MdiChieldFormBase
         }
     }
 
+    private async void buttonRefreshList_Click(object sender, EventArgs e)
+    {
+        await LoadForm();
+    }
+
     private void buttonNewWorklog_Click(object sender, EventArgs e)
     {
         // Get the MainForm (MDI Parent)
@@ -227,7 +232,6 @@ public partial class WorklogListingForm : MdiChieldFormBase
             var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, _localizationService, _configuration);
             worklogMaintenanceForm.MdiParent = mainForm;
             worklogMaintenanceForm.Show();
-            Close();
         }
     }
 
@@ -368,9 +372,4 @@ public partial class WorklogListingForm : MdiChieldFormBase
     }
 
     #endregion
-
-    private async void buttonRefreshList_Click(object sender, EventArgs e)
-    {
-        await LoadForm();
-    }
 }

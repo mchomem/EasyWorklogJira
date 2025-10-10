@@ -104,7 +104,7 @@
           "resourcesMenu": {
             "text": "Recursos",
             "chieldren": {
-              "worklogMenuItem": "Registro de Tarefas"
+              "worklogMenuItem": "Registro de Atividades"
             }
           },
           "helpMenu": {
@@ -153,7 +153,7 @@
         }
       },
       "worklogListingForm": {
-        "title": "Registro de tarefas",
+        "title": "Registro de atividades",
         "control": {
           "labelResume": "Resumo do dia",
           "columnIssueKey": "Tarefa",
@@ -166,7 +166,7 @@
         }
       },
       "worklogMaintenanceForm": {
-        "title": "Registro de tarefas",
+        "title": "Registro de atividades",
         "control": {
           "labelIssue": "Tarefa:",
           "labelDate": "Data:",
