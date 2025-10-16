@@ -2,6 +2,8 @@
 global using EasyWorklogJira.Core.Application.Services;
 global using EasyWorklogJira.Infrastructure.ExternalService.Clients;
 global using EasyWorklogJira.Infrastructure.ExternalService.ProfileMappings;
+global using EasyWorklogJira.Infrastructure.Localization.Interfaces;
+global using EasyWorklogJira.Infrastructure.Localization.Services;
 global using EasyWorklogJira.WindowsFormsApp.Forms;
 global using Mapster;
 global using MapsterMapper;

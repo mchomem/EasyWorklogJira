@@ -25,6 +25,7 @@ public class FunctionalTestFixture : IDisposable
 
         services.AddScoped<IJiraService, JiraService>();
         services.AddSingleton<IConfiguration>(configuration);
+        services.AddScoped<ILocalizationService, LocalizationService>();
         services.AddScoped<WorklogMaintenanceForm>();
 
         #endregion
