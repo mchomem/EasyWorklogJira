@@ -43,9 +43,7 @@ public class JiraApiClient : IJiraApiClient
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, _jsonSerializerOptions);
-
         var results = _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
-
         return results;
     }
 
@@ -73,9 +71,7 @@ public class JiraApiClient : IJiraApiClient
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var searchResult = JsonSerializer.Deserialize<SearchResponseDto>(jsonResponse, _jsonSerializerOptions);
-
         var results = _mapper.Map<IEnumerable<AppDto.JiraIssueDto>>(searchResult?.Issues) ?? new List<AppDto.JiraIssueDto>();
-
         return results;
     }
 
@@ -103,13 +99,13 @@ public class JiraApiClient : IJiraApiClient
             var jsonResponse = await response.Content.ReadAsStringAsync();
             var worklogsResult = JsonSerializer.Deserialize<WorklogResponseDto>(jsonResponse, _jsonSerializerOptions);
 
+            // Filter worklogs by user email.
             if (worklogsResult?.Worklogs != null)
-                allWorklogs.AddRange(worklogsResult.Worklogs);
-
-            // Filtra pelo e-mail do usuário para distinguir os worklogs do usuário autenticado.
-            allWorklogs = allWorklogs
-                .Where(x => x.Author.EmailAddress == userEmailAddress) // TODO: analisar novamente a estrutura de dados para ver uma outra forma mais eficiente de filtrar os worklogs somente do usuário, não utilizando o seu e-mail como filtro.
-                .ToList();
+            {
+                allWorklogs = worklogsResult.Worklogs
+                    .Where(x => x.Author.EmailAddress == userEmailAddress)
+                    .ToList();
+            }
 
             total = worklogsResult?.Total ?? 0;
             startAt += maxResults;
@@ -117,7 +113,6 @@ public class JiraApiClient : IJiraApiClient
         } while (startAt < total);
 
         var results = _mapper.Map<IEnumerable<AppDto.WorklogDto>>(allWorklogs);
-
         return results;
     }
 
@@ -129,7 +124,6 @@ public class JiraApiClient : IJiraApiClient
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
         var worklogResult = JsonSerializer.Deserialize<WorklogDto>(jsonResponse, _jsonSerializerOptions);
-
         return _mapper.Map<AppDto.WorklogDto>(worklogResult!);
     }
 
@@ -184,7 +178,6 @@ public class JiraApiClient : IJiraApiClient
         var userResult = JsonSerializer.Deserialize<UserDto>(jsonResponse, _jsonSerializerOptions);
 
         var result = _mapper.Map<AppDto.UserDto>(userResult!);
-
         return result;
     }
 }
