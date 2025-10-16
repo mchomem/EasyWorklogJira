@@ -35,5 +35,5 @@ public class MainWindowViewModel : ViewModelBase
 
     public WorklogsViewModel WorklogsViewModel { get; set; }
 
-    // TODO public ConfiguracaoViewModel ConfiguracaoViewModel { get; set; }
+    public ConfigurationViewModel Configuration { get; set; }
 }
