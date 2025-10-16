@@ -54,7 +54,7 @@
             monthCalendar.MaxSelectionCount = 1;
             monthCalendar.Name = "monthCalendar";
             monthCalendar.TabIndex = 0;
-            monthCalendar.DateSelected += monthCalendar_DateSelected;
+            monthCalendar.DateSelected += monthCalendar_DateSelectedAsync;
             // 
             // dataGridViewDayWorklogs
             // 
@@ -72,7 +72,7 @@
             dataGridViewDayWorklogs.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewDayWorklogs.Size = new Size(292, 180);
             dataGridViewDayWorklogs.TabIndex = 1;
-            dataGridViewDayWorklogs.CellContentClick += dataGridViewDayWorklogs_CellContentClick;
+            dataGridViewDayWorklogs.CellContentClick += dataGridViewDayWorklogs_CellContentClickAsync;
             // 
             // WorklogId
             // 
@@ -209,7 +209,7 @@
             Controls.Add(labelResumeValue);
             Name = "WorklogListingForm";
             Text = "Registro de atividades";
-            Load += WorklogForm_Load;
+            Load += WorklogForm_LoadAsync;
             ((System.ComponentModel.ISupportInitialize)dataGridViewDayWorklogs).EndInit();
             ResumeLayout(false);
             PerformLayout();

@@ -39,7 +39,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
         buttonNewWorklog.Text = worklogListingForm.Control.ButtonNew;
     }
 
-    private async Task LoadForm()
+    private async Task LoadFormAsync()
     {
         buttonRefreshList.Enabled = false;
 
@@ -55,22 +55,22 @@ public partial class WorklogListingForm : MdiChieldFormBase
             // If the current time is within the meeting schedule, load the previous day's worklogs.
             if (dateTimeNow >= meetingStartDateTime && dateTimeNow <= meetingEndDateTime)
             {
-                await LoadWorklogs(getPreviousDay: true);
+                await LoadWorklogsAsync(getPreviousDay: true);
             }
             else
             {
-                await LoadWorklogs();
+                await LoadWorklogsAsync();
             }
         }
         else
         {
-            await LoadWorklogs();
+            await LoadWorklogsAsync();
         }
 
         buttonRefreshList.Enabled = true;
     }
 
-    private async Task LoadWorklogs(bool getPreviousDay = false)
+    private async Task LoadWorklogsAsync(bool getPreviousDay = false)
     {
         try
         {
@@ -102,6 +102,8 @@ public partial class WorklogListingForm : MdiChieldFormBase
             dataGridViewDayWorklogs.Rows.Clear();
 
             var hoursRecorded = new List<(DateTimeOffset start, DateTimeOffset end, string issueKey)>();
+            var worklogsShow = new List<(string worklogId, string issueKey, DateTimeOffset startTime, DateTimeOffset endTime)>();
+
             var issuesKeys = issues.Select(i => i.Key);
 
             foreach (var issueKey in issuesKeys)
@@ -117,11 +119,21 @@ public partial class WorklogListingForm : MdiChieldFormBase
                         DateTimeOffset endTime = startTime.AddSeconds(worklog.TimeSpentSeconds);
                         var workDescriptions = ExtractTextFromComment(worklog.Comment);
 
-                        dataGridViewDayWorklogs.Rows.Add(worklog.Id, issueKey, $"{startTime:HH:mm}", $"{endTime:HH:mm}");
+                        worklogsShow.Add((worklog.Id, issueKey, startTime, endTime));
                         hoursRecorded.Add((startTime, endTime, issueKey));
                     }
                 }
             }
+
+            #region Show worklogs ordered by start time.
+
+            worklogsShow = worklogsShow.OrderBy(w => w.startTime).ToList();
+            foreach (var worklogShow in worklogsShow)
+            {
+                dataGridViewDayWorklogs.Rows.Add(worklogShow.worklogId, worklogShow.issueKey, $"{worklogShow.startTime:HH:mm}", $"{worklogShow.endTime:HH:mm}");
+            }
+
+            #endregion
 
             var totalHours = hoursRecorded.Sum(hr => (hr.end - hr.start).TotalHours);
             var totalTime = TimeSpan.FromHours(totalHours);
@@ -150,17 +162,17 @@ public partial class WorklogListingForm : MdiChieldFormBase
         }
     }
 
-    private async void WorklogForm_Load(object sender, EventArgs e)
+    private async void WorklogForm_LoadAsync(object sender, EventArgs e)
     {
-        await LoadForm();
+        await LoadFormAsync();
     }
 
-    private async void monthCalendar_DateSelected(object sender, DateRangeEventArgs e)
+    private async void monthCalendar_DateSelectedAsync(object sender, DateRangeEventArgs e)
     {
-        await LoadWorklogs();
+        await LoadWorklogsAsync();
     }
 
-    private async void dataGridViewDayWorklogs_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    private async void dataGridViewDayWorklogs_CellContentClickAsync(object sender, DataGridViewCellEventArgs e)
     {
         var worklogId = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["WorklogId"].Value?.ToString()!;
         var issueId = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString()!;
@@ -211,14 +223,14 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
                 MessageBox.Show($"Registro id: {worklogId} de tarefa excluída.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                await LoadWorklogs();
+                await LoadWorklogsAsync();
             }
         }
     }
 
     private async void buttonRefreshList_Click(object sender, EventArgs e)
     {
-        await LoadForm();
+        await LoadFormAsync();
     }
 
     private void buttonNewWorklog_Click(object sender, EventArgs e)
