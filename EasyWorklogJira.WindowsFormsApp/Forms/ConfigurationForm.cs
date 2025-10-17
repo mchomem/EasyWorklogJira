@@ -222,4 +222,10 @@ public partial class ConfigurationForm : MdiChieldFormBase
                 MessageBoxIcon.Error);
         }
     }
+
+    private void buttonToogleHideToken_Click(object sender, EventArgs e)
+    {
+        textBoxToken.PasswordChar = textBoxToken.PasswordChar == '\0' ? '●' : '\0';
+        buttonToogleHideToken.Image = textBoxToken.PasswordChar == '\0' ?  Resource._lock : Resource.lock_open;
+    }
 }

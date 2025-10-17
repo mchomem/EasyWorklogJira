@@ -33,6 +33,7 @@
             tabControlDefault = new TabControl();
             tabPageDefault = new TabPage();
             groupBoxLocalization = new GroupBox();
+            labelResetInformation = new Label();
             comboBoxLanguage = new ComboBox();
             labelLanguage = new Label();
             groupBoxWebSite = new GroupBox();
@@ -45,6 +46,7 @@
             maskedTextBoxStartTime = new MaskedTextBox();
             labelStartTime = new Label();
             groupBoxJiraAccessCredentials = new GroupBox();
+            buttonToogleHideToken = new Button();
             textBoxToken = new TextBox();
             labelEmail = new Label();
             linkLabel = new LinkLabel();
@@ -55,7 +57,6 @@
             labelNote = new Label();
             textBoxCommonAndActiveSprintIssues = new TextBox();
             labelCommonAndActiveSprintIssues = new Label();
-            labelResetInformation = new Label();
             tabControlDefault.SuspendLayout();
             tabPageDefault.SuspendLayout();
             groupBoxLocalization.SuspendLayout();
@@ -120,6 +121,15 @@
             groupBoxLocalization.TabIndex = 14;
             groupBoxLocalization.TabStop = false;
             groupBoxLocalization.Text = "Localização";
+            // 
+            // labelResetInformation
+            // 
+            labelResetInformation.AutoSize = true;
+            labelResetInformation.Location = new Point(224, 36);
+            labelResetInformation.Name = "labelResetInformation";
+            labelResetInformation.Size = new Size(117, 15);
+            labelResetInformation.TabIndex = 2;
+            labelResetInformation.Text = "OBS: precisa reiniciar";
             // 
             // comboBoxLanguage
             // 
@@ -225,6 +235,7 @@
             // 
             // groupBoxJiraAccessCredentials
             // 
+            groupBoxJiraAccessCredentials.Controls.Add(buttonToogleHideToken);
             groupBoxJiraAccessCredentials.Controls.Add(textBoxToken);
             groupBoxJiraAccessCredentials.Controls.Add(labelEmail);
             groupBoxJiraAccessCredentials.Controls.Add(linkLabel);
@@ -238,11 +249,22 @@
             groupBoxJiraAccessCredentials.TabStop = false;
             groupBoxJiraAccessCredentials.Text = "Credenciais de Acesso do Jira";
             // 
+            // buttonToogleHideToken
+            // 
+            buttonToogleHideToken.Image = Resource.lock_open;
+            buttonToogleHideToken.Location = new Point(410, 94);
+            buttonToogleHideToken.Name = "buttonToogleHideToken";
+            buttonToogleHideToken.Size = new Size(27, 24);
+            buttonToogleHideToken.TabIndex = 10;
+            buttonToogleHideToken.UseVisualStyleBackColor = true;
+            buttonToogleHideToken.Click += buttonToogleHideToken_Click;
+            // 
             // textBoxToken
             // 
             textBoxToken.Location = new Point(84, 95);
             textBoxToken.Name = "textBoxToken";
-            textBoxToken.Size = new Size(353, 23);
+            textBoxToken.PasswordChar = '●';
+            textBoxToken.Size = new Size(320, 23);
             textBoxToken.TabIndex = 9;
             // 
             // labelEmail
@@ -329,15 +351,6 @@
             labelCommonAndActiveSprintIssues.TabIndex = 0;
             labelCommonAndActiveSprintIssues.Text = "Projetos comuns e dentro da sprint ativa:";
             // 
-            // labelResetInformation
-            // 
-            labelResetInformation.AutoSize = true;
-            labelResetInformation.Location = new Point(224, 36);
-            labelResetInformation.Name = "labelResetInformation";
-            labelResetInformation.Size = new Size(117, 15);
-            labelResetInformation.TabIndex = 2;
-            labelResetInformation.Text = "OBS: precisa reiniciar";
-            // 
             // ConfigurationForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -392,5 +405,6 @@
         private Label labelLanguage;
         private ComboBox comboBoxLanguage;
         private Label labelResetInformation;
+        private Button buttonToogleHideToken;
     }
 }

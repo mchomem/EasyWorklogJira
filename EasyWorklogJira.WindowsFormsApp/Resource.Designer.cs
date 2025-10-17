@@ -63,6 +63,16 @@ namespace EasyWorklogJira.WindowsFormsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _lock {
+            get {
+                object obj = ResourceManager.GetObject("lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap arrow_refresh_blue {
             get {
                 object obj = ResourceManager.GetObject("arrow_refresh_blue", resourceCulture);
@@ -86,6 +96,16 @@ namespace EasyWorklogJira.WindowsFormsApp {
         internal static System.Drawing.Bitmap Gear1x_0_3s_200px_200px {
             get {
                 object obj = ResourceManager.GetObject("Gear1x-0.3s-200px-200px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lock_open {
+            get {
+                object obj = ResourceManager.GetObject("lock_open", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
