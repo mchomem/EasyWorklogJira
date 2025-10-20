@@ -139,6 +139,10 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
             labelTotalHoursDayValue.Text = $"{(int)totalTime.TotalHours:D2}:{totalTime.Minutes:D2}";
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Erro ao carregar os registros de atividade: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         finally
         {
             buttonRefreshList.Enabled = true;
