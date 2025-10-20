@@ -202,8 +202,8 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
                 var worklog = await _jiraService.GetWorklogByIdAsync(_issueKey!, _worklogId!);
 
                 comboBoxIssues.SelectedValue = _issueKey!;
-                dateTimePickerStarted.Value = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture);
-                maskedTextBoxStartTime.Text = DateTime.Parse(worklog.Started, CultureInfo.InvariantCulture).ToString("HH:mm");
+                dateTimePickerStarted.Value = worklog.Started.DateTime;
+                maskedTextBoxStartTime.Text = worklog.Started.DateTime.ToString("HH:mm");
                 maskedTextBoxTimeSpent.Text = $"{(worklog.TimeSpentSeconds / 3600):00}:{((worklog.TimeSpentSeconds % 3600) / 60):00}";
 
                 var commentLines = ExtractTextFromComment(worklog.Comment)

@@ -15,7 +15,14 @@ public static class ProfileMapping
         config.NewConfig<InfraDto.NestedContentDto, AppDto.NestedContentDto>().TwoWays();
         config.NewConfig<InfraDto.SearchResponseDto, AppDto.SearchResponseDto>().TwoWays();
         config.NewConfig<InfraDto.TextContentDto, AppDto.TextContentDto>().TwoWays();
-        config.NewConfig<InfraDto.WorklogDto, AppDto.WorklogDto>().TwoWays();
+
+        config.NewConfig<InfraDto.WorklogDto, AppDto.WorklogDto>()
+            .Map(dest => dest.Started, src => DateTimeOffset.Parse(src.Started, CultureInfo.InvariantCulture, DateTimeStyles.None));
+
+        // TODO: verificar se será mesmo necessário esse mapeamento customizado.
+        config.NewConfig<AppDto.WorklogDto, InfraDto.WorklogDto>()
+            .Map(dest => dest.Started, src => $"{src.Started.ToString("yyyy-MM-ddTHH:mm:ss.fff", CultureInfo.InvariantCulture)}{src.Started.ToString("zzz", CultureInfo.InvariantCulture).Replace(":", string.Empty)}");
+
         config.NewConfig<InfraDto.WorklogResponseDto, AppDto.WorklogResponseDto>().TwoWays();
         config.NewConfig<InfraDto.JiraUserDto, AppDto.JiraUserDto>().TwoWays();
 

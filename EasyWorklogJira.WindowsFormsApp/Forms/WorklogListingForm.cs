@@ -102,33 +102,21 @@ public partial class WorklogListingForm : MdiChieldFormBase
             dataGridViewDayWorklogs.Rows.Clear();
 
             var hoursRecorded = new List<(DateTimeOffset start, DateTimeOffset end, string issueKey)>();
-            var worklogsShow = new List<(string worklogId, string issueKey, DateTimeOffset startTime, DateTimeOffset endTime)>();
             var issuesKeys = issues.Select(i => i.Key);
             var email = _configuration.GetSection("JiraConnection:Email").Value!;
             var worklogs = await _jiraService.GetIssueWorklogsAsync(issuesKeys, selectedDateTimeOffiset, email);
 
-            if(worklogs != null && worklogs.Any())
+            if (worklogs != null && worklogs.Any())
             {
-                foreach(var worklog in worklogs)
+                foreach (var worklog in worklogs)
                 {
-                    DateTimeOffset.TryParse(worklog.Started, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTimeOffset startTime);
-                    DateTimeOffset endTime = startTime.AddSeconds(worklog.TimeSpentSeconds);
+                    DateTimeOffset endTime = worklog.Started.AddSeconds(worklog.TimeSpentSeconds);
                     var workDescriptions = ExtractTextFromComment(worklog.Comment);
 
-                    worklogsShow.Add((worklog.Id, worklog.IssueKey, startTime, endTime));
-                    hoursRecorded.Add((startTime, endTime, worklog.IssueKey));
+                    dataGridViewDayWorklogs.Rows.Add(worklog.Id, worklog.IssueKey, $"{worklog.Started:HH:mm}", $"{endTime:HH:mm}");
+                    hoursRecorded.Add((worklog.Started, endTime, worklog.IssueKey));
                 }
             }
-
-            #region Show worklogs ordered by start time.
-
-            worklogsShow = worklogsShow.OrderBy(w => w.startTime).ToList();
-            foreach (var worklogShow in worklogsShow)
-            {
-                dataGridViewDayWorklogs.Rows.Add(worklogShow.worklogId, worklogShow.issueKey, $"{worklogShow.startTime:HH:mm}", $"{worklogShow.endTime:HH:mm}");
-            }
-
-            #endregion
 
             var totalHours = hoursRecorded.Sum(hr => (hr.end - hr.start).TotalHours);
             var totalTime = TimeSpan.FromHours(totalHours);
@@ -153,6 +141,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
         }
         finally
         {
+            buttonRefreshList.Enabled = true;
             HideLoader();
         }
     }

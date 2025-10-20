@@ -45,6 +45,10 @@ public class JiraService : IJiraService
             }
         }
 
+        listWorkLogs = listWorkLogs
+            .OrderBy(w => w.Started)
+            .ToList();
+
         return listWorkLogs;
     }
 

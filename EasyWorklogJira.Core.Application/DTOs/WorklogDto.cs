@@ -6,7 +6,7 @@ public class WorklogDto
     public string Self { get; set; } = string.Empty;
     public AuthorDto Author { get; set; } = new AuthorDto();
     public CommentDto Comment { get; set; } = new CommentDto();
-    public string Started { get; set; } = string.Empty;
+    public DateTimeOffset Started { get; set; }
     public int TimeSpentSeconds { get; set; }
     public string IssueId { get; set; } = string.Empty;
     public string IssueKey { get; set; } = string.Empty;
