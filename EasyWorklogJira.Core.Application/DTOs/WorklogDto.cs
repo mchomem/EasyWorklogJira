@@ -9,4 +9,5 @@ public class WorklogDto
     public string Started { get; set; } = string.Empty;
     public int TimeSpentSeconds { get; set; }
     public string IssueId { get; set; } = string.Empty;
+    public string IssueKey { get; set; } = string.Empty;
 }

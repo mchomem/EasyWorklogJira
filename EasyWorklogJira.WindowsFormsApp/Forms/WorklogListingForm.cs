@@ -103,25 +103,20 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
             var hoursRecorded = new List<(DateTimeOffset start, DateTimeOffset end, string issueKey)>();
             var worklogsShow = new List<(string worklogId, string issueKey, DateTimeOffset startTime, DateTimeOffset endTime)>();
-
             var issuesKeys = issues.Select(i => i.Key);
+            var email = _configuration.GetSection("JiraConnection:Email").Value!;
+            var worklogs = await _jiraService.GetIssueWorklogsAsync(issuesKeys, selectedDateTimeOffiset, email);
 
-            foreach (var issueKey in issuesKeys)
+            if(worklogs != null && worklogs.Any())
             {
-                var email = _configuration.GetSection("JiraConnection:Email").Value!;
-                var worklogs = await _jiraService.GetIssueWorklogsAsync(issueKey, selectedDateTimeOffiset, email);
-
-                if (worklogs != null && worklogs.Any())
+                foreach(var worklog in worklogs)
                 {
-                    foreach (var worklog in worklogs)
-                    {
-                        DateTimeOffset.TryParse(worklog.Started, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTimeOffset startTime);
-                        DateTimeOffset endTime = startTime.AddSeconds(worklog.TimeSpentSeconds);
-                        var workDescriptions = ExtractTextFromComment(worklog.Comment);
+                    DateTimeOffset.TryParse(worklog.Started, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTimeOffset startTime);
+                    DateTimeOffset endTime = startTime.AddSeconds(worklog.TimeSpentSeconds);
+                    var workDescriptions = ExtractTextFromComment(worklog.Comment);
 
-                        worklogsShow.Add((worklog.Id, issueKey, startTime, endTime));
-                        hoursRecorded.Add((startTime, endTime, issueKey));
-                    }
+                    worklogsShow.Add((worklog.Id, worklog.IssueKey, startTime, endTime));
+                    hoursRecorded.Add((startTime, endTime, worklog.IssueKey));
                 }
             }
 

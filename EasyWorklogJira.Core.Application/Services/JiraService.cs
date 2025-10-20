@@ -27,6 +27,27 @@ public class JiraService : IJiraService
         return worklogs;
     }
 
+    public async Task<IEnumerable<WorklogDto>> GetIssueWorklogsAsync(IEnumerable<string> issuesKey, DateTimeOffset dateTime, string userEmailAddress)
+    {
+        var listWorkLogs = new List<WorklogDto>();
+
+        foreach (var issueKey in issuesKey)
+        {
+            var worklogs = await _jiraApiClient.GetIssueWorklogsAsync(issueKey, dateTime, userEmailAddress);
+
+            if (worklogs.Any())
+            {
+                foreach (var w in worklogs)
+                {
+                    w.IssueKey = issueKey; // This "IssueKey" field do not exists in the WorklogDto returned by Jira API, so we need to set it manually.
+                    listWorkLogs.Add(w);
+                }
+            }
+        }
+
+        return listWorkLogs;
+    }
+
     public async Task<WorklogDto> GetWorklogByIdAsync(string issueKey, string worklogId)
     {
         var worklog = await _jiraApiClient.GetWorklogByIdAsync(issueKey, worklogId);
