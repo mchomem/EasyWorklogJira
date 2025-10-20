@@ -10,5 +10,5 @@ public interface IJiraService
     public Task AddWorklogAsync(string issueKey, WorklogMaintenanceDto worklogAddDto);
     public Task UpdateWorklogAsync(string issueKey, string worklogId, WorklogMaintenanceDto worklogAddDto);
     public Task DeleteWorklogAsync(string issueKey, string worklogId);
-    public Task<UserDto> GetCurrentUserAsync();
+    public Task<JiraUserDto> GetCurrentUserAsync();
 }

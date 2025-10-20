@@ -17,8 +17,7 @@ public static class ProfileMapping
         config.NewConfig<InfraDto.TextContentDto, AppDto.TextContentDto>().TwoWays();
         config.NewConfig<InfraDto.WorklogDto, AppDto.WorklogDto>().TwoWays();
         config.NewConfig<InfraDto.WorklogResponseDto, AppDto.WorklogResponseDto>().TwoWays();
-
-        config.NewConfig<InfraDto.UserDto, AppDto.UserDto>().TwoWays();
+        config.NewConfig<InfraDto.JiraUserDto, AppDto.JiraUserDto>().TwoWays();
 
         #endregion
 

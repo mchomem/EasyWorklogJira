@@ -168,16 +168,16 @@ public class JiraApiClient : IJiraApiClient
         response.EnsureSuccessStatusCode();
     }
 
-    public async Task<AppDto.UserDto> GetCurrentUserAsync()
+    public async Task<AppDto.JiraUserDto> GetCurrentUserAsync()
     {
         var url = $"{_httpClient.BaseAddress}/rest/api/3/myself";
         HttpResponseMessage response = await _httpClient.GetAsync(url);
         response.EnsureSuccessStatusCode();
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
-        var userResult = JsonSerializer.Deserialize<UserDto>(jsonResponse, _jsonSerializerOptions);
+        var userResult = JsonSerializer.Deserialize<JiraUserDto>(jsonResponse, _jsonSerializerOptions);
 
-        var result = _mapper.Map<AppDto.UserDto>(userResult!);
+        var result = _mapper.Map<AppDto.JiraUserDto>(userResult!);
         return result;
     }
 }

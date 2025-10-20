@@ -69,7 +69,7 @@ public class JiraService : IJiraService
         await _jiraApiClient.DeleteWorklogAsync(issueKey, worklogId);
     }
 
-    public async Task<UserDto> GetCurrentUserAsync()
+    public async Task<JiraUserDto> GetCurrentUserAsync()
     {
         var user = await _jiraApiClient.GetCurrentUserAsync();
         return user;

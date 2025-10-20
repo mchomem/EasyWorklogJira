@@ -1,6 +1,6 @@
 ﻿namespace EasyWorklogJira.Infrastructure.ExternalService.DTOs;
 
-public class UserDto
+public class JiraUserDto
 {
     [JsonPropertyName("accountId")]
     public string AccountId { get; set; } = string.Empty;
