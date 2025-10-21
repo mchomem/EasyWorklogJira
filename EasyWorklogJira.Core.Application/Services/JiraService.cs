@@ -78,4 +78,10 @@ public class JiraService : IJiraService
         var user = await _jiraApiClient.GetCurrentUserAsync();
         return user;
     }
+
+    public async Task<bool> IsJiraApiOnlineAsync()
+    {
+        var isConnected = await _jiraApiClient.IsJiraApiOnlineAsync();
+        return isConnected;
+    }
 }

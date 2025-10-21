@@ -4,16 +4,33 @@ public partial class MainForm : Form
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly ILocalizationService _localizationService;
+    private readonly IJiraService _jiraService;
+    private readonly INetworkService _networkService;
     private readonly IConfiguration _configuration;
+    private readonly System.Windows.Forms.Timer _appTimer;
     private Dictionary<Type, Form> _openForms = new Dictionary<Type, Form>();
 
-    public MainForm(IServiceProvider serviceProvider, ILocalizationService localizationService, IConfiguration configuration)
+    public MainForm(IServiceProvider serviceProvider,
+        ILocalizationService localizationService,
+        IJiraService jiraService,
+        INetworkService networkService,
+        IConfiguration configuration)
     {
+        InitializeComponent();
+
         _serviceProvider = serviceProvider;
         _localizationService = localizationService;
+        _jiraService = jiraService;
+        _networkService = networkService;
         _configuration = configuration;
 
-        InitializeComponent();
+        _appTimer = new System.Windows.Forms.Timer()
+        {
+            Interval = 1000 * 60 * 5 // 5 min.
+        };
+
+        _appTimer.Tick += async (s, e) => await CheckInternetConnection();
+
         GetTranslate();
         Focus();
     }
@@ -60,6 +77,21 @@ public partial class MainForm : Form
         ShowSingleInstanceForm<AboutForm>();
     }
 
+    private async void MainForm_Load(object sender, EventArgs e)
+    {
+        await CheckInternetConnection();
+
+        ShowSingleInstanceForm<WorklogListingForm>();
+
+        _appTimer.Start();
+    }
+
+    private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        _appTimer.Stop();
+        _appTimer.Dispose();
+    }
+
     public void ShowSingleInstanceForm<T>() where T : Form
     {
         // Verifica se já existe uma instância aberta do formulário
@@ -95,8 +127,45 @@ public partial class MainForm : Form
         Environment.Exit(0);
     }
 
-    private void MainForm_Load(object sender, EventArgs e)
+    private async Task CheckInternetConnection()
     {
-        ShowSingleInstanceForm<WorklogListingForm>();
+        toolStripStatusLabelWebConnectionValue.Text = "verificando conexões de rede ...";
+        toolStripStatusLabelWebConnectionValue.BackColor = Color.Transparent;
+        toolStripStatusLabelWebConnectionValue.ForeColor = Color.Black;
+
+        var isConnected = await _networkService.IsInternetAvailableAsync();
+
+        if (isConnected)
+        {
+            toolStripStatusLabelWebConnectionValue.Text = "App ON LINE";
+            toolStripStatusLabelWebConnectionValue.BackColor = Color.Green;
+            toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+
+            await CheckJiraConnection();
+        }
+        else
+        {
+            toolStripStatusLabelWebConnectionValue.Text = "App OFF LINE";
+            toolStripStatusLabelWebConnectionValue.BackColor = Color.Red;
+            toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+        }
+    }
+
+    private async Task CheckJiraConnection()
+    {
+        var isConnected = await _jiraService.IsJiraApiOnlineAsync();
+
+        if (isConnected)
+        {
+            toolStripStatusLabelWebConnectionValue.Text = "Jira ON LINE";
+            toolStripStatusLabelWebConnectionValue.BackColor = Color.Green;
+            toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+        }
+        else
+        {
+            toolStripStatusLabelWebConnectionValue.Text = "Jira OFF LINE";
+            toolStripStatusLabelWebConnectionValue.BackColor = Color.Red;
+            toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+        }
     }
 }

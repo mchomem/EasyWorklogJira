@@ -45,6 +45,7 @@ public static class Program
         services.AddTransient<WorklogMaintenanceForm>();
         services.AddTransient<AboutForm>();
         services.AddTransient<CurrentUserForm>();
+        services.AddTransient<System.Net.NetworkInformation.Ping>();
         services.AddInfrastructureWindowsFormsApp(Configuration);
     }
 

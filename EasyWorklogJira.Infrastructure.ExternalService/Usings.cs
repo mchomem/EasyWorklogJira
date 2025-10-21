@@ -5,6 +5,7 @@ global using MapsterMapper;
 global using Microsoft.Extensions.Configuration;
 global using System.Globalization;
 global using System.Net.Http.Headers;
+global using System.Net.NetworkInformation;
 global using System.Text;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;

@@ -38,7 +38,11 @@
             worklogToolStripMenuItem = new ToolStripMenuItem();
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
+            statusStrip = new StatusStrip();
+            toolStripStatusLabelWebConnection = new ToolStripStatusLabel();
+            toolStripStatusLabelWebConnectionValue = new ToolStripStatusLabel();
             menuStripMain.SuspendLayout();
+            statusStrip.SuspendLayout();
             SuspendLayout();
             // 
             // menuStripMain
@@ -111,20 +115,47 @@
             aboutToolStripMenuItem.Text = "Sobre";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
+            // statusStrip
+            // 
+            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelWebConnection, toolStripStatusLabelWebConnectionValue });
+            statusStrip.Location = new Point(0, 707);
+            statusStrip.Name = "statusStrip";
+            statusStrip.Size = new Size(1008, 22);
+            statusStrip.TabIndex = 2;
+            statusStrip.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabelWebConnection
+            // 
+            toolStripStatusLabelWebConnection.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            toolStripStatusLabelWebConnection.Name = "toolStripStatusLabelWebConnection";
+            toolStripStatusLabelWebConnection.Size = new Size(57, 17);
+            toolStripStatusLabelWebConnection.Text = "Situação:";
+            // 
+            // toolStripStatusLabelWebConnectionValue
+            // 
+            toolStripStatusLabelWebConnectionValue.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            toolStripStatusLabelWebConnectionValue.Name = "toolStripStatusLabelWebConnectionValue";
+            toolStripStatusLabelWebConnectionValue.Size = new Size(16, 17);
+            toolStripStatusLabelWebConnectionValue.Text = "...";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1008, 729);
+            Controls.Add(statusStrip);
             Controls.Add(menuStripMain);
             IsMdiContainer = true;
             MainMenuStrip = menuStripMain;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Easy Worklog Jira";
+            FormClosing += MainForm_FormClosing;
             Load += MainForm_Load;
             menuStripMain.ResumeLayout(false);
             menuStripMain.PerformLayout();
+            statusStrip.ResumeLayout(false);
+            statusStrip.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -141,5 +172,8 @@
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem currentUserToolStripMenuItem;
+        private StatusStrip statusStrip;
+        private ToolStripStatusLabel toolStripStatusLabelWebConnectionValue;
+        private ToolStripStatusLabel toolStripStatusLabelWebConnection;
     }
 }

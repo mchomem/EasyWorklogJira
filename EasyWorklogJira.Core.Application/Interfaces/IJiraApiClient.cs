@@ -10,4 +10,5 @@ public interface IJiraApiClient
     public Task UpdateWorklogAsync(string issueKey, string worklogId, WorklogMaintenanceDto worklogAddDto);
     public Task DeleteWorklogAsync(string issueKey, string worklogId);
     public Task<JiraUserDto> GetCurrentUserAsync();
+    public Task<bool> IsJiraApiOnlineAsync();
 }

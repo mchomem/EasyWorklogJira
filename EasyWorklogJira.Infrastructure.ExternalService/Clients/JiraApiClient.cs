@@ -180,4 +180,11 @@ public class JiraApiClient : IJiraApiClient
         var result = _mapper.Map<AppDto.JiraUserDto>(userResult!);
         return result;
     }
+
+    public async Task<bool> IsJiraApiOnlineAsync()
+    {
+        var url = $"{_httpClient.BaseAddress}/rest/api/3/serverInfo";
+        HttpResponseMessage response = await _httpClient.GetAsync(url);
+        return response.IsSuccessStatusCode;
+    }
 }

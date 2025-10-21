@@ -7,6 +7,7 @@ public static class DependenceInjectionWindowsFormsApp
         #region Services
 
         services.AddScoped<IJiraService, JiraService>();
+        services.AddScoped<INetworkService, NetworkService>();
 
         #endregion
 
@@ -18,6 +19,8 @@ public static class DependenceInjectionWindowsFormsApp
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         });
+
+        services.AddScoped<INetworkExternalService, NetworkExternalService>();
 
         #endregion
 
