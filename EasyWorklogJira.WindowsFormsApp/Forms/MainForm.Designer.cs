@@ -39,7 +39,6 @@
             helpToolStripMenuItem = new ToolStripMenuItem();
             aboutToolStripMenuItem = new ToolStripMenuItem();
             statusStrip = new StatusStrip();
-            toolStripStatusLabelWebConnection = new ToolStripStatusLabel();
             toolStripStatusLabelWebConnectionValue = new ToolStripStatusLabel();
             menuStripMain.SuspendLayout();
             statusStrip.SuspendLayout();
@@ -117,19 +116,12 @@
             // 
             // statusStrip
             // 
-            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelWebConnection, toolStripStatusLabelWebConnectionValue });
+            statusStrip.Items.AddRange(new ToolStripItem[] { toolStripStatusLabelWebConnectionValue });
             statusStrip.Location = new Point(0, 707);
             statusStrip.Name = "statusStrip";
             statusStrip.Size = new Size(1008, 22);
             statusStrip.TabIndex = 2;
             statusStrip.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabelWebConnection
-            // 
-            toolStripStatusLabelWebConnection.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            toolStripStatusLabelWebConnection.Name = "toolStripStatusLabelWebConnection";
-            toolStripStatusLabelWebConnection.Size = new Size(57, 17);
-            toolStripStatusLabelWebConnection.Text = "Situação:";
             // 
             // toolStripStatusLabelWebConnectionValue
             // 
@@ -174,6 +166,5 @@
         private ToolStripMenuItem currentUserToolStripMenuItem;
         private StatusStrip statusStrip;
         private ToolStripStatusLabel toolStripStatusLabelWebConnectionValue;
-        private ToolStripStatusLabel toolStripStatusLabelWebConnection;
     }
 }
