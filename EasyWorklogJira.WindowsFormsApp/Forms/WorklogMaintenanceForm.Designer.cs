@@ -101,6 +101,7 @@
             textBoxIssueDescription.Location = new Point(16, 160);
             textBoxIssueDescription.Multiline = true;
             textBoxIssueDescription.Name = "textBoxIssueDescription";
+            textBoxIssueDescription.ScrollBars = ScrollBars.Vertical;
             textBoxIssueDescription.Size = new Size(466, 84);
             textBoxIssueDescription.TabIndex = 8;
             // 
