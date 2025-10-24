@@ -10,14 +10,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="appsettings.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="appsettings.json">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="ewj.ico" />
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="ewj.ico" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -28,22 +24,30 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\EasyWorklogJira.Infrastructure.IoC\EasyWorklogJira.Infrastructure.IoC.csproj" />
+		<ProjectReference Include="..\EasyWorklogJira.Infrastructure.IoC\EasyWorklogJira.Infrastructure.IoC.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resource.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resource.resx</DependentUpon>
-	  </Compile>
+		<Compile Update="Resource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resource.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resource.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="Resource.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
+
+	<!-- Remove appsettings.json after publish -->
+	<Target Name="RemoveAppSettingsAfterPublish" AfterTargets="Publish">
+		<Message Text="####################################################" Importance="high" />
+		<Message Text="### Deleting appsettings.json from published dir ###" Importance="high" />
+		<Message Text="####################################################" Importance="high" />
+		<Delete Files="$(PublishDir)appsettings.json" />
+	</Target>
 
 </Project>
