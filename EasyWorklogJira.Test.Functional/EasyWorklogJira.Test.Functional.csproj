@@ -40,6 +40,19 @@
 
 	<ItemGroup>
 		<Using Include="Xunit" />
-	</ItemGroup>	
+	</ItemGroup>
+
+	<!-- Custom config: Ensure appsettings.json exists before build -->
+	<Target Name="EnsureAppSettingsExists" BeforeTargets="BeforeBuild">
+		<Message Text="#########################################################" Importance="high" />
+		<Message Text="### Checking for the existence of appsettings.json ...###" Importance="high" />
+		<Message Text="#########################################################" Importance="high" />
+
+		<!-- If the file does not exist, create a new empty one. -->
+		<ItemGroup>
+			<_AppSettingsFile Include="appsettings.json" />
+		</ItemGroup>
+		<Exec Command="if not exist &quot;%( _AppSettingsFile.Identity )&quot; echo {{}} &gt; &quot;%( _AppSettingsFile.Identity )&quot;" />
+	</Target>
 
 </Project>
