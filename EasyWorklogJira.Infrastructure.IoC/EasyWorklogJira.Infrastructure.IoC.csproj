@@ -14,8 +14,10 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\EasyWorklogJira.Core.Application\EasyWorklogJira.Core.Application.csproj" />
+	  <ProjectReference Include="..\EasyWorklogJira.Core.Domain\EasyWorklogJira.Core.Domain.csproj" />
 	  <ProjectReference Include="..\EasyWorklogJira.Infrastructure.ExternalService\EasyWorklogJira.Infrastructure.ExternalService.csproj" />
 	  <ProjectReference Include="..\EasyWorklogJira.Infrastructure.Localization\EasyWorklogJira.Infrastructure.Localization.csproj" />
+	  <ProjectReference Include="..\EasyWorklogJira.Infrastructure.Logging\EasyWorklogJira.Infrastructure.Logging.csproj" />
 	</ItemGroup>
 
 </Project>

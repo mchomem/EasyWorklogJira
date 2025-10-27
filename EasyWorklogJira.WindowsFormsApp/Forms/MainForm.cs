@@ -7,6 +7,7 @@ public partial class MainForm : Form
     private readonly IJiraService _jiraService;
     private readonly INetworkService _networkService;
     private readonly IConfiguration _configuration;
+    private readonly ILogService _logService;
     private readonly System.Windows.Forms.Timer _appTimer;
     private Dictionary<Type, Form> _openForms = new Dictionary<Type, Form>();
 
@@ -14,7 +15,8 @@ public partial class MainForm : Form
         ILocalizationService localizationService,
         IJiraService jiraService,
         INetworkService networkService,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        ILogService logService)
     {
         InitializeComponent();
 
@@ -23,6 +25,7 @@ public partial class MainForm : Form
         _jiraService = jiraService;
         _networkService = networkService;
         _configuration = configuration;
+        _logService = logService;
 
         _appTimer = new System.Windows.Forms.Timer()
         {
@@ -79,11 +82,13 @@ public partial class MainForm : Form
 
     private async void MainForm_Load(object sender, EventArgs e)
     {
-        await CheckInternetConnection();
+        var isOnline = await CheckInternetConnection();
 
-        ShowSingleInstanceForm<WorklogListingForm>();
-
-        _appTimer.Start();
+        if (isOnline)
+        {
+            ShowSingleInstanceForm<WorklogListingForm>();
+            _appTimer.Start();
+        }
     }
 
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -127,45 +132,75 @@ public partial class MainForm : Form
         Environment.Exit(0);
     }
 
-    private async Task CheckInternetConnection()
+    private async Task<bool> CheckInternetConnection()
     {
-        toolStripStatusLabelWebConnectionValue.Text = "verificando conexões de rede ...";
-        toolStripStatusLabelWebConnectionValue.BackColor = Color.Transparent;
-        toolStripStatusLabelWebConnectionValue.ForeColor = Color.Black;
-
-        var isConnected = await _networkService.IsInternetAvailableAsync();
-
-        if (isConnected)
+        try
         {
-            toolStripStatusLabelWebConnectionValue.Text = "App ON LINE";
-            toolStripStatusLabelWebConnectionValue.BackColor = Color.Green;
-            toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+            toolStripStatusLabelWebConnectionValue.Text = "Verificando conexões de rede ...";
+            toolStripStatusLabelWebConnectionValue.BackColor = Color.Transparent;
+            toolStripStatusLabelWebConnectionValue.ForeColor = Color.Black;
 
-            await CheckJiraConnection();
+            var isConnected = await _networkService.IsInternetAvailableAsync();
+
+            if (isConnected)
+            {
+                toolStripStatusLabelWebConnectionValue.Text = "App ON LINE";
+                toolStripStatusLabelWebConnectionValue.BackColor = Color.Green;
+                toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+
+                return await CheckJiraConnection();
+            }
+            else
+            {
+                toolStripStatusLabelWebConnectionValue.Text = "App OFF LINE";
+                toolStripStatusLabelWebConnectionValue.BackColor = Color.Red;
+                toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+
+                return isConnected;
+            }
         }
-        else
+        catch (Exception ex)
         {
-            toolStripStatusLabelWebConnectionValue.Text = "App OFF LINE";
+            toolStripStatusLabelWebConnectionValue.Text = "Falha ao verificar a conexão com a internet.";
             toolStripStatusLabelWebConnectionValue.BackColor = Color.Red;
             toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+
+            _logService.LogError(exception: ex, "Failed to check internet connection.");
+            MessageBox.Show($"Falha ao verificar a conexão com a internet: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
     }
 
-    private async Task CheckJiraConnection()
+    private async Task<bool> CheckJiraConnection()
     {
-        var isConnected = await _jiraService.IsJiraApiOnlineAsync();
+        try
+        {
+            var jiraIsOnline = await _jiraService.IsJiraApiOnlineAsync();
 
-        if (isConnected)
-        {
-            toolStripStatusLabelWebConnectionValue.Text = "Jira ON LINE";
-            toolStripStatusLabelWebConnectionValue.BackColor = Color.Green;
-            toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+            if (jiraIsOnline)
+            {
+                toolStripStatusLabelWebConnectionValue.Text = "Jira ON LINE";
+                toolStripStatusLabelWebConnectionValue.BackColor = Color.Green;
+                toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+            }
+            else
+            {
+                toolStripStatusLabelWebConnectionValue.Text = "Jira OFF LINE";
+                toolStripStatusLabelWebConnectionValue.BackColor = Color.Red;
+                toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+            }
+
+            return jiraIsOnline;
         }
-        else
+        catch (Exception ex)
         {
-            toolStripStatusLabelWebConnectionValue.Text = "Jira OFF LINE";
+            toolStripStatusLabelWebConnectionValue.Text = "Falha ao verificar a conexão com o Jira.";
             toolStripStatusLabelWebConnectionValue.BackColor = Color.Red;
             toolStripStatusLabelWebConnectionValue.ForeColor = Color.White;
+
+            _logService.LogError(exception: ex, "Failed to verify the connection to Jira..");
+            MessageBox.Show($"Falha ao verificar a conexão com o Jira: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return false;
         }
     }
 }

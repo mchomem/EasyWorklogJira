@@ -1,12 +1,16 @@
 ﻿global using EasyWorklogJira.Core.Application.Interfaces;
 global using EasyWorklogJira.Core.Application.Services;
+global using EasyWorklogJira.Core.Domain.Interfaces;
 global using EasyWorklogJira.Infrastructure.ExternalService.Clients;
 global using EasyWorklogJira.Infrastructure.ExternalService.ProfileMappings;
 global using EasyWorklogJira.Infrastructure.ExternalService.Services;
 global using EasyWorklogJira.Infrastructure.Localization.Interfaces;
 global using EasyWorklogJira.Infrastructure.Localization.Services;
+global using EasyWorklogJira.Infrastructure.Logging.Services;
 global using Mapster;
 global using MapsterMapper;
 global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Serilog;
 global using System.Net.Http.Headers;

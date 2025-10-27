@@ -5,16 +5,22 @@ public partial class WorklogListingForm : MdiChieldFormBase
     private readonly IJiraService _jiraService;
     private readonly ILocalizationService _localizationService;
     private readonly IConfiguration _configuration;
+    private readonly ILogService _logService;
 
     private Panel loaderPanel;
     private Label loaderLabel;
     private PictureBox loaderGif;
 
-    public WorklogListingForm(IJiraService jiraService, ILocalizationService localizationService, IConfiguration configuration)
+    public WorklogListingForm(
+        IJiraService jiraService,
+        ILocalizationService localizationService,
+        IConfiguration configuration,
+        ILogService logService)
     {
         _jiraService = jiraService;
         _localizationService = localizationService;
         _configuration = configuration;
+        _logService = logService;
 
         InitializeComponent();
         InitializeLoader();
@@ -72,6 +78,19 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
     private async Task LoadWorklogsAsync(bool getPreviousDay = false)
     {
+        // TODO: centralizar essa verificação em um serviço ou helper.
+        var urlConfiguration = _configuration.GetSection("JiraConnection:baseUrl").Value!;
+        var emailConfiguration = _configuration.GetSection("JiraConnection:Email").Value!;
+        var tokenConfiguration = _configuration.GetSection("JiraConnection:token").Value!;
+
+        if (string.IsNullOrEmpty(urlConfiguration)
+            || string.IsNullOrEmpty(emailConfiguration)
+            || string.IsNullOrEmpty(tokenConfiguration))
+        {
+            MessageBox.Show("A configuração está incopleta, por isso não é possível abrir a consulta dos registros de atividades. Configure o sistema antes de usá-lo", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+
         try
         {
             ShowLoader();
@@ -123,24 +142,34 @@ public partial class WorklogListingForm : MdiChieldFormBase
 
             if (totalHours < 6)
             {
-                labelTotalHoursDayValue.BackColor = System.Drawing.Color.Red;
-                labelTotalHoursDayValue.ForeColor = System.Drawing.Color.White;
+                labelTotalHoursDayValue.BackColor = Color.Red;
+                labelTotalHoursDayValue.ForeColor = Color.White;
             }
             else if (totalHours >= 6 && totalHours <= 7)
             {
-                labelTotalHoursDayValue.BackColor = System.Drawing.Color.Yellow;
-                labelTotalHoursDayValue.ForeColor = System.Drawing.Color.Black;
+                labelTotalHoursDayValue.BackColor = Color.Yellow;
+                labelTotalHoursDayValue.ForeColor = Color.Black;
             }
             else
             {
-                labelTotalHoursDayValue.BackColor = System.Drawing.Color.Green;
-                labelTotalHoursDayValue.ForeColor = System.Drawing.Color.White;
+                labelTotalHoursDayValue.BackColor = Color.Green;
+                labelTotalHoursDayValue.ForeColor = Color.White;
             }
 
             labelTotalHoursDayValue.Text = $"{(int)totalTime.TotalHours:D2}:{totalTime.Minutes:D2}";
         }
         catch (Exception ex)
         {
+            var selectedDate = monthCalendar.SelectionStart;
+            var email = _configuration.GetSection("JiraConnection:Email").Value!;
+
+            _logService.LogError(
+                exception: ex,
+                message: "Error on load worklogs.",
+                selectedDate,
+                email,
+                getPreviousDay);
+
             MessageBox.Show($"Erro ao carregar os registros de atividade: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         finally
@@ -166,7 +195,10 @@ public partial class WorklogListingForm : MdiChieldFormBase
         var issueId = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString()!;
 
         // Ignore header clicks
-        if (e.RowIndex < 0) return;
+        if (e.RowIndex < 0)
+        {
+            return;
+        }
 
         if (e.ColumnIndex == 1 && e.RowIndex >= 0)
         {
@@ -183,7 +215,13 @@ public partial class WorklogListingForm : MdiChieldFormBase
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Não foi possível abrir o link: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _logService.LogError(
+                exception: ex,
+                message: "Cannot to open link.",
+                jiraUrl,
+                issueKey);
+
+                MessageBox.Show($"Não é possível abrir o link: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

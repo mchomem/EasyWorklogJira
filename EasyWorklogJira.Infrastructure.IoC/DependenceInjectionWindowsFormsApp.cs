@@ -4,10 +4,32 @@ public static class DependenceInjectionWindowsFormsApp
 {
     public static IServiceCollection AddInfrastructureWindowsFormsApp(this IServiceCollection services, IConfiguration configuration)
     {
+        #region Serilog Configuration
+
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File(
+                path: "logs/ewj-.log",
+                rollingInterval: RollingInterval.Day,
+                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}",
+                retainedFileCountLimit: 30,
+                shared: true)
+            .WriteTo.Console()
+            .CreateLogger();
+
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.ClearProviders();
+            loggingBuilder.AddSerilog(dispose: true);
+        });
+
+        #endregion
+
         #region Services
 
         services.AddScoped<IJiraService, JiraService>();
         services.AddScoped<INetworkService, NetworkService>();
+        services.AddScoped<ILogService, LogService>();
 
         #endregion
 
@@ -15,7 +37,13 @@ public static class DependenceInjectionWindowsFormsApp
 
         services.AddHttpClient<IJiraApiClient, JiraApiClient>(client =>
         {
-            client.BaseAddress = new Uri(configuration.GetSection("JiraConnection:baseUrl").Value!);
+            var baseUrl = configuration.GetSection("JiraConnection:baseUrl").Value!;
+
+            if (!string.IsNullOrEmpty(baseUrl))
+            {
+                client.BaseAddress = new Uri(baseUrl);
+            }
+
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         });
