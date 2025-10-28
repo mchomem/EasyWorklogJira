@@ -179,6 +179,40 @@ public partial class WorklogListingForm : MdiChieldFormBase
         }
     }
 
+    private void OpenUrlInBrowser(string url)
+    {
+        try
+        {
+            // Remove espaços extras e usa CMD - método mais confiável
+            url = url.Trim();
+            
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "cmd",
+                Arguments = $"/c start \"\" \"{url}\"",
+                UseShellExecute = false,
+                CreateNoWindow = true
+            });
+        }
+        catch (Exception ex)
+        {
+            // Fallback: tenta com explorer
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "explorer.exe",
+                    Arguments = url,
+                    UseShellExecute = false
+                });
+            }
+            catch
+            {
+                throw new InvalidOperationException($"Não foi possível abrir a URL: {url}", ex);
+            }
+        }
+    }
+
     private async void WorklogForm_LoadAsync(object sender, EventArgs e)
     {
         await LoadFormAsync();
@@ -203,23 +237,20 @@ public partial class WorklogListingForm : MdiChieldFormBase
         if (e.ColumnIndex == 1 && e.RowIndex >= 0)
         {
             var issueKey = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString()!;
-            var jiraUrl = $"{_configuration.GetSection("JiraConnection:baseUrl").Value}/browse/{issueKey}";
+            var baseUrl = _configuration.GetSection("JiraConnection:baseUrl").Value?.Trim();
+            var jiraUrl = $"{baseUrl}/browse/{issueKey}".Trim();
 
             try
             {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = jiraUrl,
-                    UseShellExecute = true
-                });
+                OpenUrlInBrowser(jiraUrl);
             }
             catch (Exception ex)
             {
                 _logService.LogError(
-                exception: ex,
-                message: "Cannot to open link.",
-                jiraUrl,
-                issueKey);
+                    exception: ex,
+                    message: "Cannot to open link.",
+                    jiraUrl,
+                    issueKey);
 
                 MessageBox.Show($"Não é possível abrir o link: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -271,6 +302,28 @@ public partial class WorklogListingForm : MdiChieldFormBase
             worklogMaintenanceForm.MdiParent = mainForm;
             worklogMaintenanceForm.Show();
         }
+    }
+
+    private void dataGridViewDayWorklogs_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex < 0)
+        {
+            return;
+        }
+
+        // Check if the mouse is over the "Update" or "Delete" column
+        if (e.ColumnIndex >= 0 &&
+            (dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "Update")
+            || dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "Delete")
+        {
+            dataGridViewDayWorklogs.Cursor = Cursors.Hand;
+        }
+    }
+
+    private void dataGridViewDayWorklogs_CellMouseLeave(object sender, DataGridViewCellEventArgs e)
+    {
+        // Reset the cursor when the mouse leaves the cell
+        dataGridViewDayWorklogs.Cursor = Cursors.Default;
     }
 
     private static List<string> ExtractTextFromComment(CommentDto comment)

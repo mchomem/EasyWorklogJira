@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             monthCalendar = new MonthCalendar();
             dataGridViewDayWorklogs = new DataGridView();
             WorklogId = new DataGridViewTextBoxColumn();
@@ -73,6 +73,8 @@
             dataGridViewDayWorklogs.Size = new Size(292, 180);
             dataGridViewDayWorklogs.TabIndex = 1;
             dataGridViewDayWorklogs.CellContentClick += dataGridViewDayWorklogs_CellContentClickAsync;
+            dataGridViewDayWorklogs.CellMouseEnter += dataGridViewDayWorklogs_CellMouseEnter;
+            dataGridViewDayWorklogs.CellMouseLeave += dataGridViewDayWorklogs_CellMouseLeave;
             // 
             // WorklogId
             // 
@@ -83,9 +85,9 @@
             // 
             // IssueKey
             // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            IssueKey.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IssueKey.DefaultCellStyle = dataGridViewCellStyle4;
             IssueKey.FillWeight = 70F;
             IssueKey.HeaderText = "Tarefa";
             IssueKey.Name = "IssueKey";
@@ -96,8 +98,8 @@
             // 
             // StartTime
             // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            StartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StartTime.DefaultCellStyle = dataGridViewCellStyle5;
             StartTime.FillWeight = 50F;
             StartTime.HeaderText = "Início";
             StartTime.Name = "StartTime";
@@ -107,8 +109,8 @@
             // 
             // EndTime
             // 
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            EndTime.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            EndTime.DefaultCellStyle = dataGridViewCellStyle6;
             EndTime.FillWeight = 50F;
             EndTime.HeaderText = "Fim";
             EndTime.Name = "EndTime";
