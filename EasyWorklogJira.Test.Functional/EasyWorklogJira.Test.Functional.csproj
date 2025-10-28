@@ -44,9 +44,9 @@
 
 	<!-- Custom config: Ensure appsettings.json exists before build -->
 	<Target Name="EnsureAppSettingsExists" BeforeTargets="BeforeBuild">
-		<Message Text="#########################################################" Importance="high" />
+		<Message Text="##############################################################" Importance="high" />
 		<Message Text="### Checking for the existence of appsettings.test.json ...###" Importance="high" />
-		<Message Text="#########################################################" Importance="high" />
+		<Message Text="##############################################################" Importance="high" />
 
 		<!-- If the file does not exist, create a new empty one. -->
 		<ItemGroup>
