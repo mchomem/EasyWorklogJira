@@ -1,7 +1,4 @@
-﻿using EasyWorklogJira.Core.Domain.Interfaces;
-using Microsoft.Extensions.Logging;
-
-namespace EasyWorklogJira.Infrastructure.Logging.Services;
+﻿namespace EasyWorklogJira.Infrastructure.Logging.Services;
 
 public class LogService : ILogService
 {
