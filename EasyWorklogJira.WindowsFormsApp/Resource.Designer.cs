@@ -93,9 +93,9 @@ namespace EasyWorklogJira.WindowsFormsApp {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gear1x_0_3s_200px_200px {
+        internal static System.Drawing.Bitmap ewj_banner {
             get {
-                object obj = ResourceManager.GetObject("Gear1x-0.3s-200px-200px", resourceCulture);
+                object obj = ResourceManager.GetObject("ewj_banner", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
