@@ -35,7 +35,7 @@ This query should be entered in the JQL tab, as shown in the image:
 
 ![Setup Jira Queries](Docs/Images/setup-jira-queries.png)
 
-NOTE: There is no configuration for JQL, the default query value is:
+NOTE: If no JQL is specified, the default value is assumed:
 
 `sprint in openSprints() AND assignee = currentUser() ORDER BY created DESC`
 
