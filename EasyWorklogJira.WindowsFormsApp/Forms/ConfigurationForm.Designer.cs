@@ -328,7 +328,7 @@
             // labelNote
             // 
             labelNote.AutoSize = true;
-            labelNote.Location = new Point(23, 122);
+            labelNote.Location = new Point(18, 163);
             labelNote.Name = "labelNote";
             labelNote.Size = new Size(39, 15);
             labelNote.TabIndex = 2;
@@ -339,7 +339,8 @@
             textBoxCommonAndActiveSprintIssues.Location = new Point(18, 44);
             textBoxCommonAndActiveSprintIssues.Multiline = true;
             textBoxCommonAndActiveSprintIssues.Name = "textBoxCommonAndActiveSprintIssues";
-            textBoxCommonAndActiveSprintIssues.Size = new Size(465, 64);
+            textBoxCommonAndActiveSprintIssues.ScrollBars = ScrollBars.Vertical;
+            textBoxCommonAndActiveSprintIssues.Size = new Size(465, 116);
             textBoxCommonAndActiveSprintIssues.TabIndex = 1;
             // 
             // labelCommonAndActiveSprintIssues
