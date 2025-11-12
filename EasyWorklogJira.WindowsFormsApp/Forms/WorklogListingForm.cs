@@ -87,7 +87,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
             || string.IsNullOrEmpty(emailConfiguration)
             || string.IsNullOrEmpty(tokenConfiguration))
         {
-            MessageBox.Show("A configuração está incopleta, por isso não é possível abrir a consulta dos registros de atividades. Configure o sistema antes de usá-lo", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.ShowError("A configuração está incopleta, por isso não é possível abrir a consulta dos registros de atividades. Configure o sistema antes de usá-lo");
             return;
         }
 
@@ -170,7 +170,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
                 email,
                 getPreviousDay);
 
-            MessageBox.Show($"Erro ao carregar os registros de atividade: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.ShowError($"Erro ao carregar os registros de atividade: {ex.Message}");
         }
         finally
         {
@@ -185,7 +185,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
         {
             // Remove espaços extras e usa CMD - método mais confiável
             url = url.Trim();
-            
+
             Process.Start(new ProcessStartInfo
             {
                 FileName = "cmd",
@@ -252,7 +252,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
                     jiraUrl,
                     issueKey);
 
-                MessageBox.Show($"Não é possível abrir o link: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.ShowError($"Não é possível abrir o link: {ex.Message}");
             }
         }
 
@@ -278,7 +278,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
             {
                 await _jiraService.DeleteWorklogAsync(issueId, worklogId);
 
-                MessageBox.Show($"Registro id: {worklogId} de tarefa excluída.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.ShowSuccess($"Registro id: {worklogId} de tarefa excluída.");
 
                 await LoadWorklogsAsync();
             }

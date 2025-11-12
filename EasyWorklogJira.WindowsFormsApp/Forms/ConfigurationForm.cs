@@ -62,7 +62,7 @@ public partial class ConfigurationForm : MdiChieldFormBase
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erro ao carregar as configurações: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.ShowError($"Erro ao carregar as configurações: {ex.Message}");
         }
     }
 
@@ -144,11 +144,7 @@ public partial class ConfigurationForm : MdiChieldFormBase
             || string.IsNullOrEmpty(email)
             || string.IsNullOrEmpty(token))
         {
-            MessageBox.Show(
-                "Informe a Url base, e-mail e token para configuração",
-                "Atenção",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
+            this.ShowWarning("Informe a Url base, e-mail e token para configuração");
 
             return;
         }
@@ -207,25 +203,19 @@ public partial class ConfigurationForm : MdiChieldFormBase
                 File.WriteAllText(_appSettingsPath, updatedJson);
             }
 
-            MessageBox.Show("Configurações salvas com sucesso!",
-                "Sucesso",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            this.ShowSuccess("Configurações salvas com sucesso!");
 
             Close();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erro ao salvar as configurações: {ex.Message}",
-                 "Erro",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
+            this.ShowError($"Erro ao salvar as configurações: {ex.Message}");
         }
     }
 
     private void buttonToogleHideToken_Click(object sender, EventArgs e)
     {
         textBoxToken.PasswordChar = textBoxToken.PasswordChar == '\0' ? '●' : '\0';
-        buttonToogleHideToken.Image = textBoxToken.PasswordChar == '\0' ?  Resource._lock : Resource.lock_open;
+        buttonToogleHideToken.Image = textBoxToken.PasswordChar == '\0' ? Resource._lock : Resource.lock_open;
     }
 }

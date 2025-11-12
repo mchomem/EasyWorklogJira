@@ -70,14 +70,14 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         || !maskedTextBoxTimeSpent.MaskCompleted
         || string.IsNullOrEmpty(textBoxIssueDescription.Text))
         {
-            MessageBox.Show("Por favor, preencha todos os campos.", "Campos obrigatórios", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            this.ShowWarning("Por favor, preencha todos os campos.");
             return;
         }
 
         // Validar se o maskedTextBoxTimeSpent contém um valor válido
         if (!maskedTextBoxTimeSpent.MaskFull || !maskedTextBoxTimeSpent.MaskCompleted)
         {
-            MessageBox.Show("Por favor, informe o tempo gasto no formato hh:mm.", "Tempo inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            this.ShowWarning("Por favor, informe o tempo gasto no formato hh:mm.");
             maskedTextBoxTimeSpent.Focus();
             return;
         }
@@ -85,7 +85,7 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         // Obter horas e minutos do maskedTextBox
         if (!TimeSpan.TryParse(maskedTextBoxTimeSpent.Text, out TimeSpan timeSpent))
         {
-            MessageBox.Show("Formato de tempo inválido. Use o formato hh:mm.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.ShowError("Formato de tempo inválido. Use o formato hh:mm.");
             maskedTextBoxTimeSpent.Focus();
             return;
         }
@@ -130,7 +130,7 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
 
         if (!TimeSpan.TryParse(maskedTextBoxTimeSpent.Text, out TimeSpan timeSpendParsed))
         {
-            MessageBox.Show($"Valor inválido para Tempo Gasto.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            this.ShowWarning($"Valor inválido para Tempo Gasto.");
             return;
         }
 
@@ -154,12 +154,12 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
             else
                 await _jiraService.AddWorklogAsync(selectedIssue, worklog);
 
-            MessageBox.Show("Registro de atividade salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.ShowSuccess("Registro de atividade salvo com sucesso!");
             Close();
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erro ao registrar a atividade: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.ShowError($"Erro ao registrar a atividade: {ex.Message}");
         }
         finally
         {
@@ -217,7 +217,7 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"Erro ao carregar os dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            this.ShowError($"Erro ao carregar os dados: {ex.Message}");
         }
         finally
         {
