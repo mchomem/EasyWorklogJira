@@ -361,6 +361,7 @@
             Controls.Add(buttonClose);
             Controls.Add(buttonSave);
             Name = "ConfigurationForm";
+            ShowIcon = false;
             Text = "Configuração";
             tabControlDefault.ResumeLayout(false);
             tabPageDefault.ResumeLayout(false);

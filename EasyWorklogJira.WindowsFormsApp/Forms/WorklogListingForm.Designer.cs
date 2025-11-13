@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             monthCalendar = new MonthCalendar();
             dataGridViewDayWorklogs = new DataGridView();
             WorklogId = new DataGridViewTextBoxColumn();
@@ -85,9 +85,9 @@
             // 
             // IssueKey
             // 
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            IssueKey.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IssueKey.DefaultCellStyle = dataGridViewCellStyle1;
             IssueKey.FillWeight = 70F;
             IssueKey.HeaderText = "Tarefa";
             IssueKey.Name = "IssueKey";
@@ -98,8 +98,8 @@
             // 
             // StartTime
             // 
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            StartTime.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StartTime.DefaultCellStyle = dataGridViewCellStyle2;
             StartTime.FillWeight = 50F;
             StartTime.HeaderText = "Início";
             StartTime.Name = "StartTime";
@@ -109,8 +109,8 @@
             // 
             // EndTime
             // 
-            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            EndTime.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            EndTime.DefaultCellStyle = dataGridViewCellStyle3;
             EndTime.FillWeight = 50F;
             EndTime.HeaderText = "Fim";
             EndTime.Name = "EndTime";
@@ -210,6 +210,7 @@
             Controls.Add(monthCalendar);
             Controls.Add(labelResumeValue);
             Name = "WorklogListingForm";
+            ShowIcon = false;
             Text = "Registro de atividades";
             Load += WorklogForm_LoadAsync;
             ((System.ComponentModel.ISupportInitialize)dataGridViewDayWorklogs).EndInit();

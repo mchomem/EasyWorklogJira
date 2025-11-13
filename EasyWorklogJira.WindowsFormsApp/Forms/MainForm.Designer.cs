@@ -140,6 +140,7 @@
             IsMdiContainer = true;
             MainMenuStrip = menuStripMain;
             Name = "MainForm";
+            ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Easy Worklog Jira";
             FormClosing += MainForm_FormClosing;

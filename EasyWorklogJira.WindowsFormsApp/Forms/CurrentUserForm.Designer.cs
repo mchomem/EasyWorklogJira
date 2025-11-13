@@ -95,6 +95,7 @@
             ClientSize = new Size(531, 260);
             Controls.Add(groupBoxUserData);
             Name = "CurrentUserForm";
+            ShowIcon = false;
             Text = "Usuário da aplicação";
             Load += CurrentUserForm_Load;
             groupBoxUserData.ResumeLayout(false);

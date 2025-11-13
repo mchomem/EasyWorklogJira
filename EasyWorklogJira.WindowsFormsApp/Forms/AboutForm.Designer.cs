@@ -59,6 +59,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(labelTextAbout);
             Name = "AboutForm";
+            ShowIcon = false;
             Text = "Sobre";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

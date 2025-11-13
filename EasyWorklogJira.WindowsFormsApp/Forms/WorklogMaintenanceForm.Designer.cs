@@ -179,6 +179,7 @@
             Controls.Add(comboBoxIssues);
             Controls.Add(dateTimePickerStarted);
             Name = "WorklogMaintenanceForm";
+            ShowIcon = false;
             Text = "Registro de atividades";
             Load += WorklogMaintenanceForm_Load;
             ResumeLayout(false);
