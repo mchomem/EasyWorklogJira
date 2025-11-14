@@ -33,18 +33,19 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             monthCalendar = new MonthCalendar();
             dataGridViewDayWorklogs = new DataGridView();
-            WorklogId = new DataGridViewTextBoxColumn();
-            IssueKey = new DataGridViewLinkColumn();
-            StartTime = new DataGridViewTextBoxColumn();
-            EndTime = new DataGridViewTextBoxColumn();
-            Update = new DataGridViewImageColumn();
-            Delete = new DataGridViewImageColumn();
             labelResume = new Label();
             labelTotalHoursDay = new Label();
             labelTotalHoursDayValue = new Label();
             buttonNewWorklog = new Button();
             labelResumeValue = new Label();
             buttonRefreshList = new Button();
+            WorklogId = new DataGridViewTextBoxColumn();
+            IssueSummary = new DataGridViewTextBoxColumn();
+            IssueKey = new DataGridViewLinkColumn();
+            StartTime = new DataGridViewTextBoxColumn();
+            EndTime = new DataGridViewTextBoxColumn();
+            Update = new DataGridViewImageColumn();
+            Delete = new DataGridViewImageColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridViewDayWorklogs).BeginInit();
             SuspendLayout();
             // 
@@ -64,7 +65,7 @@
             dataGridViewDayWorklogs.AllowUserToResizeRows = false;
             dataGridViewDayWorklogs.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridViewDayWorklogs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewDayWorklogs.Columns.AddRange(new DataGridViewColumn[] { WorklogId, IssueKey, StartTime, EndTime, Update, Delete });
+            dataGridViewDayWorklogs.Columns.AddRange(new DataGridViewColumn[] { WorklogId, IssueSummary, IssueKey, StartTime, EndTime, Update, Delete });
             dataGridViewDayWorklogs.Location = new Point(18, 260);
             dataGridViewDayWorklogs.Name = "dataGridViewDayWorklogs";
             dataGridViewDayWorklogs.ReadOnly = true;
@@ -75,66 +76,6 @@
             dataGridViewDayWorklogs.CellContentClick += dataGridViewDayWorklogs_CellContentClickAsync;
             dataGridViewDayWorklogs.CellMouseEnter += dataGridViewDayWorklogs_CellMouseEnter;
             dataGridViewDayWorklogs.CellMouseLeave += dataGridViewDayWorklogs_CellMouseLeave;
-            // 
-            // WorklogId
-            // 
-            WorklogId.HeaderText = "WorklogId";
-            WorklogId.Name = "WorklogId";
-            WorklogId.ReadOnly = true;
-            WorklogId.Visible = false;
-            // 
-            // IssueKey
-            // 
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            IssueKey.DefaultCellStyle = dataGridViewCellStyle1;
-            IssueKey.FillWeight = 70F;
-            IssueKey.HeaderText = "Tarefa";
-            IssueKey.Name = "IssueKey";
-            IssueKey.ReadOnly = true;
-            IssueKey.Resizable = DataGridViewTriState.False;
-            IssueKey.SortMode = DataGridViewColumnSortMode.Automatic;
-            IssueKey.Width = 70;
-            // 
-            // StartTime
-            // 
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            StartTime.DefaultCellStyle = dataGridViewCellStyle2;
-            StartTime.FillWeight = 50F;
-            StartTime.HeaderText = "Início";
-            StartTime.Name = "StartTime";
-            StartTime.ReadOnly = true;
-            StartTime.Resizable = DataGridViewTriState.False;
-            StartTime.Width = 50;
-            // 
-            // EndTime
-            // 
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            EndTime.DefaultCellStyle = dataGridViewCellStyle3;
-            EndTime.FillWeight = 50F;
-            EndTime.HeaderText = "Fim";
-            EndTime.Name = "EndTime";
-            EndTime.ReadOnly = true;
-            EndTime.Resizable = DataGridViewTriState.False;
-            EndTime.Width = 50;
-            // 
-            // Update
-            // 
-            Update.FillWeight = 60F;
-            Update.HeaderText = "Atualizar";
-            Update.Image = Resource.page_white_edit;
-            Update.Name = "Update";
-            Update.ReadOnly = true;
-            Update.Width = 60;
-            // 
-            // Delete
-            // 
-            Delete.FillWeight = 60F;
-            Delete.HeaderText = "Excluir";
-            Delete.Image = Resource.cross;
-            Delete.Name = "Delete";
-            Delete.ReadOnly = true;
-            Delete.Width = 60;
             // 
             // labelResume
             // 
@@ -196,6 +137,73 @@
             buttonRefreshList.UseVisualStyleBackColor = true;
             buttonRefreshList.Click += buttonRefreshList_Click;
             // 
+            // WorklogId
+            // 
+            WorklogId.HeaderText = "WorklogId";
+            WorklogId.Name = "WorklogId";
+            WorklogId.ReadOnly = true;
+            WorklogId.Visible = false;
+            // 
+            // IssueSummary
+            // 
+            IssueSummary.HeaderText = "Sumário";
+            IssueSummary.Name = "IssueSummary";
+            IssueSummary.ReadOnly = true;
+            IssueSummary.Visible = false;
+            // 
+            // IssueKey
+            // 
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            IssueKey.DefaultCellStyle = dataGridViewCellStyle1;
+            IssueKey.FillWeight = 70F;
+            IssueKey.HeaderText = "Tarefa";
+            IssueKey.Name = "IssueKey";
+            IssueKey.ReadOnly = true;
+            IssueKey.Resizable = DataGridViewTriState.False;
+            IssueKey.SortMode = DataGridViewColumnSortMode.Automatic;
+            IssueKey.Width = 70;
+            // 
+            // StartTime
+            // 
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            StartTime.DefaultCellStyle = dataGridViewCellStyle2;
+            StartTime.FillWeight = 50F;
+            StartTime.HeaderText = "Início";
+            StartTime.Name = "StartTime";
+            StartTime.ReadOnly = true;
+            StartTime.Resizable = DataGridViewTriState.False;
+            StartTime.Width = 50;
+            // 
+            // EndTime
+            // 
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            EndTime.DefaultCellStyle = dataGridViewCellStyle3;
+            EndTime.FillWeight = 50F;
+            EndTime.HeaderText = "Fim";
+            EndTime.Name = "EndTime";
+            EndTime.ReadOnly = true;
+            EndTime.Resizable = DataGridViewTriState.False;
+            EndTime.Width = 50;
+            // 
+            // Update
+            // 
+            Update.FillWeight = 60F;
+            Update.HeaderText = "Atualizar";
+            Update.Image = Resource.page_white_edit;
+            Update.Name = "Update";
+            Update.ReadOnly = true;
+            Update.Width = 60;
+            // 
+            // Delete
+            // 
+            Delete.FillWeight = 60F;
+            Delete.HeaderText = "Excluir";
+            Delete.Image = Resource.cross;
+            Delete.Name = "Delete";
+            Delete.ReadOnly = true;
+            Delete.Width = 60;
+            // 
             // WorklogListingForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -226,13 +234,14 @@
         private Label labelTotalHoursDay;
         private Label labelTotalHoursDayValue;
         private Button buttonNewWorklog;
+        private Label labelResumeValue;
+        private Button buttonRefreshList;
         private DataGridViewTextBoxColumn WorklogId;
+        private DataGridViewTextBoxColumn IssueSummary;
         private DataGridViewLinkColumn IssueKey;
         private DataGridViewTextBoxColumn StartTime;
         private DataGridViewTextBoxColumn EndTime;
         private DataGridViewImageColumn Update;
         private DataGridViewImageColumn Delete;
-        private Label labelResumeValue;
-        private Button buttonRefreshList;
     }
 }

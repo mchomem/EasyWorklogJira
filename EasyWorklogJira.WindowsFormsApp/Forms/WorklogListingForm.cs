@@ -121,9 +121,8 @@ public partial class WorklogListingForm : MdiChieldFormBase
             dataGridViewDayWorklogs.Rows.Clear();
 
             var hoursRecorded = new List<(DateTimeOffset start, DateTimeOffset end, string issueKey)>();
-            var issuesKeys = issues.Select(i => i.Key);
             var email = _configuration.GetSection("JiraConnection:Email").Value!;
-            var worklogs = await _jiraService.GetIssueWorklogsAsync(issuesKeys, selectedDateTimeOffiset, email);
+            var worklogs = await _jiraService.GetIssueWorklogsAsync(issues, selectedDateTimeOffiset, email);
 
             if (worklogs != null && worklogs.Any())
             {
@@ -132,7 +131,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
                     DateTimeOffset endTime = worklog.Started.AddSeconds(worklog.TimeSpentSeconds);
                     var workDescriptions = ExtractTextFromComment(worklog.Comment);
 
-                    dataGridViewDayWorklogs.Rows.Add(worklog.Id, worklog.IssueKey, $"{worklog.Started:HH:mm}", $"{endTime:HH:mm}");
+                    dataGridViewDayWorklogs.Rows.Add(worklog.Id, worklog.IssueSummary, worklog.IssueKey, $"{worklog.Started:HH:mm}", $"{endTime:HH:mm}");
                     hoursRecorded.Add((worklog.Started, endTime, worklog.IssueKey));
                 }
             }
@@ -234,7 +233,7 @@ public partial class WorklogListingForm : MdiChieldFormBase
             return;
         }
 
-        if (e.ColumnIndex == 1 && e.RowIndex >= 0)
+        if (dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "IssueKey")
         {
             var issueKey = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString()!;
             var baseUrl = _configuration.GetSection("JiraConnection:baseUrl").Value?.Trim();
@@ -266,8 +265,6 @@ public partial class WorklogListingForm : MdiChieldFormBase
                 var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, _localizationService, _configuration, issueId, worklogId);
                 worklogMaintenanceForm.MdiParent = mainForm;
                 worklogMaintenanceForm.Show();
-
-                Close();
             }
         }
         else if (dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "Delete")
@@ -317,6 +314,19 @@ public partial class WorklogListingForm : MdiChieldFormBase
             || dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "Delete")
         {
             dataGridViewDayWorklogs.Cursor = Cursors.Hand;
+        }
+
+        // Fill summary issue into ToolTipText for IssueKey column
+        if (e.ColumnIndex >= 0 && dataGridViewDayWorklogs.Columns[e.ColumnIndex].Name == "IssueKey")
+        {
+            var cell = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            var issueKey = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueKey"].Value?.ToString() ?? string.Empty;
+            var issueSummary = dataGridViewDayWorklogs.Rows[e.RowIndex].Cells["IssueSummary"].Value?.ToString() ?? string.Empty;
+
+            if (!string.IsNullOrEmpty(issueSummary))
+            {
+                cell.ToolTipText = $"{issueKey} {issueSummary}";
+            }
         }
     }
 

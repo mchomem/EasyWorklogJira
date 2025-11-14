@@ -10,4 +10,5 @@ public class WorklogDto
     public int TimeSpentSeconds { get; set; }
     public string IssueId { get; set; } = string.Empty;
     public string IssueKey { get; set; } = string.Empty;
+    public string IssueSummary { get; set; } = string.Empty;
 }

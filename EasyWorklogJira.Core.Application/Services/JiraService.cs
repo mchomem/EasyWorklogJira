@@ -27,19 +27,21 @@ public class JiraService : IJiraService
         return worklogs;
     }
 
-    public async Task<IEnumerable<WorklogDto>> GetIssueWorklogsAsync(IEnumerable<string> issuesKey, DateTimeOffset dateTime, string userEmailAddress)
+    public async Task<IEnumerable<WorklogDto>> GetIssueWorklogsAsync(IEnumerable<JiraIssueDto> issues, DateTimeOffset dateTime, string userEmailAddress)
     {
         var listWorkLogs = new List<WorklogDto>();
 
-        foreach (var issueKey in issuesKey)
+        foreach (var issue in issues)
         {
-            var worklogs = await _jiraApiClient.GetIssueWorklogsAsync(issueKey, dateTime, userEmailAddress);
+            var worklogs = await _jiraApiClient.GetIssueWorklogsAsync(issue.Key, dateTime, userEmailAddress);
 
             if (worklogs.Any())
             {
                 foreach (var w in worklogs)
                 {
-                    w.IssueKey = issueKey; // This "IssueKey" field do not exists in the WorklogDto returned by Jira API, so we need to set it manually.
+                    // Both "IssueKey" and "IssueSummary" fields, dont exists on WorklogDto returned by Jira API, so we need to set it manually.
+                    w.IssueKey = issue.Key;
+                    w.IssueSummary = issue.Fields.Summary;
                     listWorkLogs.Add(w);
                 }
             }
