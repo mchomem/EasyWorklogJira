@@ -2,6 +2,8 @@
 
 public partial class WorklogMaintenanceForm : MdiChieldFormBase
 {
+    public event EventHandler? WorklogSaved;
+
     private readonly IJiraService _jiraService;
     private readonly ILocalizationService _localizationService;
     private readonly IConfiguration _configuration;
@@ -155,6 +157,17 @@ public partial class WorklogMaintenanceForm : MdiChieldFormBase
                 await _jiraService.AddWorklogAsync(selectedIssue, worklog);
 
             this.ShowSuccess("Registro de atividade salvo com sucesso!");
+
+            var listingForm = this.MdiParent.MdiChildren
+                .OfType<WorklogListingForm>()
+                .FirstOrDefault();
+
+            // If WorklogListingForm is open, trigger the WorklogSaved event to refresh the list.
+            if (listingForm != null && !listingForm.IsDisposed)
+            {
+                WorklogSaved?.Invoke(this, EventArgs.Empty);
+            }
+
             Close();
         }
         catch (Exception ex)

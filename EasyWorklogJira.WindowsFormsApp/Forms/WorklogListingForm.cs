@@ -264,6 +264,10 @@ public partial class WorklogListingForm : MdiChieldFormBase
                 // Passar os dados diretamente para o formulário de manutenção
                 var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, _localizationService, _configuration, issueId, worklogId);
                 worklogMaintenanceForm.MdiParent = mainForm;
+
+                // Subscribe to the WorklogSaved event to refresh the list after saving
+                worklogMaintenanceForm.WorklogSaved += async (s, args) => await LoadWorklogsAsync();
+                
                 worklogMaintenanceForm.Show();
             }
         }
@@ -282,6 +286,11 @@ public partial class WorklogListingForm : MdiChieldFormBase
         }
     }
 
+    private void WorklogMaintenanceForm_WorklogSaved(object? sender, EventArgs e)
+    {
+        throw new NotImplementedException();
+    }
+
     private async void buttonRefreshList_Click(object sender, EventArgs e)
     {
         await LoadFormAsync();
@@ -297,6 +306,10 @@ public partial class WorklogListingForm : MdiChieldFormBase
             // Criar novo worklog sem parâmetros (modo inserção)
             var worklogMaintenanceForm = new WorklogMaintenanceForm(_jiraService, _localizationService, _configuration);
             worklogMaintenanceForm.MdiParent = mainForm;
+
+            // Subscribe to the WorklogSaved event to refresh the list after saving
+            worklogMaintenanceForm.WorklogSaved += async (s, args) => await LoadWorklogsAsync();
+
             worklogMaintenanceForm.Show();
         }
     }
