@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/0 - Test/">
+    <Project Path="EasyWorklogJira.Test.Functional/EasyWorklogJira.Test.Functional.csproj" />
+    <Project Path="EasyWorklogJira.Test.Integration/EasyWorklogJira.Test.Integration.csproj" />
+    <Project Path="EasyWorklogJira.Test.Unit/EasyWorklogJira.Test.Unit.csproj" />
+  </Folder>
+  <Folder Name="/1 - Core/">
+    <Project Path="EasyWorklogJira.Core.Application/EasyWorklogJira.Core.Application.csproj" />
+    <Project Path="EasyWorklogJira.Core.Domain/EasyWorklogJira.Core.Domain.csproj" />
+  </Folder>
+  <Folder Name="/2 - Infrastructure/">
+    <Project Path="EasyWorklogJira.Infrastructure.ExternalService/EasyWorklogJira.Infrastructure.ExternalService.csproj" />
+    <Project Path="EasyWorklogJira.Infrastructure.IoC/EasyWorklogJira.Infrastructure.IoC.csproj" />
+    <Project Path="EasyWorklogJira.Infrastructure.Localization/EasyWorklogJira.Infrastructure.Localization.csproj" />
+    <Project Path="EasyWorklogJira.Infrastructure.Logging/EasyWorklogJira.Infrastructure.Logging.csproj" />
+  </Folder>
+  <Folder Name="/3 - Presentation/">
+    <Project Path="EasyWorklogJira.WindowsFormsApp/EasyWorklogJira.WindowsFormsApp.csproj" />
+  </Folder>
+</Solution>
